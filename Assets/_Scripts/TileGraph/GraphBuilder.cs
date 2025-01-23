@@ -11,8 +11,7 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GraphBuilder : MonoBehaviour
 {
-    [SerializeField] Vector2Int _size = new Vector2Int(10, 10);
-    [SerializeField] Vector2Int _offset = new Vector2Int(10, 10);
+    [SerializeField] RectInt _bounds;
     [SerializeField] Graph _graph;
     [SerializeField] NodeContainer _nodePrefab;
 
@@ -29,9 +28,9 @@ public class GraphBuilder : MonoBehaviour
         }
 
         //itere sur toutes les tiles de la zone de jeu définie
-        for (int x = _offset.x; x < _size.x + _offset.x; x++)
+        for (int x = _bounds.min.x; x < _bounds.max.x ; x++)
         {
-            for (int y= _offset.y; y < _size.y+ _offset.y; y++)
+            for (int y= _bounds.min.y ; y < _bounds.max.y; y++)
             {
                 bool collision = Physics2D.OverlapPoint(new Vector2(x, y), LayerMask.GetMask(solidLayer)); //le node sera desactivé si il y'avait un objet sur la case avant qu'il ne spawn
 
@@ -68,7 +67,7 @@ public class GraphBuilder : MonoBehaviour
     //gizmos
     public void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube((Vector3)(Vector2)(_offset+_size/2- Vector2.one*0.5f), (Vector3)(Vector2)(_size));
+        Gizmos.DrawWireCube(_bounds.center.X0Y(),_bounds.size.X0Y());
     }
 }
 
