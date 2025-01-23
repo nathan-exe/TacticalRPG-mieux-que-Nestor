@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
     }
     public async UniTask PlayTurn()
     {
-
+        await UniTask.Yield();
     }
     
 }
