@@ -14,7 +14,7 @@ public class NodeContainer : MonoBehaviour
 
     private void Awake()
     {
-        node.monoBehaviour = this;
+        node.MonoBehaviour = this;
         node.resetNode();
     }
 

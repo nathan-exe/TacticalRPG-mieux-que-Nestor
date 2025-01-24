@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -11,11 +12,16 @@ using UnityEngine.Tilemaps;
 /// </summary>
 public class GraphBuilder : MonoBehaviour
 {
+    [Header("Parameters")]
+    [SerializeField] LayerMask _solidLayerMask;
     [SerializeField] RectInt _bounds;
+
+    [Header("Scene References")]
     [SerializeField] Graph _graph;
+
+    [Header("Asset References")]
     [SerializeField] NodeContainer _nodePrefab;
 
-    public const string solidLayer = "Solid";
     public void BuildGraph()
     {
         _graph.Nodes.Clear();
@@ -30,19 +36,20 @@ public class GraphBuilder : MonoBehaviour
         //itere sur toutes les tiles de la zone de jeu définie
         for (int x = _bounds.min.x; x < _bounds.max.x ; x++)
         {
-            for (int y= _bounds.min.y ; y < _bounds.max.y; y++)
+            for (int z= _bounds.min.y ; z < _bounds.max.y; z++)
             {
-                bool collision = Physics2D.OverlapPoint(new Vector2(x, y), LayerMask.GetMask(solidLayer)); //le node sera desactivé si il y'avait un objet sur la case avant qu'il ne spawn
+                bool collision = Physics.SphereCast(new Vector3(x,50,z),.4f,Vector3.down,out RaycastHit hit,100, _solidLayerMask); //le node sera desactivé si il y'avait un objet sur la case avant qu'il ne spawn
 
-                NodeContainer newObject = Instantiate(_nodePrefab, new Vector2(x, y), Quaternion.identity, transform);
+                NodeContainer newObject = PrefabUtility.InstantiatePrefab(_nodePrefab, transform).GetComponent<NodeContainer>();
+                newObject.transform.position = new Vector3(x, hit.point.y, z);
                 TileAstarNode newNode = newObject.node;
-                newNode.monoBehaviour = newObject;
+                newNode.MonoBehaviour = newObject;
 
-                newNode.monoBehaviour.gameObject.name = $"Node({x},{y})";
-                _graph.Nodes.Add(new Vector2Int(x, y), newNode);
+                newNode.MonoBehaviour.gameObject.name = $"Node({x},{z})";
+                _graph.Nodes.Add(new Vector2Int(x, z), newNode);
                 if(!collision) _graph.FreeNodes.Add(newNode);
 
-                newNode.monoBehaviour.gameObject.SetActive(!collision);
+                newNode.MonoBehaviour.gameObject.SetActive(!collision);
             }
         }
 

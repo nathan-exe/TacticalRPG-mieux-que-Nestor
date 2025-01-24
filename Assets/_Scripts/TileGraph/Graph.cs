@@ -48,7 +48,7 @@ public class Graph : MonoBehaviour
     //fonctions pratiques
     public void ActivateNodeAtPosition(Vector2Int position)
     {
-        Nodes[position].monoBehaviour.gameObject.SetActive(true);
+        Nodes[position].MonoBehaviour.gameObject.SetActive(true);
         if (!FreeNodes.Contains(Nodes[position]))FreeNodes.Add(Nodes[position]);
     }
 
@@ -59,7 +59,7 @@ public class Graph : MonoBehaviour
 
     public void DisableNode(TileAstarNode node)
     {
-        node.monoBehaviour.gameObject.SetActive(false);
+        node.MonoBehaviour.gameObject.SetActive(false);
         FreeNodes.Remove(node);
     }
 

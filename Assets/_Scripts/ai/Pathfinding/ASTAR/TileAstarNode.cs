@@ -12,16 +12,16 @@ using static UnityEngine.GraphicsBuffer;
 [Serializable]
 public class TileAstarNode : AstarNode
 {
-    public NodeContainer monoBehaviour;
-    public GameObject gameObject => monoBehaviour.gameObject;
-    public Transform transform => monoBehaviour.transform;
+    public NodeContainer MonoBehaviour;
+    public GameObject gameObject => MonoBehaviour.gameObject;
+    public Transform transform => MonoBehaviour.transform;
     public Vector2Int pose => gameObject.transform.position.RoundToV2Int();
 
     public const float gWheight = .3f;
 
     public override bool isActive()
     {
-        return monoBehaviour.isActiveAndEnabled;
+        return MonoBehaviour.isActiveAndEnabled;
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ public class TileAstarNode : AstarNode
     /// <returns></returns>
     public override float ComputeCost(AstarNode target)
     {
-        float h = Vector2.Distance(((TileAstarNode)target).transform.position, monoBehaviour.transform.position);
+        float h = Vector2.Distance(((TileAstarNode)target).transform.position, MonoBehaviour.transform.position);
         return h + g * gWheight;
     }
 
