@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,15 +13,21 @@ public class SpellEditionWindow : EditorWindow
     float _tileSize;
 
     int _selectedTile;
+
+    //visuals
+    const int canvasOutlineSize = 2;
+    static readonly Color c = new Color(.95f, .25f, .35f);
     void OnGUI()
     {
 
-        EditorGUILayout.LabelField("Canvas");
+        //EditorGUILayout.LabelField("Canvas");
+        EditorGUILayout.Separator();
 
         UpdateCanvas();
         HandleInputs();
         DrawCanvas();
-
+        EditorGUILayout.Separator();
+        EditorGUILayout.LabelField("LMB : Paint ; RMB : Erase");
         EditorGUILayout.Separator();
         if (GUILayout.Button("Clear")) Spell.AffectedTiles.Clear();
     }
@@ -34,17 +41,31 @@ public class SpellEditionWindow : EditorWindow
         {
             if (_canvas.Contains(Event.current.mousePosition))
             {
-                // Debug.Log(canvas.min);
                 Vector2Int c = ((Vector2)Unity.Mathematics.math.remap(_canvas.min, _canvas.max, (Vector2)Spell.Bounds.min, (Vector2)Spell.Bounds.max, Event.current.mousePosition)).Floor();
-                
-
-                if(!Spell.AffectedTiles.Contains(new Vector2Int(c.x, c.y)))
+                //c.y *= -1;
+                if (c != Vector2Int.zero)
                 {
-                    Spell.AffectedTiles.Add(new Vector2Int(c.x, c.y));
-                    EditorUtility.SetDirty(Spell);
-                    Event.current.Use();
+                    if (Event.current.button == 0)
+                    {
+                        if (!Spell.AffectedTiles.Contains(new Vector2Int(c.x, c.y)))
+                        {
+
+
+                            Spell.AffectedTiles.Add(new Vector2Int(c.x, c.y));
+                            EditorUtility.SetDirty(Spell);
+                            Event.current.Use();
+                        }
+                    }
+                    else if (Event.current.button == 1)
+                    {
+                        if (Spell.AffectedTiles.Contains(new Vector2Int(c.x, c.y)))
+                        {
+                            Spell.AffectedTiles.Remove(new Vector2Int(c.x, c.y));
+                            EditorUtility.SetDirty(Spell);
+                            Event.current.Use();
+                        }
+                    }
                 }
-               
             }
         }
     }
@@ -79,9 +100,13 @@ public class SpellEditionWindow : EditorWindow
 
     void DrawCanvas()
     {
+
         if (Event.current.type == EventType.Repaint)
         {
-            EditorGUI.DrawRect(_canvas, Color.white);
+            Color backgroundColor = EditorGUIUtility.isProSkin ? new Color32(56, 56, 56, 255) : new Color32(194, 194, 194, 255);
+
+            EditorGUI.DrawRect(_canvas.ExpandBy(new RectOffset(canvasOutlineSize, canvasOutlineSize, canvasOutlineSize, canvasOutlineSize)), Color.grey);
+            EditorGUI.DrawRect(_canvas, backgroundColor);
 
             //draw all tiles inside white area
             for (int i = 0; i < Spell.Bounds.width; i++)
@@ -90,21 +115,26 @@ public class SpellEditionWindow : EditorWindow
                 {
 
                     Vector2Int value = new Vector2Int(i + Mathf.FloorToInt(Spell.Bounds.xMin), j + Mathf.FloorToInt(Spell.Bounds.yMin));
+                    //value.y *= -1;
                     if (Spell.AffectedTiles.Contains(value))
                     {
-                        Color c = Color.red;
                         EditorGUI.DrawRect(new Rect(_canvas.position.x + i * _tileSize + 1, _canvas.position.y + j * _tileSize + 1, _tileSize - 2, _tileSize - 2), c);
                     }
 
                 }
             }
+
+            float  x = -Spell.Bounds.xMin;
+            float  y = -Spell.Bounds.yMin;
+            EditorGUI.DrawRect(new Rect(_canvas.position.x + x * _tileSize + 1, _canvas.position.y + y * _tileSize + 1, _tileSize - 2, _tileSize - 2),Color.white);
         }
 
     }
 
-    private void OnEnable()
+    public void SetUp(SpellData data)
     {
-        name = Spell.name + " Editor";
+        Spell = data;
+        name = Spell.Name;
         titleContent = new(name);
 
     }
