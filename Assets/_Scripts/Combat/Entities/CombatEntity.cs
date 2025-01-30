@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
+public abstract class CombatEntity : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private EntityData _data;
@@ -17,9 +17,7 @@ public abstract class Entity : MonoBehaviour
     {
         
     }
-    public async UniTask PlayTurn()
-    {
-        await UniTask.Yield();
-    }
-    
+    public abstract UniTask PlayTurn();
+
+
 }
