@@ -9,6 +9,9 @@ public class CombatEntityMovement : MonoBehaviour
     [Header("references")]
     [SerializeField] Astar _pathfinder;
 
+    [Header("Parameters")]
+    [SerializeField] float _speed;
+
     TileAstarNode _currentNode;
 
     Stack<AstarNode> _path;
@@ -52,7 +55,7 @@ public class CombatEntityMovement : MonoBehaviour
         if (_currentMovementTask.Status != UniTaskStatus.Pending && _path.Count > 0)
         {
             TileAstarNode target = (TileAstarNode)_path.Pop();
-            _currentMovementTask = MoveToPoint(_currentNode.MonoBehaviour.transform.position.setY(transform.position.y), target.MonoBehaviour.transform.position.setY(transform.position.y), .3f, true);
+            _currentMovementTask = MoveToPoint(_currentNode.MonoBehaviour.transform.position.setY(transform.position.y), target.MonoBehaviour.transform.position.setY(transform.position.y), 1f/ _speed, false);
             _currentNode = target;
         }
     }
