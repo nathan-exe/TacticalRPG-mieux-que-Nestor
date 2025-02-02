@@ -8,7 +8,7 @@ public abstract class CombatEntity : MonoBehaviour
     [Header("References")]
     [SerializeField] private EntityData _data;
 
-    public Spell Spells;
+    public List<Spell> Spells;
 
     private bool _isDead;
     public float HP { get; private set; }

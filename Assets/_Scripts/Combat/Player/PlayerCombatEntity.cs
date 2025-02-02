@@ -10,9 +10,9 @@ public class PlayerCombatEntity : CombatEntity
     {
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
-
+        //await ChooseSpell();
     }
-    
+
     async UniTask<Vector2Int> ChooseDestination()
     {
         bool waiting = true;
@@ -30,13 +30,13 @@ public class PlayerCombatEntity : CombatEntity
                     Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
                     Vector2Int t = hit.point.RoundToV2Int();
                     Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
-                    if (Graph.Instance.Nodes.ContainsKey(t)) 
+                    if (Graph.Instance.Nodes.ContainsKey(t))
                     {
                         waiting = false;
                         output = t;
                     }
-                    
-                    
+
+
                 }
             }
 
@@ -45,8 +45,39 @@ public class PlayerCombatEntity : CombatEntity
         return output;
 
     }
-    
-    
+
+    /*async UniTask<Spell> ChooseSpell()
+    {
+        bool waiting = true;
+
+        Spell output;
+
+        while (waiting)
+        {
+            await UniTask.Yield();
+            Debug.Log("waiting for click");
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit)) // @TODO faire un singleton de la camera plutot que Camera.main
+                {
+                    Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
+                    Vector2Int t = hit.point.RoundToV2Int();
+                    Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
+                    if (Graph.Instance.Nodes.ContainsKey(t))
+                    {
+                        waiting = false;
+                        output = t;
+                    }
+
+
+                }
+            }
+        }
+    }*/
+
+
+
+
 
     /*player.play():
     - await ChooseDestination()
