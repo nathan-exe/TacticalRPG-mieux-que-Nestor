@@ -6,10 +6,16 @@ using UnityEngine;
 
 public class Sign : MonoBehaviour, Iinteractable
 {
-    public UniTask InteractWith()
+
+    public string signName = "Sign";
+    [TextArea] public string signText;
+    
+    public async UniTask InteractWith()
     {
         Debug.Log("coucou C moi");
-        return UniTask.CompletedTask;
+        await DialogueBoxDisplay.Instance.OpenDialogueBox(signName, signText);
+        await DialogueBoxDisplay.Instance.IsSkipping();
+
     }
 
     public void OnSelected()
@@ -19,18 +25,6 @@ public class Sign : MonoBehaviour, Iinteractable
 
     public void OnUnselected()
     {
-        transform.localScale = Vector3.one ;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        transform.localScale = Vector3.one;
     }
 }

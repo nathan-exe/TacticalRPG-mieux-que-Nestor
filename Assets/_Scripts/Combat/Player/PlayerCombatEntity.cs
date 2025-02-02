@@ -40,13 +40,13 @@ public class PlayerCombatEntity : CombatEntity
                     Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
                     Vector2Int t = hit.point.RoundToV2Int();
                     Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
-                    if (Graph.Instance.Nodes.ContainsKey(t)) 
+                    if (Graph.Instance.Nodes.ContainsKey(t))
                     {
                         waiting = false;
                         output = t;
                     }
-                    
-                    
+
+
                 }
             }
 
