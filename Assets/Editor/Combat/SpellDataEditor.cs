@@ -26,7 +26,7 @@ public class SpellDataEditor : Editor
         if (GUILayout.Button("Edit Area of Effect"))
         {
             SpellEditionWindow window = EditorWindow.GetWindow<SpellEditionWindow>();
-            window.Spell = Target;
+            window.SetUp(Target);
             window.Show();
         }
         
