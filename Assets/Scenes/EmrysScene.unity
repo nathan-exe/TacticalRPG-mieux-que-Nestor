@@ -6835,6 +6835,7 @@ MonoBehaviour:
   dialogueBox: {fileID: 22877376}
   boxName: {fileID: 406452689}
   boxDialogueText: {fileID: 159650731}
+  playerOverworldController: {fileID: 1867656713}
 --- !u!4 &2126763151
 Transform:
   m_ObjectHideFlags: 0
