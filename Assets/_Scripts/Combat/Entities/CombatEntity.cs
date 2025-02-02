@@ -5,19 +5,59 @@ using UnityEngine;
 
 public abstract class CombatEntity : MonoBehaviour
 {
+    public const float MaxManaPerEntity = 10;
+
     [Header("References")]
+<<<<<<< Updated upstream
     [SerializeField] private EntityData _data;
 
     public Spell Spells;
+=======
+    [SerializeField] public EntityData Data;
+    public CombatEntityUI UI;
+>>>>>>> Stashed changes
 
+    [Header("Values")]
     private bool _isDead;
-    public float HP { get; private set; }
 
-    public void Init()
+    float _HP;
+    public float HP
     {
-        
+        get { return _HP; }
+        private set
+        {
+            _HP = value;
+            UI.HealthSlider.Value = _HP;
+        }
     }
+
+    float _mana;
+    public float Mana { get { return _mana; }
+        private set
+        {
+            _mana = value;
+            UI.ManaSlider.Value = _mana;
+        }
+    }
+
+    
+    void Start()
+    {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        HP = Data.MaxHP;
+        Mana = MaxManaPerEntity;
+    }
+
     public abstract UniTask PlayTurn();
 
+    protected async UniTask CastSpell(Spell spell)
+    {
+        Mana-=spell.Data.ManaCost;
+        await spell.Execute(this);
+    }
 
 }

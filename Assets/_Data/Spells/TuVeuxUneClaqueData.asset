@@ -10,20 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
-  m_Name: BouleDeFeuData
+  m_Name: TuVeuxUneClaqueData
   m_EditorClassIdentifier: 
-  Name: Boule de feu
+  Name: TuVeuxUneClaque
   Sprite: {fileID: 0}
-  ManaCost: 1
+  ManaCost: 2
   Bounds:
     serializedVersion: 2
-    x: -1
-    y: -1
+    x: -5
+    y: -5
     width: 11
-    height: 3
+    height: 11
   AffectedTiles:
-  - {x: 6, y: 0}
-  - {x: 7, y: 0}
-  - {x: 7, y: -1}
-  - {x: 8, y: 0}
-  - {x: 7, y: 1}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0}
+  - {x: 3, y: 0}
+  - {x: 4, y: 0}
+  - {x: 5, y: 0}
+  - {x: 5, y: -1}
+  - {x: 5, y: -2}
+  - {x: 5, y: 1}
+  - {x: 5, y: 2}
+  - {x: 4, y: 1}
+  - {x: 4, y: 2}
+  - {x: 4, y: -1}
+  - {x: 4, y: -2}
+  - {x: 3, y: -1}
+  - {x: 2, y: -1}
+  - {x: 2, y: 1}
+  - {x: 3, y: 1}

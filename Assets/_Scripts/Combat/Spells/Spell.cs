@@ -5,16 +5,22 @@ using UnityEngine;
 
 public class Spell
 {
-    [Header("References")]
-    [SerializeField] private SpellData _spellData;
+    public SpellData Data;
 
-    public void previewAffectedTiles()
+    public void PreviewSpellEffect(CombatEntity owner)
     {
-
+        //@ToDo : preview tiles
+        owner.UI.PreviewManaLoss(Data.ManaCost);
     }
 
-    public async UniTask Execute()
+    public void CancelPreview(CombatEntity owner)
     {
+        owner.UI.CancelManaLossPreview();
+        //@ToDo : cancel tiles preview
+    }
 
+    public async UniTask Execute(CombatEntity owner)
+    {
+        //@ToDo : appliquer degats sur toutes les tiles
     }
 }

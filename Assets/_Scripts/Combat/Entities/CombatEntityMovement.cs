@@ -26,6 +26,8 @@ public class CombatEntityMovement : MonoBehaviour
 
     public async UniTask MoveToPoint(Vector3 from,Vector3 to, float duration, bool smoothstep) 
     {
+        from.y = to.y = transform.position.y;
+
         float StartTime = Time.time;
         float EndTime = Time.time + duration;
         while (Time.time < EndTime)

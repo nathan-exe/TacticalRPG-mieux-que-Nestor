@@ -5,11 +5,21 @@ using Cysharp.Threading.Tasks;
 
 public class PlayerCombatEntity : CombatEntity
 {
+
     [SerializeField] CombatEntityMovement _movement;
+
+
     public override async UniTask PlayTurn()
     {
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
+<<<<<<< Updated upstream
+=======
+
+        Spell ChosenSpell = await ChooseSpell();
+        await CastSpell(ChosenSpell);
+    }
+>>>>>>> Stashed changes
 
     }
     
@@ -18,6 +28,9 @@ public class PlayerCombatEntity : CombatEntity
         bool waiting = true;
 
         Vector2Int output = Vector2Int.zero;
+        
+        //@ToDo
+        //PreviewTiles();
 
         while (waiting)
         {
@@ -45,8 +58,19 @@ public class PlayerCombatEntity : CombatEntity
         return output;
 
     }
+<<<<<<< Updated upstream
     
     
+=======
+    async UniTask<Spell> ChooseSpell()
+    {
+        return await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
+    }
+
+
+
+
+>>>>>>> Stashed changes
 
     /*player.play():
     - await ChooseDestination()

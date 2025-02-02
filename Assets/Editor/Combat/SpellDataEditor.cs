@@ -18,7 +18,6 @@ public class SpellDataEditor : Editor
 
         base.OnInspectorGUI();
 
-
         GUILayout.Space(5);
         EditorGUI.DrawRect(EditorGUILayout.GetControlRect(false, 1), Color.gray);
         GUILayout.Space(5);

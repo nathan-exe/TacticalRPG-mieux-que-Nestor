@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-[CreateAssetMenu(fileName = "new spell",menuName = "Spells")]
+[CreateAssetMenu(fileName = "new spell",menuName = "Combat/Spell")]
 public class SpellData : ScriptableObject
 {
     
@@ -12,10 +13,14 @@ public class SpellData : ScriptableObject
     /// </summary>
     public string Name;
 
+    public Sprite Sprite;
+    
     /// <summary>
     /// le cout en mana du spell
     /// </summary>
-    public int ManaCost;
+    public float ManaCost;
+
+    public float Damage;
 
     /// <summary>
     /// utilisé pour savoir la taille du canvas quand on dessine le sort dans la window. Le lançeur de sort est placé en 0,0

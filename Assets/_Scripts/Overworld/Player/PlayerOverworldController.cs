@@ -27,7 +27,6 @@ public class PlayerOverworldController : MonoBehaviour
                 //selection des interactibles
                 if (hit.collider.gameObject.TryGetComponent<Iinteractable>(out Iinteractable interactable))
                 {
-                    Debug.Log("AAAAAAAHHHHHHHHHH");
                     _interaction.SelectInteractable(interactable);
                 }
                 else
