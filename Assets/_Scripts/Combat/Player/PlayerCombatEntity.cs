@@ -11,15 +11,22 @@ public class PlayerCombatEntity : CombatEntity
 
     public override async UniTask PlayTurn()
     {
+        print("a");
         Vector2Int t = await ChooseDestination();
+        print("b");
         await _movement.GoTo(t);
 
+        print("c");
         Spell ChosenSpell = await ChooseSpell();
+        print("d");
+
         await CastSpell(ChosenSpell);
+        print("e");
+
     }
 
-    
-    
+
+
     async UniTask<Vector2Int> ChooseDestination()
     {
         bool waiting = true;
