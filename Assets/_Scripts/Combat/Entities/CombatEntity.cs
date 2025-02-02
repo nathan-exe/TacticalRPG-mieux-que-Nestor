@@ -8,14 +8,8 @@ public abstract class CombatEntity : MonoBehaviour
     public const float MaxManaPerEntity = 10;
 
     [Header("References")]
-<<<<<<< Updated upstream
-    [SerializeField] private EntityData _data;
-
-    public Spell Spells;
-=======
     [SerializeField] public EntityData Data;
     public CombatEntityUI UI;
->>>>>>> Stashed changes
 
     [Header("Values")]
     private bool _isDead;

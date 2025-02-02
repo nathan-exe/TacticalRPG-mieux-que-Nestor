@@ -13,15 +13,12 @@ public class PlayerCombatEntity : CombatEntity
     {
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
-<<<<<<< Updated upstream
-=======
 
         Spell ChosenSpell = await ChooseSpell();
         await CastSpell(ChosenSpell);
     }
->>>>>>> Stashed changes
 
-    }
+    
     
     async UniTask<Vector2Int> ChooseDestination()
     {
@@ -58,19 +55,11 @@ public class PlayerCombatEntity : CombatEntity
         return output;
 
     }
-<<<<<<< Updated upstream
-    
-    
-=======
     async UniTask<Spell> ChooseSpell()
     {
         return await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 
-
-
-
->>>>>>> Stashed changes
 
     /*player.play():
     - await ChooseDestination()
