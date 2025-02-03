@@ -14,13 +14,13 @@ public class GraphBuilder : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] LayerMask _solidLayerMask;
-    [SerializeField] RectInt _bounds;
+    
 
     [Header("Scene References")]
     [SerializeField] Graph _graph;
 
     [Header("Asset References")]
-    [SerializeField] NodeContainer _nodePrefab;
+    [SerializeField] CombatTile _nodePrefab;
 
     public void BuildGraph()
     {
@@ -34,13 +34,13 @@ public class GraphBuilder : MonoBehaviour
         }
 
         //itere sur toutes les tiles de la zone de jeu définie
-        for (int x = _bounds.min.x; x < _bounds.max.x ; x++)
+        for (int x = _graph.Bounds.min.x; x < _graph.Bounds.max.x ; x++)
         {
-            for (int z= _bounds.min.y ; z < _bounds.max.y; z++)
+            for (int z= _graph.Bounds.min.y ; z < _graph.Bounds.max.y; z++)
             {
                 bool collision = Physics.SphereCast(new Vector3(x,50,z),.4f,Vector3.down,out RaycastHit hit,100, _solidLayerMask); //le node sera desactivé si il y'avait un objet sur la case avant qu'il ne spawn
 
-                NodeContainer newObject = PrefabUtility.InstantiatePrefab(_nodePrefab, transform).GetComponent<NodeContainer>();
+                CombatTile newObject = PrefabUtility.InstantiatePrefab(_nodePrefab, transform).GetComponent<CombatTile>();
                 newObject.transform.position = new Vector3(x, hit.point.y, z);
                 TileAstarNode newNode = newObject.node;
                 newNode.MonoBehaviour = newObject;
@@ -71,11 +71,7 @@ public class GraphBuilder : MonoBehaviour
 
     }
 
-    //gizmos
-    public void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(_bounds.center.X0Y(),_bounds.size.X0Y());
-    }
+
 }
 
 #if UNITY_EDITOR

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System;
 
 public class PlayerCombatEntity : CombatEntity
 {
@@ -16,7 +17,9 @@ public class PlayerCombatEntity : CombatEntity
 
     public override async UniTask PlayTurn()
     {
+
         Vector2Int t = await ChooseDestination();
+
         await _movement.GoTo(t);
 
         Spell ChosenSpell = await ChooseSpell();
@@ -31,7 +34,7 @@ public class PlayerCombatEntity : CombatEntity
         Vector2Int output = Vector2Int.zero;
 
         Vector2Int originTile = _floodFill.GetOriginTile();
-        _floodFill.UpdateTileHighlighting(originTile);
+         _floodFill.UpdateTileHighlighting(originTile);
 
         //@ToDo
         //PreviewTiles();

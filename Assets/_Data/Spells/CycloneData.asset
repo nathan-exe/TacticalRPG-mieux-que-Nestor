@@ -24,11 +24,6 @@ MonoBehaviour:
     width: 9
     height: 9
   AffectedTiles:
-  - {x: 6, y: 0}
-  - {x: 7, y: 0}
-  - {x: 7, y: -1}
-  - {x: 8, y: 0}
-  - {x: 7, y: 1}
   - {x: -1, y: -2}
   - {x: 0, y: -2}
   - {x: 1, y: -2}

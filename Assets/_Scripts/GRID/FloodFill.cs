@@ -6,7 +6,7 @@ public class FloodFill : MonoBehaviour
 {
     [SerializeField] private int _mouvementRange = 3;
     [SerializeField] private int _spellRange = 5;
-    [SerializeField] private Material _spellMaterial, _playerMaterial, _resetMaterial;
+    //[SerializeField] private Material _spellMaterial, _playerMaterial, _resetMaterial;
     [SerializeField] private Transform _playerTransform;
     [Tooltip("Détermine si la souris est l'origine de la zone")][SerializeField] public bool UseMouseOrigin = true;
 
@@ -38,18 +38,18 @@ public class FloodFill : MonoBehaviour
     {
         if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode)) return;
 
-        Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
+        //Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
         HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, _spellRange));
 
         //------------  Réinitialise les anciennes tuiles --------------------------
         foreach (var tile in HighlightedTiles)
             if (!newHighlight.Contains(tile) && !_lockedTiles.Contains(tile))
-                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
+                tile.MonoBehaviour.SetState(CombatTile.State.empty) ;
 
         //------------Applique le matériau actif aux nouvelles tuiles------------------------------
         foreach (var tile in newHighlight)
             if (!_lockedTiles.Contains(tile))
-                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = activeMaterial;
+                tile.MonoBehaviour.SetState(CombatTile.State.clickable);
 
         //-----------------------------------------------------------------------------------------
         HighlightedTiles = newHighlight;
@@ -66,7 +66,7 @@ public class FloodFill : MonoBehaviour
         //------------  Réinitialise les anciennes tuiles non verrouillées--------------------------
         foreach (var tile in _lockedTiles)
             if (!HighlightedTiles.Contains(tile))
-                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
+                tile.MonoBehaviour.SetState(CombatTile.State.empty);
         //------------------------------------------------------------------------------------------
 
         _lockedTiles.Clear();
@@ -79,7 +79,7 @@ public class FloodFill : MonoBehaviour
     public void ResetTilesHighlighting()
     {
         foreach (var tile in HighlightedTiles)
-            tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
+            tile.MonoBehaviour.SetState(CombatTile.State.empty);
         HighlightedTiles.Clear();
     }
 

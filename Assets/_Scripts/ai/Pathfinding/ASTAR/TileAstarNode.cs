@@ -12,7 +12,7 @@ using static UnityEngine.GraphicsBuffer;
 [Serializable]
 public class TileAstarNode : AstarNode
 {
-    public NodeContainer MonoBehaviour;
+    public CombatTile MonoBehaviour;
     public GameObject gameObject => MonoBehaviour.gameObject;
     public Transform transform => MonoBehaviour.transform;
     public Vector2Int pose => gameObject.transform.position.RoundToV2Int();

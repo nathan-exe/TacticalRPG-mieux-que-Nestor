@@ -53,6 +53,7 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         _interactable = false;
         Button.interactable = false;
         transform.DOScale(Vector3.one, TweenDuration);
+        _spell.CancelPreview(_currentEntity);
         _infoBubble.Hide();
     }
 

@@ -132,7 +132,9 @@ MonoBehaviour:
   node:
     VisitedState: 2
     g: 0
-    monoBehaviour: {fileID: 3625020707251338195}
+    MonoBehaviour: {fileID: 0}
+  _data: {fileID: 11400000, guid: a7eae29581c42d845ac34a2f81c96420, type: 2}
+  _renderer: {fileID: 1338274323955123541}
 --- !u!65 &4364169807197751365
 BoxCollider:
   m_ObjectHideFlags: 0

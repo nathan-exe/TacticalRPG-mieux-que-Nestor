@@ -23,12 +23,13 @@ public class Graph : MonoBehaviour
     public Dictionary<Vector2Int, TileAstarNode> Nodes = new();
 
     /// <summary>
-    /// la liste de tous les noeuds libres, sans
+    /// la liste de tous les noeuds libres
     /// </summary>
     public List<TileAstarNode> FreeNodes { get; private set; } = new();
 
     public const string NodeLayer = "graph";
 
+    public RectInt Bounds;
 
     //singleton
     private static Graph _instance;
@@ -68,4 +69,8 @@ public class Graph : MonoBehaviour
         if(Nodes.ContainsKey(position)) DisableNode (Nodes[position]);
     }
 
+    public void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(Bounds.center.X0Y(), Bounds.size.X0Y());
+    }
 }
