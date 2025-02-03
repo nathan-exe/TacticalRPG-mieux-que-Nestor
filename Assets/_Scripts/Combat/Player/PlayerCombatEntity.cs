@@ -7,7 +7,12 @@ public class PlayerCombatEntity : CombatEntity
 {
 
     [SerializeField] CombatEntityMovement _movement;
+    FloodFill _floodFill;
 
+    private void Awake()
+    {
+        TryGetComponent<FloodFill>(out _floodFill);
+    }
 
     public override async UniTask PlayTurn()
     {
@@ -19,14 +24,15 @@ public class PlayerCombatEntity : CombatEntity
 
     }
 
-
-
     async UniTask<Vector2Int> ChooseDestination()
     {
         bool waiting = true;
 
         Vector2Int output = Vector2Int.zero;
-        
+
+        Vector2Int originTile = _floodFill.GetOriginTile();
+        _floodFill.UpdateTileHighlighting(originTile);
+
         //@ToDo
         //PreviewTiles();
 
@@ -38,16 +44,19 @@ public class PlayerCombatEntity : CombatEntity
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit)) // @TODO faire un singleton de la camera plutot que Camera.main
                 {
-                    //@ToDo check if tile is white
-                    Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
-                    Vector2Int t = hit.point.RoundToV2Int();
-                    Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
-                    if (Graph.Instance.Nodes.ContainsKey(t))
+                    Vector2Int tilePos = hit.point.RoundToV2Int();
+                    Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode tile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
+                    if (tile != null && _floodFill.HighlightedTiles.Contains(tile)) //Si on clique sur une tile blanche :
                     {
-                        waiting = false;
-                        output = t;
+                        Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
+                        Vector2Int t = hit.point.RoundToV2Int();
+                        Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
+                        if (Graph.Instance.Nodes.ContainsKey(t))
+                        {
+                            waiting = false;
+                            output = t;
+                        }
                     }
-
 
                 }
             }
@@ -59,6 +68,7 @@ public class PlayerCombatEntity : CombatEntity
     }
     async UniTask<Spell> ChooseSpell()
     {
+        _floodFill.ResetTilesHighlighting();
         return await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 

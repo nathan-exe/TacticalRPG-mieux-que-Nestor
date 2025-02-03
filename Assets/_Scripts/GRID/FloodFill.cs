@@ -4,87 +4,93 @@ using UnityEngine;
 
 public class FloodFill : MonoBehaviour
 {
-    [SerializeField] private int mouvementRange = 3;
-    [SerializeField] private int spellRange = 5;
-    [SerializeField] private Material spellMaterial, playerMaterial, resetMaterial;
-    [SerializeField] private Transform playerTransform;
-    [Tooltip("Détermine si la souris est l'origine de la zone")] [SerializeField] private bool useMouseOrigin = true;
+    [SerializeField] private int _mouvementRange = 3;
+    [SerializeField] private int _spellRange = 5;
+    [SerializeField] private Material _spellMaterial, _playerMaterial, _resetMaterial;
+    [SerializeField] private Transform _playerTransform;
+    [Tooltip("Détermine si la souris est l'origine de la zone")][SerializeField] public bool UseMouseOrigin = true;
 
-    private HashSet<TileAstarNode> highlightedTiles = new(), lockedTiles = new();
-    private Vector2Int lastOriginTile = new(int.MinValue, int.MinValue); //élément de comparaison pour savoir si la tile d'origine a bougé.
+    public HashSet<TileAstarNode> HighlightedTiles { get; private set; } = new();
+    private HashSet<TileAstarNode> _lockedTiles = new();
+    private Vector2Int _lastOriginTile = new(int.MinValue, int.MinValue); //élément de comparaison pour savoir si la tile d'origine a bougé.  ll
 
     void Update() //@ToDo : Enlever ça de Update au secours
     {
-        Vector2Int originTile = GetOriginTile(); //Détermine la tile à l'origine de floodfill
-
-        if (originTile != lastOriginTile) //Si les tiles d'origines sont différents alors c'est que la souris ou le joueur à bougés donc il faut modifier l'affichage
-        {
-            lastOriginTile = originTile;
-            UpdateTileHighlighting(originTile);
-        }
-
-        if (Input.GetMouseButtonDown(0) && useMouseOrigin) //pour un sort
+        if (Input.GetMouseButtonDown(0) && UseMouseOrigin) //pour un sort
             StartCoroutine(LockTilesTemporarily(1f));
     }
 
     /// <summary>
     /// Détermine la position de l'origine du floodfill (soit la souris pour le sort, soit l'entité).
     /// </summary>
-    private Vector2Int GetOriginTile()
+    public Vector2Int GetOriginTile()
     {
-        if (!useMouseOrigin) return playerTransform.position.RoundToV2Int(); //Si c'est le joueur le centre alors sa tile est l'origine.
+        if (!UseMouseOrigin) return _playerTransform.position.RoundToV2Int(); //Si c'est le joueur le centre alors sa tile est l'origine.
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2Int() : lastOriginTile;
+        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2Int() : _lastOriginTile;
     }
 
     /// <summary>
     /// Met à jour l'affichage des tuiles en fonction de la portée du sort.
     /// </summary>
-    private void UpdateTileHighlighting(Vector2Int originTile)
+    public void UpdateTileHighlighting(Vector2Int originTile)
     {
         if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode)) return;
 
-        Material activeMaterial = useMouseOrigin ? spellMaterial : playerMaterial;
-        HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, spellRange));
+        Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
+        HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, _spellRange));
 
-        //------------  Réinitialise les anciennes tuiles non verrouillées--------------------------
-        foreach (var tile in highlightedTiles)
-            if (!newHighlight.Contains(tile) && !lockedTiles.Contains(tile))
-                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = resetMaterial;
+        //------------  Réinitialise les anciennes tuiles --------------------------
+        foreach (var tile in HighlightedTiles)
+            if (!newHighlight.Contains(tile) && !_lockedTiles.Contains(tile))
+                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
 
         //------------Applique le matériau actif aux nouvelles tuiles------------------------------
         foreach (var tile in newHighlight)
-            if (!lockedTiles.Contains(tile))
+            if (!_lockedTiles.Contains(tile))
                 tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = activeMaterial;
 
         //-----------------------------------------------------------------------------------------
-        highlightedTiles = newHighlight;
+        HighlightedTiles = newHighlight;
     }
 
     /// <summary>
     /// Garde temporairement les tuiles avant de les réinitialiser (utilisé par les spells).
     /// </summary>
-    private IEnumerator LockTilesTemporarily(float duration)
+    public IEnumerator LockTilesTemporarily(float duration)
     {
-        lockedTiles = new HashSet<TileAstarNode>(highlightedTiles);
+        _lockedTiles = new HashSet<TileAstarNode>(HighlightedTiles);
         yield return new WaitForSeconds(duration); //attends
 
         //------------  Réinitialise les anciennes tuiles non verrouillées--------------------------
-        foreach (var tile in lockedTiles)
-            if (!highlightedTiles.Contains(tile))
-                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = resetMaterial;
+        foreach (var tile in _lockedTiles)
+            if (!HighlightedTiles.Contains(tile))
+                tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
         //------------------------------------------------------------------------------------------
 
-        lockedTiles.Clear();
+        _lockedTiles.Clear();
     }
+
+    #region ResetFunction
+    /// <summary>
+    /// Réinitialise les tuiles après un temps donné.
+    /// </summary>
+    public void ResetTilesHighlighting()
+    {
+        foreach (var tile in HighlightedTiles)
+            tile.MonoBehaviour.GetComponentInChildren<Renderer>().material = _resetMaterial;
+        HighlightedTiles.Clear();
+    }
+
+    #endregion
 
     /// <summary>
     /// Retourne les tuiles accessibles dans un certain rayon en utilisant une recherche en largeur (BFS).
     /// </summary>
-    private List<TileAstarNode> GetReachableTiles(TileAstarNode startNode, int range) //On part d'un node de départ avec une range donné pour regardé les voisins
+    public List<TileAstarNode> GetReachableTiles(TileAstarNode startNode, int range) //On part d'un node de départ avec une range donné pour regardé les voisins
     {
-        if (!useMouseOrigin) { range = mouvementRange; } //On ne veux pas forcément la meme value entre mouvement et spell
+        if (!UseMouseOrigin) { range = _mouvementRange; } //On ne veux pas forcément la meme value entre mouvement et spell
 
         List<TileAstarNode> result = new();
         Queue<(TileAstarNode, int)> queue = new();
@@ -106,5 +112,10 @@ public class FloodFill : MonoBehaviour
                     }
         }
         return result;
+    }
+
+    public void CheckElement()
+    {
+
     }
 }

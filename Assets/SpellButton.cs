@@ -45,6 +45,7 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         Image i = (Image)Button.targetGraphic;
         i.sprite = _spell.Data.Sprite;
         i.color = _interactable ? Color.white : Color.grey;
+        print("testttt");
     }
 
     public void Disable()
