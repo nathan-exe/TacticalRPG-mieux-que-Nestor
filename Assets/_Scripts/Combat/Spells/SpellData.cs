@@ -22,6 +22,8 @@ public class SpellData : ScriptableObject
 
     public float Damage;
 
+    public bool IsOccludedByWalls;
+
     /// <summary>
     /// utilisé pour savoir la taille du canvas quand on dessine le sort dans la window. Le lançeur de sort est placé en 0,0
     /// </summary>

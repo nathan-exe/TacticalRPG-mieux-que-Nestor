@@ -11,17 +11,11 @@ public class PlayerCombatEntity : CombatEntity
 
     public override async UniTask PlayTurn()
     {
-        print("a");
         Vector2Int t = await ChooseDestination();
-        print("b");
         await _movement.GoTo(t);
 
-        print("c");
         Spell ChosenSpell = await ChooseSpell();
-        print("d");
-
         await CastSpell(ChosenSpell);
-        print("e");
 
     }
 
@@ -44,6 +38,7 @@ public class PlayerCombatEntity : CombatEntity
             {
                 if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit)) // @TODO faire un singleton de la camera plutot que Camera.main
                 {
+                    //@ToDo check if tile is white
                     Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
                     Vector2Int t = hit.point.RoundToV2Int();
                     Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
@@ -68,9 +63,4 @@ public class PlayerCombatEntity : CombatEntity
     }
 
 
-    /*player.play():
-    - await ChooseDestination()
-    - await MoveToDestination()
-    - await ChooseSpell()
-    - await Spell.Execute()*/
 }

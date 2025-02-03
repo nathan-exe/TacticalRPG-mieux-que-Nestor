@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Boule de feu
   Sprite: {fileID: 0}
-  ManaCost: 1
+  ManaCost: 2
+  Damage: 3
+  IsOccludedByWalls: 0
   Bounds:
     serializedVersion: 2
     x: -1

@@ -8,6 +8,7 @@ using UnityEngine;
 public class Spell
 {
     public SpellData Data;
+    public float DamageModifier;
 
     public void PreviewSpellEffect(CombatEntity owner)
     {
@@ -24,5 +25,9 @@ public class Spell
     public async UniTask Execute(CombatEntity owner)
     {
         //@ToDo : appliquer degats sur toutes les tiles
+        foreach (Vector2Int offset in Data.AffectedTiles)
+        {
+            //Vector2Int TargetTile = owner.transform.position
+        }
     }
 }
