@@ -16,7 +16,7 @@ MonoBehaviour:
   Sprite: {fileID: 0}
   ManaCost: 3
   Damage: 2
-  IsOccludedByWalls: 0
+  IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2
     x: -4

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: fleche
   m_EditorClassIdentifier: 
   Name: fleche
+  Sprite: {fileID: 0}
   ManaCost: 0
+  Damage: 0
+  IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2
     x: -1
