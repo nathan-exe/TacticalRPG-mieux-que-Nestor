@@ -750,7 +750,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signName: New sign
-  signText: YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  signText: 'YAAAAAAA. YAAAAAAAA! YAAAAAAAA? YAAAAAAA. YAAAAAAAA! YAAAAAAAA? YAAAAAAA.
+    YAAAAAAAA! YAAAAAAAA? YAAAAAAA. YAAAAAAAA! YAAAAAAAA? '
 --- !u!114 &165867628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1878,8 +1879,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   signName: Old sign
-  signText: Hello, i'm a old sign Hello, i'm a old signHello, i'm a old signHello,
-    i'm a old sign Hello, i'm a old sign.
+  signText: Hello, i'm a old sign. Hello, i'm a old sign. Hello, i'm a old sign.
+    Hello, i'm a old sign. Hello, i'm a old sign. Hello, i'm a old sign.
 --- !u!114 &496301933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6163,7 +6164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1734343559}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6836,6 +6837,8 @@ MonoBehaviour:
   boxName: {fileID: 406452689}
   boxDialogueText: {fileID: 159650731}
   playerOverworldController: {fileID: 1867656713}
+  letterDelay: 50
+  punctuationDelay: 200
 --- !u!4 &2126763151
 Transform:
   m_ObjectHideFlags: 0

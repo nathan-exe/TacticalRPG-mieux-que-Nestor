@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using Cysharp.Threading.Tasks;
+using UnityEngine.TextCore.Text;
 
 public class DialogueBoxDisplay : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class DialogueBoxDisplay : MonoBehaviour
 
     bool isDialogueOpen = false;
     bool isSkipping = false;
+
+    public int letterDelay = 50;
+    public int punctuationDelay = 200;
+
+    private bool IsPunctuation(char c) => c is '?' or '.' or '!' or ',';
 
     private void Awake()
     {
@@ -52,7 +58,10 @@ public class DialogueBoxDisplay : MonoBehaviour
                 break;
             }
             boxDialogueText.text += c;
-            await UniTask.Delay(50); 
+            if (IsPunctuation(c)){
+                await UniTask.Delay(punctuationDelay);
+            }
+            await UniTask.Delay(letterDelay); 
         }
 
         await PlayerInput();
