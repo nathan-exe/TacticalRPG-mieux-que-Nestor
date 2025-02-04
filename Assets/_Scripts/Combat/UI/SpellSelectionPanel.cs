@@ -22,17 +22,13 @@ public class SpellSelectionPanel : MonoBehaviour
 
     public async UniTask<Spell> SelectEntitySpell(CombatEntity Entity)
     {
-        Debug.Log("b");
         Assert.IsTrue(Entity.Data.Spells.Count == 3 , "Il devrait y avoir 3 spells par personnage jouable");
         _selectedSpell = -1;
-
-        Debug.Log("c");
 
         SetUpButtons(Entity);
         transform.DOScale(Vector3.one, .15f);
         _canvasGroup.DOFade(1, .15f);
 
-        Debug.Log("d");
         while (_selectedSpell == -1)
         {
             await UniTask.Yield();

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using UnityEngine;
 /// </summary>
 public class CombatTile : MonoBehaviour
 {
+
     public enum State { empty,clickable,dangerous};
 
     public TileAstarNode node = new();
@@ -22,11 +24,16 @@ public class CombatTile : MonoBehaviour
     [Header("Scene References")]
     [SerializeField] MeshRenderer _renderer;
 
+    //visuals
+    Vector3 _rendererBaseScale;
+    const float TweeningDuration = 0.25f;
+
     private void Awake()
     {
         //Astar setup
         node.MonoBehaviour = this;
         node.resetNode();
+        _rendererBaseScale = _renderer.transform.localScale;
     }
 
     public void SetState(State newState)
@@ -34,18 +41,32 @@ public class CombatTile : MonoBehaviour
         switch (newState)
         {
             case State.empty:
-                _renderer.material = _data.Material_Default;
+                //_renderer.material = _data.Material_Default;
+                _renderer.transform.DOScale(Vector3.zero, TweeningDuration);
                 break;
 
             case State.clickable:
                 _renderer.material = _data.Material_Clickable;
+                _renderer.transform.DOScale(_rendererBaseScale, TweeningDuration);
                 break;
 
             case State.dangerous:
                 _renderer.material = _data.Material_Danger;
+                _renderer.transform.DOScale(_rendererBaseScale, TweeningDuration);
                 break;
 
         }
+    }
+
+    public void OnMouseHover()
+    {
+        _renderer.transform.DOScale(_rendererBaseScale*1.5f, TweeningDuration);
+    }
+
+    public void OnMouseLeave()
+    {
+        Debug.Log("AHHHHHHHHHHHHHHHHHHHHHHHH");
+        _renderer.transform.DOScale(_rendererBaseScale, TweeningDuration);
     }
 
     //----------- Guizmos -----------

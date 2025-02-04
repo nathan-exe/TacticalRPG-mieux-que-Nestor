@@ -8,11 +8,15 @@ public class PlayerCombatEntity : CombatEntity
 {
 
     [SerializeField] CombatEntityMovement _movement;
+    
+    
     FloodFill _floodFill;
 
     private void Awake()
     {
         TryGetComponent<FloodFill>(out _floodFill);
+        _floodFill.MovementRange = Data.MovementRangePerTurn;
+        
     }
 
     public override async UniTask PlayTurn()
@@ -38,19 +42,31 @@ public class PlayerCombatEntity : CombatEntity
 
         //@ToDo
         //PreviewTiles();
+        TileAstarNode SelectedTile = null;
 
         while (waiting)
         {
             await UniTask.Yield();
-            Debug.Log("waiting for click");
-            if (Input.GetMouseButtonDown(0))
+            //Debug.Log("waiting for click");
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100, ~LayerMask.GetMask("solid"))) // @TODO faire un singleton de la camera plutot que Camera.main
             {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit)) // @TODO faire un singleton de la camera plutot que Camera.main
+                Vector2Int tilePos = hit.point.RoundToV2Int();
+                Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode HitTile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
+                if (HitTile != null && _floodFill.HighlightedTiles.Contains(HitTile)) //Si on clique sur une tile blanche :
                 {
-                    Vector2Int tilePos = hit.point.RoundToV2Int();
-                    Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode tile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
-                    if (tile != null && _floodFill.HighlightedTiles.Contains(tile)) //Si on clique sur une tile blanche :
+                    if(HitTile!= SelectedTile)
                     {
+                        if(SelectedTile!=null) Debug.Log(SelectedTile.MonoBehaviour.gameObject.name);
+                        Debug.Log(HitTile.MonoBehaviour.gameObject.name);
+                        if (SelectedTile != null) SelectedTile.MonoBehaviour.OnMouseLeave();
+                        HitTile.MonoBehaviour.OnMouseHover();
+                        SelectedTile = HitTile;
+                    }
+
+                    if (Input.GetMouseButtonDown(0))
+                    {
+
                         Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
                         Vector2Int t = hit.point.RoundToV2Int();
                         Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
@@ -63,6 +79,7 @@ public class PlayerCombatEntity : CombatEntity
 
                 }
             }
+            
 
         }
 

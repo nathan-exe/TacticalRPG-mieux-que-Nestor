@@ -10,6 +10,7 @@ public abstract class CombatEntity : MonoBehaviour
     [Header("References")]
     [SerializeField] public EntityData Data;
     public CombatEntityUI UI;
+    public HealthComponent Health;
 
     [Header("Values")]
     private bool _isDead;
@@ -35,16 +36,14 @@ public abstract class CombatEntity : MonoBehaviour
     }
 
     
-    void Start()
-    {
-        Initialize();
-    }
 
-    public void Initialize()
+
+    void Start()
     {
         HP = Data.MaxHP;
         Mana = MaxManaPerEntity;
     }
+
 
     public abstract UniTask PlayTurn();
 

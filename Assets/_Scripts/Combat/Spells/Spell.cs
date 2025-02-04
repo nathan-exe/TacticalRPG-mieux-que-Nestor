@@ -10,6 +10,7 @@ public /*abstract*/ class Spell
 {
     public SpellData Data;
     List<Vector2Int> TargetableTiles;
+    List<CombatEntity> HittableObjects;
 
     /// <summary>
     /// trouve toutes les tiles du graph qui seront affectées par le sort.
@@ -59,7 +60,12 @@ public /*abstract*/ class Spell
         //preview mana loss
         owner.UI.PreviewManaLoss(Data.ManaCost);
 
-        //@ToDo : preview ennemi HP loss
+        //preview ennemi Loss
+        GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
+        foreach ( CombatEntity o in HittableObjects)
+        {
+            o.UI.PreviewHPLoss(Data.Damage);
+        }
     }
 
     public void CancelPreview(CombatEntity owner)
@@ -70,13 +76,42 @@ public /*abstract*/ class Spell
         {
             Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.empty);
         }
+        TargetableTiles.Clear();
+
+        foreach (CombatEntity o in HittableObjects)
+        {
+            o.UI.CancelHPLossPreview();
+        }
+        HittableObjects.Clear();
     }
 
     public async UniTask Execute(CombatEntity owner)
     {
-        //@ToDo : appliquer degats sur toutes les tiles
-            
-        //bool collision = Physics.SphereCast(new Vector3(worldPos.x, 50, worldPos.z), .4f, Vector3.down, out RaycastHit hit, 100); //le node sera desactivé si il y'avait un objet sur la case avant qu'il ne spawn
+        RecomputeTargetableTiles(owner);
+
+        GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
+        foreach (CombatEntity o in HittableObjects)
+        {
+            o.Health.TakeDamage(Data.Damage);
+        }
 
     }
+
+    private void GetAllHittableEntitiesOnTiles_NoAlloc(List<Vector2Int> tiles, ref List<CombatEntity> healthComponentsList)
+    {
+        healthComponentsList.Clear();
+        foreach (Vector2Int targetTile in TargetableTiles)
+        {
+            Vector3 worldPos = new Vector3(targetTile.x, .5f, targetTile.y);
+            if (Physics.SphereCast(new Vector3(worldPos.x, 50, worldPos.z), .4f, Vector3.down, out RaycastHit hit, 100))
+            {
+                if (hit.collider.TryGetComponent(out CombatEntity hitEntity))
+                {
+                    healthComponentsList.Add(hitEntity);
+                }
+            }
+        }
+    }
+
 }
+
