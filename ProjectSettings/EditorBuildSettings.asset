@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/SceneOverMat\xE9o.unity"
     guid: 5162c3f320bee40469ca5118a61a1564
-  - enabled: 0
-    path: Assets/Scenes/SceneNathanCombat.unity
-    guid: 10f586b1719bb914ab3833b74b24ab83
   - enabled: 1
     path: "Assets/Scenes/SceneMat\xE9o.unity"
     guid: 9f8ba7eb2a6399646a0250cab641bc34
