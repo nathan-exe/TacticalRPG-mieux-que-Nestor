@@ -28,7 +28,7 @@ public class AiCombatEntity : CombatEntity
         _floodFill.UpdateTileHighlighting(originTile);
 
         //pick random spell
-        SpellData chosenSpell = Data.Spells.PickRandom();
+        SpellData chosenSpell = Data.Spells.PickRandom(); //@ToDo : take mana intoAccount
 
         //pick random target unit
         Vector2Int SpellTargetTile = PlayerCombatEntity.Instances.PickRandom().transform.position.RoundToV2Int();
@@ -41,7 +41,8 @@ public class AiCombatEntity : CombatEntity
         Vector2Int? TargetTile = null;
         foreach(Vector2Int Offset in chosenSpell.AffectedTiles) //pour toutes les cases rouges
         {
-            Offset.rotate90(Orientation);
+            Offset.rotate90(Orientation);//@ToDo : fix orientation
+
             Vector2Int castOrigin = SpellTargetTile - Offset;
             if (_floodFill.HighlightedTiles.Contains(Graph.Instance.Nodes[castOrigin]))
             {
@@ -75,10 +76,10 @@ public class AiCombatEntity : CombatEntity
         SpellCaster.SelectedSpellData = chosenSpell;
         await UniTask.Delay(1000);
 
-        await SpellCaster.CastSelectedSpell();
+        await SpellCaster.CastSelectedSpell();//@ToDo : cast spell only if tile wasnt picked at Random
     }
 
-    int ChooseClosestDirectionTowardPosition(Vector3 target)
+    int ChooseClosestDirectionTowardPosition(Vector3 target)//@ToDo : fix orientation
     {
         float bestAngle = 181;
         byte bestIndex = 0;

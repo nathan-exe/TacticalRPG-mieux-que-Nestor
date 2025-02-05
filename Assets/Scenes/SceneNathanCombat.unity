@@ -5845,6 +5845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthSlider: {fileID: 1623875860}
   ManaSlider: {fileID: 1022024026}
+  Name: {fileID: 0}
 --- !u!224 &250837393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15007,36 +15008,19 @@ GameObject:
   - component: {fileID: 626291180}
   - component: {fileID: 626291179}
   - component: {fileID: 626291178}
-  - component: {fileID: 626291171}
+  - component: {fileID: 626291181}
   - component: {fileID: 626291175}
   - component: {fileID: 626291176}
   - component: {fileID: 626291177}
   - component: {fileID: 626291173}
   - component: {fileID: 626291172}
   m_Layer: 0
-  m_Name: PlayerCharacter (2)
+  m_Name: AICharacter (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &626291171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 626291170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc0277e0f5c28194390870d3c8d37889, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 5ca6ccef0bb295d4db9d4bda5278e01a, type: 2}
-  _movement: {fileID: 626291175}
-  UI: {fileID: 250837392}
-  Health: {fileID: 626291173}
-  SpellCaster: {fileID: 626291172}
 --- !u!114 &626291172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15049,7 +15033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4824bbfb33b620a4db0b9460f3f77f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Owner: {fileID: 626291171}
+  Owner: {fileID: 626291181}
 --- !u!114 &626291173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15063,7 +15047,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyGameObjectOnDeath: 0
-  _entity: {fileID: 626291171}
+  _entity: {fileID: 626291181}
   MaxHP: 5
 --- !u!4 &626291174
 Transform:
@@ -15196,6 +15180,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626291170}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &626291181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626291170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c04aa20025fc2d48b12cd15885f1605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 5ca6ccef0bb295d4db9d4bda5278e01a, type: 2}
+  _movement: {fileID: 626291175}
+  UI: {fileID: 250837392}
+  Health: {fileID: 626291173}
+  SpellCaster: {fileID: 626291172}
 --- !u!1001 &630907985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17964,7 +17965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Entities:
   - {fileID: 1606866715}
-  - {fileID: 626291171}
+  - {fileID: 626291181}
 --- !u!4 &766190860
 Transform:
   m_ObjectHideFlags: 0
@@ -46882,7 +46883,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e101928e4c3a284c83405674524feea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _partyData: {fileID: 0}
   _partyPrefab: {fileID: 0}
   _potentialSpawn: []
   _combatManager: {fileID: 0}
@@ -49926,6 +49926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthSlider: {fileID: 1518482433}
   ManaSlider: {fileID: 1108366696}
+  Name: {fileID: 0}
 --- !u!224 &2031690481
 RectTransform:
   m_ObjectHideFlags: 0
