@@ -3,9 +3,11 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SpellSelectionPanel : MonoBehaviour
 {
@@ -13,9 +15,9 @@ public class SpellSelectionPanel : MonoBehaviour
     [SerializeField] List<SpellButton> _buttons;
     [SerializeField] CanvasGroup _canvasGroup;
 
-    
 
-    int _selectedSpell = -1;
+
+    bool Waiting = true;
 
     //spell rotation
     public event Action<int> OnSpellRotated;
@@ -29,22 +31,23 @@ public class SpellSelectionPanel : MonoBehaviour
         _canvasGroup.alpha = 0;
     }
 
-    public async UniTask<Spell> SelectEntitySpell(CombatEntity Entity)
+    public async UniTask SelectEntitySpell(CombatEntity Entity)
     {
         Assert.IsTrue(Entity.Data.Spells.Count == 3 , "Il devrait y avoir 3 spells par personnage jouable");
-        _selectedSpell = -1;
 
-        SetUpButtons(Entity);
         transform.DOScale(Vector3.one, .15f);
         _canvasGroup.DOFade(1, .15f);
 
-        while (_selectedSpell == -1)
+        Waiting = true;
+        SetUpButtons(Entity);
+
+        //attend de recevoir un event de la part des boutons
+        while (Waiting)
         {
             await UniTask.Yield();
             
-            if (Input.GetMouseButtonDown(1)) SpellOrientation++;
-            if (Input.GetKeyDown(KeyCode.Escape)) _selectedSpell = -2;
-            Debug.Log("Waiting For Spell button click");
+            if (Input.GetMouseButtonDown(1)) SpellOrientation++; //rotation du spell
+            if (Input.GetKeyDown(KeyCode.Escape)) Waiting = false;
         }
 
         DisableButtons();
@@ -52,9 +55,7 @@ public class SpellSelectionPanel : MonoBehaviour
         transform.DOScale(Vector3.zero, .15f);
         _canvasGroup.DOFade(0, .15f);
 
-        if (_selectedSpell == -2) return null;
-        return Entity.Data.Spells[_selectedSpell];
-        //return 0;
+
     }
 
     
@@ -64,9 +65,12 @@ public class SpellSelectionPanel : MonoBehaviour
         {
             _buttons[i].Initialize(entity, i);
 
+            //events
             int su = i;
             _buttons[i].Button.onClick.RemoveAllListeners();
-            _buttons[i].Button.onClick.AddListener(() => _selectedSpell = su);
+            _buttons[i].OnMouseHover += () => entity.SpellCaster.SelectedSpellData = entity.Data.Spells[su];
+            _buttons[i].OnMouseHoverExit += () => entity.SpellCaster.SelectedSpellData = null;
+            _buttons[i].Button.onClick.AddListener(() => Waiting = false);
             OnSpellRotated += _buttons[i].OnSpellRotationMessageReceived;
         }
     }

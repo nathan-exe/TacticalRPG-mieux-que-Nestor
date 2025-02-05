@@ -9,5 +9,5 @@ public class EntityData : ScriptableObject
 {
     public int MaxHP;
     public int MovementRangePerTurn = 5;
-    public List<Spell> Spells = new List<Spell>();
+    public List<SpellData> Spells = new List<SpellData>();
 }

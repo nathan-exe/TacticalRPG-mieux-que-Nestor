@@ -10,8 +10,8 @@ public class AiCombatEntity : CombatEntity
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
 
-        Spell ChosenSpell = await ChooseSpell();
-        if (ChosenSpell != null) await CastSpell(ChosenSpell);
+        await ChooseSpell();
+        await SpellCaster.CastSelectedSpell();
     }
 
     async UniTask<Vector2Int> ChooseDestination()
@@ -26,9 +26,9 @@ public class AiCombatEntity : CombatEntity
         return output;
 
     }
-    async UniTask<Spell> ChooseSpell()
+    async UniTask ChooseSpell()
     {
         _floodFill.ResetTilesHighlighting();
-        return await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
+        await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 }
