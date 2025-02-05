@@ -25,9 +25,4 @@ public class PartySpawn : MonoBehaviour
             _combatManager.Entities.Add(newTeammate.GetComponent<CombatEntity>());
         }
     }
-
-    private void Start()
-    {
-        _combatManager.Play();
-    }
 }
