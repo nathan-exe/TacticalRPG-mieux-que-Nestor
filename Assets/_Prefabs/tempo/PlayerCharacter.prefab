@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 2176401211109406214}
   - component: {fileID: 8152940409923898326}
   - component: {fileID: 8066208990122238569}
+  - component: {fileID: 8890892305574478179}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -456,9 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: 5ca6ccef0bb295d4db9d4bda5278e01a, type: 2}
+  _movement: {fileID: 8915943749733136409}
   UI: {fileID: 6007540318052427716}
   Health: {fileID: 8066208990122238569}
-  _movement: {fileID: 8915943749733136409}
+  SpellCaster: {fileID: 8890892305574478179}
 --- !u!114 &8915943749733136409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,8 +516,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyGameObjectOnDeath: 0
-  _entity: {fileID: 0}
+  _entity: {fileID: 9074048798559524179}
   MaxHP: 5
+--- !u!114 &8890892305574478179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7418128638990208317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4824bbfb33b620a4db0b9460f3f77f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Owner: {fileID: 9074048798559524179}
 --- !u!1001 &3801541352587191576
 PrefabInstance:
   m_ObjectHideFlags: 0
