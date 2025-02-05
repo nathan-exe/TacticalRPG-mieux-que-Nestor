@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class Encouters : MonoBehaviour
 {
     [SerializeField] private Animation _anim;
-    [SerializeField] private int _nomberMonster;
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private List<string> _monsters = new();
+
     private void Start()
     {
         PartyData.Instance.AddCharacter(new CharacterState("Nestor", 10, 100));
@@ -21,6 +21,10 @@ public class Encouters : MonoBehaviour
         {
             _anim.Play();
             PartyData.Instance.DisplayTeam();
+            foreach (var monster in _monsters)
+            {
+                MonsterData.Instance.ListOfMonsterName.Add(monster);
+            }
             await Task.Delay(600);
             SceneManager.LoadScene("SceneMatéo");
         }
