@@ -9,13 +9,17 @@ public abstract class CombatEntity : MonoBehaviour
 
     [Header("References")]
     [SerializeField] public EntityData Data;
+    [SerializeField] protected CombatEntityMovement _movement;
     public CombatEntityUI UI;
     public HealthComponent Health;
+    public SpellCaster SpellCaster;
+    protected FloodFill _floodFill;
 
     [Header("Values")]
     private bool _isDead;
 
     float _HP;
+
     public float HP
     {
         get { return _HP; }
@@ -28,29 +32,23 @@ public abstract class CombatEntity : MonoBehaviour
 
     float _mana;
     public float Mana { get { return _mana; }
-        private set
+        set
         {
             _mana = value;
             UI.ManaSlider.Value = _mana;
         }
     }
 
-    
 
-
-    void Start()
+    private void Awake()
     {
+        TryGetComponent<FloodFill>(out _floodFill);
+        _floodFill.MovementRange = Data.MovementRangePerTurn;
         HP = Data.MaxHP;
         Mana = MaxManaPerEntity;
     }
 
-
     public abstract UniTask PlayTurn();
 
-    protected async UniTask CastSpell(Spell spell)
-    {
-        Mana-=spell.Data.ManaCost;
-        await spell.Execute(this);
-    }
 
 }
