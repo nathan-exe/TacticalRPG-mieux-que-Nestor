@@ -13,11 +13,11 @@ public class HealthComponent : MonoBehaviour
     public float MaxHP = 100;
 
     //HP getters et setters
-    private float _HP;
+    public float _HP;
     public float HP
     {
         get { return _HP; }
-        private set
+        set
         {
             _HP = Mathf.Clamp(value, 0, MaxHP);
             OnHealthUpdated?.Invoke(_HP);
@@ -62,8 +62,6 @@ public class HealthComponent : MonoBehaviour
         };
 
         MaxHP = _entity.Data.MaxHP;
-        HP = MaxHP;
-
     }
 
 }
