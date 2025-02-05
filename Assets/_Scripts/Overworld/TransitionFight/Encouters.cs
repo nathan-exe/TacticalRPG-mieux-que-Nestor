@@ -11,8 +11,8 @@ public class Encouters : MonoBehaviour
     [SerializeField] private GameObject _enemyPrefab;
     private void Start()
     {
-        PartyData.Instance.AddCharacter(new CharacterState("Nestor", 100, 100));
-        PartyData.Instance.AddCharacter(new CharacterState("Matéo", 50, 50));
+        PartyData.Instance.AddCharacter(new CharacterState("Nestor", 10, 100));
+        PartyData.Instance.AddCharacter(new CharacterState("Matéo", 5, 50));
     }
 
     private async void OnTriggerEnter(Collider other)
@@ -22,7 +22,7 @@ public class Encouters : MonoBehaviour
             _anim.Play();
             PartyData.Instance.DisplayTeam();
             await Task.Delay(600);
-            SceneManager.LoadScene("SceneMatéo");
+            SceneManager.LoadScene("SceneNathanCombat");
         }
     }
 }

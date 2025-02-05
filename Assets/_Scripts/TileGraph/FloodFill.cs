@@ -36,7 +36,23 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public void UpdateTileHighlighting(Vector2Int originTile)
     {
-        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode)) return;
+        if (Graph.Instance == null)
+        {
+            Debug.LogError("pitié");
+            return;
+        }
+
+        if (Graph.Instance.Nodes == null)
+        {
+            Debug.LogError("Graph.Instance.Nodes est NULL !");
+            return;
+        }
+
+        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode))
+        {
+            Debug.LogError($"Aucune tuile trouvée pour la position {originTile} !");
+            return;
+        }
 
         //Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
         HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, _spellRange));

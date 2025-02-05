@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: "Assets/Scenes/SceneMat\xE9o.unity"
-    guid: f9b25426e2b9bd147a42e3913fe20977
-  - enabled: 1
     path: "Assets/Scenes/SceneOverMat\xE9o.unity"
     guid: 5162c3f320bee40469ca5118a61a1564
+  - enabled: 1
+    path: Assets/Scenes/SceneNathanCombat.unity
+    guid: 10f586b1719bb914ab3833b74b24ab83
   m_configObjects: {}
