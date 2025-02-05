@@ -4,6 +4,9 @@ using UnityEngine;
 public static class VectorExtensions
 {
 
+    // "constantes"
+    public static readonly Vector3[] All4Directions = new Vector3[4] { Vector3.right, Vector3.back, Vector3.left, Vector3.forward };
+    
     //rounding
     public static Vector3Int Round(this Vector3 v)
     {

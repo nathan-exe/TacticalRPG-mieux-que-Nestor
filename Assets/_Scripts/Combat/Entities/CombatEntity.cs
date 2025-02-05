@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ public abstract class CombatEntity : MonoBehaviour
 
     float _HP;
 
+    //notifiers
+
     public float HP
     {
         get { return _HP; }
@@ -40,7 +43,7 @@ public abstract class CombatEntity : MonoBehaviour
     }
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         TryGetComponent<FloodFill>(out _floodFill);
         _floodFill.MovementRange = Data.MovementRangePerTurn;

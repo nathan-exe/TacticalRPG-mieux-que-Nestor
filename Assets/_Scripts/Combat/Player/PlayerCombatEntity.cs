@@ -6,6 +6,18 @@ using System;
 
 public class PlayerCombatEntity : CombatEntity
 {
+    public static List<PlayerCombatEntity> Instances = new List<PlayerCombatEntity>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Instances.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        Instances.Remove(this);
+    }
 
     public override async UniTask PlayTurn()
     {
@@ -61,13 +73,13 @@ public class PlayerCombatEntity : CombatEntity
             
 
         }
-
+        _floodFill.ResetTilesHighlighting();
         return output;
 
     }
     async UniTask ChooseSpell()
     {
-        _floodFill.ResetTilesHighlighting();
+        
         await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 

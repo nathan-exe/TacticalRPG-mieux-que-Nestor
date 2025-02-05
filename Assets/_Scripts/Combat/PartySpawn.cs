@@ -15,6 +15,8 @@ public class PartySpawn : MonoBehaviour
         {
             GameObject newTeammate = Instantiate(_partyPrefab); //nouveau pote
 
+            //@todo : setup entity data
+
             newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
             newTeammate.GetComponent<HealthComponent>().MaxHP = Teammate.HP; //pv
 

@@ -22,7 +22,7 @@ public class Encouters : MonoBehaviour
             _anim.Play();
             PartyData.Instance.DisplayTeam();
             await Task.Delay(600);
-            SceneManager.LoadScene("SceneMatéo");
+            SceneManager.LoadScene("Scene Matéo");
         }
     }
 }

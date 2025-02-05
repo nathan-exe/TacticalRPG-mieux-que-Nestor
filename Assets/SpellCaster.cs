@@ -35,10 +35,9 @@ public class SpellCaster : MonoBehaviour
     /// trouve toutes les tiles du graph qui seront affectées par le sort.
     /// </summary>
     /// <param name="owner"></param>
-   
-    void RecomputeTargetableTiles()
+    public void GetTargetableTiles(ref List<Vector2Int> targetableTiles)
     {
-        TargetableTiles.Clear();
+        targetableTiles.Clear();
         foreach (Vector2Int v in SelectedSpellData.AffectedTiles)
         {
             //rotation du sort
@@ -58,12 +57,12 @@ public class SpellCaster : MonoBehaviour
                     Debug.DrawRay(TileworldPos, TileToOwner, Color.red, .1f);
                     if (!Physics.Raycast(TileworldPos, TileToOwner, TileToOwner.magnitude, LayerMask.GetMask("solid")))
                     {
-                        TargetableTiles.Add(TargetTile);
+                        targetableTiles.Add(TargetTile);
                     }
                 }
                 else
                 {
-                    TargetableTiles.Add(TargetTile);
+                    targetableTiles.Add(TargetTile);
                 }
             }
         }
@@ -76,7 +75,7 @@ public class SpellCaster : MonoBehaviour
     {
 
         //preview tiles
-        RecomputeTargetableTiles();
+        GetTargetableTiles(ref TargetableTiles);
         foreach (Vector2Int targetTile in TargetableTiles)
         {
             Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.dangerous);
@@ -123,7 +122,7 @@ public class SpellCaster : MonoBehaviour
 
         Owner.Mana -= SelectedSpellData.ManaCost;
 
-        RecomputeTargetableTiles();
+        GetTargetableTiles(ref TargetableTiles);
 
         GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
         foreach (CombatEntity o in HittableObjects)

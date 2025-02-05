@@ -6,6 +6,7 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     public List<CombatEntity> Entities = new List<CombatEntity>();
+
     int _currentEntityIndex = 0;
 
     bool _isPlaying = false;
