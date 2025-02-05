@@ -7,6 +7,8 @@ public class AiCombatEntity : CombatEntity
 {
     public override async UniTask PlayTurn()
     {
+        SpellData spell = Data.Spells.PickRandom();
+
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
 

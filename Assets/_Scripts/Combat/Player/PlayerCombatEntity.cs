@@ -44,7 +44,6 @@ public class PlayerCombatEntity : CombatEntity
                     //Tile Mouse events
                     if(HitTile!= SelectedTile)
                     {
-                        if(SelectedTile!=null) Debug.Log(SelectedTile.MonoBehaviour.gameObject.name);
                         if (SelectedTile != null) SelectedTile.MonoBehaviour.OnMouseLeave();
                         HitTile.MonoBehaviour.OnMouseHover();
                         SelectedTile = HitTile;
