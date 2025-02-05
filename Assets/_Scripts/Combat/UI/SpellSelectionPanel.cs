@@ -41,7 +41,9 @@ public class SpellSelectionPanel : MonoBehaviour
         while (_selectedSpell == -1)
         {
             await UniTask.Yield();
+            
             if (Input.GetMouseButtonDown(1)) SpellOrientation++;
+            if (Input.GetKeyDown(KeyCode.Escape)) _selectedSpell = -2;
             Debug.Log("Waiting For Spell button click");
         }
 
@@ -50,6 +52,7 @@ public class SpellSelectionPanel : MonoBehaviour
         transform.DOScale(Vector3.zero, .15f);
         _canvasGroup.DOFade(0, .15f);
 
+        if (_selectedSpell == -2) return null;
         return Entity.Data.Spells[_selectedSpell];
         //return 0;
     }

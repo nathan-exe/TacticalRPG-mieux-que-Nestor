@@ -11,11 +11,14 @@ public abstract class CombatEntity : MonoBehaviour
     [SerializeField] public EntityData Data;
     public CombatEntityUI UI;
     public HealthComponent Health;
+    [SerializeField] protected CombatEntityMovement _movement;
+    protected FloodFill _floodFill;
 
     [Header("Values")]
     private bool _isDead;
 
     float _HP;
+
     public float HP
     {
         get { return _HP; }
@@ -35,15 +38,14 @@ public abstract class CombatEntity : MonoBehaviour
         }
     }
 
-    
 
-
-    void Start()
+    private void Awake()
     {
+        TryGetComponent<FloodFill>(out _floodFill);
+        _floodFill.MovementRange = Data.MovementRangePerTurn;
         HP = Data.MaxHP;
         Mana = MaxManaPerEntity;
     }
-
 
     public abstract UniTask PlayTurn();
 
