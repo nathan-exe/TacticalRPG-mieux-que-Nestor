@@ -10,7 +10,7 @@ public class CombatEntityUI : MonoBehaviour
     public void PreviewManaLoss(float loss) => ManaSlider.PreviewValue(ManaSlider.Value - loss);
     public void CancelManaLossPreview() => ManaSlider.CancelPreview();
 
-    public void PreviewHPLoss(float loss) => HealthSlider.PreviewValue(ManaSlider.Value - loss);
+    public void PreviewHPLoss(float loss) => HealthSlider.PreviewValue(HealthSlider.Value - loss);
     public void CancelHPLossPreview() => HealthSlider.CancelPreview();
 
     private void Start()

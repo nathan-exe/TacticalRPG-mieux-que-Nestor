@@ -16,6 +16,9 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
     CombatEntity _currentEntity;
 
     bool _interactable;
+
+    bool _isOverlappedByMouse;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!_interactable) return;
@@ -23,6 +26,7 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         transform.DOScale(Vector3.one * 1.2f, TweenDuration);
         _spell.PreviewSpellEffect(_currentEntity);
         _infoBubble.ShowSpellInfo(_spell);
+        _isOverlappedByMouse = true;
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -32,6 +36,18 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         transform.DOScale(Vector3.one, TweenDuration);
         _spell.CancelPreview(_currentEntity);
         _infoBubble.Hide();
+        _isOverlappedByMouse = false;
+    }
+
+    public void OnSpellRotationMessageReceived(int Orientation)
+    {
+        if (_isOverlappedByMouse)
+        {
+            _spell.Orientation = Orientation;
+            _spell.CancelPreview(_currentEntity);
+            _spell.PreviewSpellEffect(_currentEntity);
+        }
+        
     }
 
     public void Initialize(CombatEntity entity,int spellID)

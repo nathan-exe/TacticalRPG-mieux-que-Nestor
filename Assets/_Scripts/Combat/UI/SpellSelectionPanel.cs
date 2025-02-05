@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,15 @@ public class SpellSelectionPanel : MonoBehaviour
     [SerializeField] List<SpellButton> _buttons;
     [SerializeField] CanvasGroup _canvasGroup;
 
+    
+
     int _selectedSpell = -1;
+
+    //spell rotation
+    public event Action<int> OnSpellRotated;
+    private int _orientation;
+    public int SpellOrientation { get => _orientation; set { _orientation = value % 4; OnSpellRotated?.Invoke(SpellOrientation); } }
+    
 
     private void Start()
     {
@@ -32,6 +41,7 @@ public class SpellSelectionPanel : MonoBehaviour
         while (_selectedSpell == -1)
         {
             await UniTask.Yield();
+            if (Input.GetMouseButtonDown(1)) SpellOrientation++;
             Debug.Log("Waiting For Spell button click");
         }
 
@@ -54,6 +64,7 @@ public class SpellSelectionPanel : MonoBehaviour
             int su = i;
             _buttons[i].Button.onClick.RemoveAllListeners();
             _buttons[i].Button.onClick.AddListener(() => _selectedSpell = su);
+            OnSpellRotated += _buttons[i].OnSpellRotationMessageReceived;
         }
     }
 
@@ -61,6 +72,7 @@ public class SpellSelectionPanel : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
         {
+            OnSpellRotated -= _buttons[i].OnSpellRotationMessageReceived;
             _buttons[i].Disable();
         }
     }

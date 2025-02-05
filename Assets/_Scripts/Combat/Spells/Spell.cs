@@ -12,6 +12,8 @@ public /*abstract*/ class Spell
     List<Vector2Int> TargetableTiles;
     List<CombatEntity> HittableObjects;
 
+    public int Orientation;
+
     /// <summary>
     /// trouve toutes les tiles du graph qui seront affectées par le sort.
     /// </summary>
@@ -19,8 +21,10 @@ public /*abstract*/ class Spell
     void RecomputeTargetableTiles(CombatEntity owner)
     {
         TargetableTiles.Clear();
-        foreach (Vector2Int offset in Data.AffectedTiles)
+        foreach (Vector2Int v in Data.AffectedTiles)
         {
+            Vector2Int offset = v;
+            offset = offset.rotate90(Orientation);
             Vector2Int TargetTile = owner.transform.position.RoundToV2Int() + offset;
             if (Graph.Instance.Bounds.Contains(TargetTile))
             {
@@ -50,7 +54,7 @@ public /*abstract*/ class Spell
     public void PreviewSpellEffect(CombatEntity owner)
     {
         RecomputeTargetableTiles(owner);
-
+        Debug.Log("bidule");
         //preview tiles
         foreach (Vector2Int targetTile in TargetableTiles)
         {
