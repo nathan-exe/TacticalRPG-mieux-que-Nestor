@@ -15,8 +15,7 @@ public class CombatManager : MonoBehaviour
         _isPlaying = false;
     }
 
-
-    async UniTask Play()
+    public async UniTask Play()
     {
         _isPlaying = true;
         while(_isPlaying)
@@ -25,10 +24,5 @@ public class CombatManager : MonoBehaviour
             _currentEntityIndex++;
             _currentEntityIndex = _currentEntityIndex%Entities.Count;
         }
-    }
-
-    private void Start()
-    {
-        Play();
     }
 }
