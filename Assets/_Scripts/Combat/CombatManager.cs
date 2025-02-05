@@ -10,6 +10,11 @@ public class CombatManager : MonoBehaviour
 
     bool _isPlaying = false;
 
+    private void Start()
+    {
+        if (Entities.Count > 0) Play();
+    }
+
     void EndFight()
     {
         _isPlaying = false;
