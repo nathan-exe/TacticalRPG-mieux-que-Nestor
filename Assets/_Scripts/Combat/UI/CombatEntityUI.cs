@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CombatEntityUI : MonoBehaviour
@@ -7,6 +8,7 @@ public class CombatEntityUI : MonoBehaviour
     [Header("References")]
     public CoolSlider HealthSlider;
     public CoolSlider ManaSlider;
+    public TextMeshProUGUI Name;
     public void PreviewManaLoss(float loss) => ManaSlider.PreviewValue(ManaSlider.Value - loss);
     public void CancelManaLossPreview() => ManaSlider.CancelPreview();
 
