@@ -50,8 +50,8 @@ public class FloodFill : MonoBehaviour
         foreach (var tile in newHighlight)
             if (!_lockedTiles.Contains(tile))
                 tile.MonoBehaviour.SetState(CombatTile.State.clickable);
-
         //-----------------------------------------------------------------------------------------
+
         HighlightedTiles = newHighlight;
     }
 
