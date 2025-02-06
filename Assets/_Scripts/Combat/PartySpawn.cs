@@ -18,7 +18,7 @@ public class PartySpawn : MonoBehaviour
             //@todo : setup entity data
 
             newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
-            newTeammate.GetComponent<HealthComponent>().HP = Teammate.HP; //pv
+            newTeammate.GetComponent<HealthComponent>().MaxHP = Teammate.HP; //pv
 
             int pos = Random.Range(0, _potentialSpawn.Count); //positionne
             newTeammate.transform.position = _potentialSpawn[pos].position;
