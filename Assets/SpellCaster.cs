@@ -54,7 +54,7 @@ public class SpellCaster : MonoBehaviour
                     //wall collision check
                     Vector3 TileworldPos = new Vector3(TargetTile.x, transform.position.y, TargetTile.y);
                     Vector3 TileToOwner = transform.position - TileworldPos;
-                    Debug.DrawRay(TileworldPos, TileToOwner, Color.red, .1f);
+                    //Debug.DrawRay(TileworldPos, TileToOwner, Color.red, .1f);
                     if (!Physics.Raycast(TileworldPos, TileToOwner, TileToOwner.magnitude, LayerMask.GetMask("solid")))
                     {
                         targetableTiles.Add(TargetTile);

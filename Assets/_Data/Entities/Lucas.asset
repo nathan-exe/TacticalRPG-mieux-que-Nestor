@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Lucas
   MaxHP: 1
-  MovementRangePerTurn: 5
+  MovementRangePerTurn: 10
   Spells:
-  - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}
-  - {fileID: 11400000, guid: 1c51b49e377ef1e40acd54ae5dc93e83, type: 2}
-  - {fileID: 11400000, guid: 647ffe4d144ed584b86752fe4b6b86ba, type: 2}
+  - {fileID: 11400000, guid: 43012bc5973e2af4a856f61d68095f2a, type: 2}
