@@ -1,25 +1,29 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FollowPlayer : MonoBehaviour
 {
-    public GameObject player;
+    public PlayerOverworldController player;
     public float distanceBetween = 2f;
     public float followSpeed = 5f;
 
     private GameObject previousObject;
+    private NavMeshAgent navAgent;
     private bool isFollowing = true;
 
     void Start()
     {
+        navAgent = GetComponent<NavMeshAgent>();
+
         if (previousObject == null)
         {
-            previousObject = player;
+            previousObject = player.gameObject;
         }
     }
 
     void Update()
     {
-        if (player.GetComponent<Rigidbody>().velocity.magnitude < 0.1f)
+        if (player.HasComeToDestination)
         {
             isFollowing = false;
         }
@@ -31,8 +35,12 @@ public class FollowPlayer : MonoBehaviour
         if (isFollowing)
         {
             Vector3 targetPosition = previousObject.transform.position - previousObject.transform.forward * distanceBetween;
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * followSpeed);
-            transform.rotation = Quaternion.LookRotation(previousObject.transform.forward);
+            navAgent.speed = 10f;
+            navAgent.SetDestination(targetPosition);
+        }
+        else
+        {
+            navAgent.ResetPath();
         }
     }
 

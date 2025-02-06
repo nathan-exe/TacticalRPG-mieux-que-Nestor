@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FollowManager : MonoBehaviour
 {
-    public GameObject player;
+    public PlayerOverworldController player;
     public GameObject[] followers;
 
     void Awake()
