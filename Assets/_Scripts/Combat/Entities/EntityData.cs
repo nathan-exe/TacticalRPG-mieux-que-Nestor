@@ -7,6 +7,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "new spell", menuName = "Combat/Entity")]
 public class EntityData : ScriptableObject
 {
+    public string Name;
     public int MaxHP;
-    public List<Spell> Spells = new List<Spell>();
+    public int MovementRangePerTurn = 5;
+    public List<SpellData> Spells = new List<SpellData>();
 }

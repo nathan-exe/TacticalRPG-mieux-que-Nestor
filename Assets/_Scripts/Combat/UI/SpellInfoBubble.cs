@@ -8,10 +8,10 @@ public class SpellInfoBubble : MonoBehaviour
 {
     [SerializeField] TMP_Text _text;
     [SerializeField] float _tweeningDuration;
-    public void ShowSpellInfo(Spell spell)
+    public void ShowSpellInfo(SpellData spell)
     {
         transform.DOScale(Vector3.one, _tweeningDuration);
-        _text.text = $"-{spell.Data.ManaCost} MP\n{spell.Data.Damage} DMG";
+        _text.text = $"-{spell.ManaCost} MP\n{spell.Damage} DMG";
     }
 
     public void Hide()

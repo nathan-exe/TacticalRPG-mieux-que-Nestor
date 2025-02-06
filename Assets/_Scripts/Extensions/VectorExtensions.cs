@@ -4,6 +4,9 @@ using UnityEngine;
 public static class VectorExtensions
 {
 
+    // "constantes"
+    public static readonly Vector3[] All4Directions = new Vector3[4] { Vector3.right, Vector3.back, Vector3.left, Vector3.forward };
+    
     //rounding
     public static Vector3Int Round(this Vector3 v)
     {
@@ -79,5 +82,34 @@ public static class VectorExtensions
     public static Vector2 Min(Vector2 a, Vector2 b)
     {
         return new Vector2(Mathf.Min(a.x, b.x), Mathf.Min(a.y, b.y));
+    }
+
+    //transformations
+    public static Vector2 rotate(this Vector2 v, float delta)
+    {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
+    }
+
+    public static Vector2 rotate90(this Vector2 v,int numberOfTime)
+    {
+        for (int i = 0; i < numberOfTime; i++)
+        {
+            v = new Vector2( -v.y, v.x);
+        }
+
+        return v;
+    }
+    
+    public static Vector2Int rotate90(this Vector2Int v,int numberOfTime)
+    {
+        for (int i = 0; i < numberOfTime; i++)
+        {
+            v = new Vector2Int( -v.y, v.x);
+        }
+
+        return v;
     }
 }

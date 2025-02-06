@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class FloodFill : MonoBehaviour
 {
-    [SerializeField] private int _mouvementRange = 3;
+    public int MovementRange = 3;
     [SerializeField] private int _spellRange = 5;
-    //[SerializeField] private Material _spellMaterial, _playerMaterial, _resetMaterial;
     [SerializeField] private Transform _playerTransform;
     [Tooltip("Détermine si la souris est l'origine de la zone")][SerializeField] public bool UseMouseOrigin = true;
 
@@ -16,6 +15,7 @@ public class FloodFill : MonoBehaviour
 
     void Update() //@ToDo : Enlever ça de Update au secours
     {
+        return;
         if (Input.GetMouseButtonDown(0) && UseMouseOrigin) //pour un sort
             StartCoroutine(LockTilesTemporarily(1f));
     }
@@ -36,7 +36,23 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public void UpdateTileHighlighting(Vector2Int originTile)
     {
-        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode)) return;
+        if (Graph.Instance == null)
+        {
+            Debug.LogError("pitié");
+            return;
+        }
+
+        if (Graph.Instance.Nodes == null)
+        {
+            Debug.LogError("Graph.Instance.Nodes est NULL !");
+            return;
+        }
+
+        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode))
+        {
+            Debug.LogError($"Aucune tuile trouvée pour la position {originTile} !");
+            return;
+        }
 
         //Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
         HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, _spellRange));
@@ -50,8 +66,8 @@ public class FloodFill : MonoBehaviour
         foreach (var tile in newHighlight)
             if (!_lockedTiles.Contains(tile))
                 tile.MonoBehaviour.SetState(CombatTile.State.clickable);
-
         //-----------------------------------------------------------------------------------------
+
         HighlightedTiles = newHighlight;
     }
 
@@ -90,7 +106,7 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public List<TileAstarNode> GetReachableTiles(TileAstarNode startNode, int range) //On part d'un node de départ avec une range donné pour regardé les voisins
     {
-        if (!UseMouseOrigin) { range = _mouvementRange; } //On ne veux pas forcément la meme value entre mouvement et spell
+        if (!UseMouseOrigin) { range = MovementRange; } //On ne veux pas forcément la meme value entre mouvement et spell
 
         List<TileAstarNode> result = new();
         Queue<(TileAstarNode, int)> queue = new();

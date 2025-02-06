@@ -6,73 +6,81 @@ using System;
 
 public class PlayerCombatEntity : CombatEntity
 {
+    public static List<PlayerCombatEntity> Instances = new List<PlayerCombatEntity>();
 
-    [SerializeField] CombatEntityMovement _movement;
-    FloodFill _floodFill;
-
-    private void Awake()
+    protected override void Awake()
     {
-        TryGetComponent<FloodFill>(out _floodFill);
+        base.Awake();
+        Instances.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        Instances.Remove(this);
     }
 
     public override async UniTask PlayTurn()
     {
-
         Vector2Int t = await ChooseDestination();
-
         await _movement.GoTo(t);
 
-        Spell ChosenSpell = await ChooseSpell();
-        await CastSpell(ChosenSpell);
-
+        await ChooseSpell();
+        if(SpellCaster.SelectedSpellData!=null) await SpellCaster.CastSelectedSpell() ;
     }
 
     async UniTask<Vector2Int> ChooseDestination()
     {
+        //set up
         bool waiting = true;
-
         Vector2Int output = Vector2Int.zero;
+        TileAstarNode SelectedTile = null;
 
+        //floodfill
         Vector2Int originTile = _floodFill.GetOriginTile();
          _floodFill.UpdateTileHighlighting(originTile);
 
-        //@ToDo
-        //PreviewTiles();
-
-        while (waiting)
+        
+        while (waiting) //wait for the player to choose a tile
         {
             await UniTask.Yield();
-            Debug.Log("waiting for click");
-            if (Input.GetMouseButtonDown(0))
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100, ~LayerMask.GetMask("solid"))) // @TODO faire un singleton de la camera plutot que Camera.main
             {
-                if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit)) // @TODO faire un singleton de la camera plutot que Camera.main
+                Vector2Int tilePos = hit.point.RoundToV2Int();
+                Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode HitTile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
+                
+                //Si on clique sur une tile blanche :
+                if (HitTile != null && _floodFill.HighlightedTiles.Contains(HitTile)) 
                 {
-                    Vector2Int tilePos = hit.point.RoundToV2Int();
-                    Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode tile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
-                    if (tile != null && _floodFill.HighlightedTiles.Contains(tile)) //Si on clique sur une tile blanche :
+
+                    //Tile Mouse events
+                    if(HitTile!= SelectedTile)
                     {
-                        Debug.DrawRay(hit.point, Vector3.up, Color.magenta, 2);
-                        Vector2Int t = hit.point.RoundToV2Int();
-                        Debug.DrawRay(new Vector3(t.x, hit.point.y, t.y), Vector3.up, Color.red, 1);
-                        if (Graph.Instance.Nodes.ContainsKey(t))
-                        {
-                            waiting = false;
-                            output = t;
-                        }
+                        if (SelectedTile != null) SelectedTile.MonoBehaviour.OnMouseLeave();
+                        HitTile.MonoBehaviour.OnMouseHover();
+                        SelectedTile = HitTile;
+                    }
+
+                    //OnClick :
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        waiting = false;
+                        output = tilePos;
                     }
 
                 }
             }
+            
 
         }
-
+        _floodFill.ResetTilesHighlighting();
         return output;
 
     }
-    async UniTask<Spell> ChooseSpell()
+    async UniTask ChooseSpell()
     {
-        _floodFill.ResetTilesHighlighting();
-        return await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
+        
+        await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 
 

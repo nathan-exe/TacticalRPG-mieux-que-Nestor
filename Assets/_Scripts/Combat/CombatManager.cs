@@ -6,17 +6,22 @@ using UnityEngine;
 public class CombatManager : MonoBehaviour
 {
     public List<CombatEntity> Entities = new List<CombatEntity>();
+
     int _currentEntityIndex = 0;
 
     bool _isPlaying = false;
+
+    private void Start()
+    {
+        if (Entities.Count > 0) Play();
+    }
 
     void EndFight()
     {
         _isPlaying = false;
     }
 
-
-    async UniTask Play()
+    public async UniTask Play()
     {
         _isPlaying = true;
         while(_isPlaying)
@@ -25,10 +30,5 @@ public class CombatManager : MonoBehaviour
             _currentEntityIndex++;
             _currentEntityIndex = _currentEntityIndex%Entities.Count;
         }
-    }
-
-    private void Start()
-    {
-        Play();
     }
 }
