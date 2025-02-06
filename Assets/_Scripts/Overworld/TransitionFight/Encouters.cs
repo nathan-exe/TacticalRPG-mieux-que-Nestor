@@ -26,7 +26,7 @@ public class Encouters : MonoBehaviour
                 MonsterData.Instance.ListOfMonsterName.Add(monster);
             }
             await Task.Delay(600);
-            SceneManager.LoadScene("Scene Matéo");
+            SceneManager.LoadScene("SceneMatéo");
         }
     }
 }
