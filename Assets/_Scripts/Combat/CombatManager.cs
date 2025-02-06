@@ -14,11 +14,39 @@ public class CombatManager : MonoBehaviour
     private void Start()
     {
         if (Entities.Count > 0) Play();
+        foreach (CombatEntity entity in Entities)
+        {
+            entity.Health.OnDeath += RemoveList;
+        }
     }
 
     void EndFight()
     {
         _isPlaying = false;
+    }
+
+    void RemoveList(GameObject EntityDeath)
+    {
+        if (EntityDeath.GetComponent<PlayerCombatEntity>())
+        {
+            PlayerCombatEntity.Instances.Remove(EntityDeath.GetComponent<PlayerCombatEntity>());
+            print("Player mort");
+
+            if (PlayerCombatEntity.Instances.Count == 0)
+            {
+                print("GameOver");
+            }
+        }
+        if (EntityDeath.GetComponent<AiCombatEntity>())
+        {
+            AiCombatEntity.Instances.Remove(EntityDeath.GetComponent<AiCombatEntity>());
+            print("Méchant mort");
+
+            if (AiCombatEntity.Instances.Count == 0)
+            {
+                print("Victoire");
+            }
+        }
     }
 
     public async UniTask Play()
