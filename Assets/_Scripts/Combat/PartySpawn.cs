@@ -9,9 +9,7 @@ public class PartySpawn : MonoBehaviour
 
     private void Awake()
     {
-        if (PartyData.Instance == null ) { _combatManager.Play(); return; } //au cas ou...
-
-        foreach(CharacterState Teammate in PartyData.Instance.TeamState)
+        foreach(CharacterState Teammate in GameStat.TeamState)
         {
             GameObject newTeammate = Instantiate(_partyPrefab); //nouveau pote
 
