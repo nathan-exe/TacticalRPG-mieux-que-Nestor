@@ -7,10 +7,10 @@ public struct CharacterState
     public int Mana;
     public string Name;
 
-    public CharacterState(string name, int health, int mana)
+    public CharacterState(int health, int mana, string nom)
     {
         HP = health;
         Mana = mana;
-        Name = name;
+        Name = nom;
     }
 }
