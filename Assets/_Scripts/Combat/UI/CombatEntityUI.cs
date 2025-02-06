@@ -15,6 +15,11 @@ public class CombatEntityUI : MonoBehaviour
     public void CancelHPLossPreview() => HealthSlider.CancelPreview();
     public TextMeshProUGUI Name;
 
+    private void Awake()
+    {
+        transform.parent.GetComponent<HealthComponent>().OnHealthUpdated += (float hp) => HealthSlider.Value = hp;
+    }
+
     //set up
     private void Start()
     {
@@ -22,6 +27,5 @@ public class CombatEntityUI : MonoBehaviour
         ManaSlider.Value = CombatEntity.MaxManaPerEntity;
 
         HealthSlider.MaxValue = transform.parent.GetComponent<CombatEntity>().Data.MaxHP;
-        transform.parent.GetComponent<HealthComponent>().OnHealthUpdated += (float hp) => HealthSlider.Value = hp;
     }
 }
