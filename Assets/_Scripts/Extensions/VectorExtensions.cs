@@ -5,7 +5,7 @@ public static class VectorExtensions
 {
 
     // "constantes"
-    public static readonly Vector3[] All4Directions = new Vector3[4] { Vector3.right, Vector3.back, Vector3.left, Vector3.forward };
+    public static readonly Vector3[] All4Directions = new Vector3[4] { Vector3.right, Vector3.forward, Vector3.left, Vector3.back };
     
     //rounding
     public static Vector3Int Round(this Vector3 v)

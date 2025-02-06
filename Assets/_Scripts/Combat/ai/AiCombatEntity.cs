@@ -12,6 +12,7 @@ public class AiCombatEntity : CombatEntity
     {
         base.Awake();
         Instances.Add(this);
+        //Health.HP = Data.MaxHP;
     }
     private void OnDestroy()
     {
@@ -22,7 +23,6 @@ public class AiCombatEntity : CombatEntity
     public override async UniTask PlayTurn()
     {
         //compute and show floodFill
-
         Vector2Int originTile = _floodFill.GetOriginTile();
 
         _floodFill.UpdateTileHighlighting(originTile);
@@ -87,7 +87,7 @@ public class AiCombatEntity : CombatEntity
         {
             Vector3 offset = target - transform.position;
             float angle = Vector3.Angle(offset, VectorExtensions.All4Directions[i]);
-            if (angle < bestAngle) 
+            if (angle < bestAngle)
             {
                 bestAngle = angle;
                 bestIndex = i;
