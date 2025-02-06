@@ -13,13 +13,15 @@ public static class GameStat
     public static void AddCharacter(CharacterState character)
     {
         TeamState.Add(character);
+        Debug.Log($"{character.Name} rejoint votre équipe. {character.HP} HP & {character.Mana} PM");
     }
 
     public static void DisplayTeam()
     {
         foreach (var character in TeamState)
         {
-            Debug.Log($"- PV: {character.HP}, Mana: {character.Mana}");
+            Debug.Log($"- Nom: {character.Name}, PV: {character.HP}, Mana: {character.Mana}");
         }
     }
+
 }
