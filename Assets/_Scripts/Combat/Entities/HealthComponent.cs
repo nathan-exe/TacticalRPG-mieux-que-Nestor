@@ -62,6 +62,7 @@ public class HealthComponent : MonoBehaviour
         };
 
         MaxHP = _entity.Data.MaxHP;
+        HP = MaxHP;
     }
 
 }
