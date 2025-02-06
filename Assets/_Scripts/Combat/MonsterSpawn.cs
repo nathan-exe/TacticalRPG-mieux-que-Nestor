@@ -10,7 +10,7 @@ public class MonsterSpawn : MonoBehaviour
 
     private void Awake()
     {
-        foreach (string name in MonsterData.Instance.ListOfMonsterName)
+       foreach (string name in MonsterData.Instance.ListOfMonsterName)
         {
             EntityData foundMonster = MonsterData.Instance.ScriptableMonsters.Find(entity => entity.Name == name);
 
