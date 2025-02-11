@@ -9,6 +9,5 @@ public static class RectExtensions
         point -= r.center;
         Vector2 d = point.AbsoluteValue() - r.size;
         return (VectorExtensions.Max(d, Vector2.zero)).magnitude + Mathf.Min(Mathf.Max(d.x, d.y), 0f);
-
     }
 }

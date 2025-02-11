@@ -41,7 +41,6 @@ public class CombatTile : MonoBehaviour
         switch (newState)
         {
             case State.empty:
-                //_renderer.material = _data.Material_Default;
                 _renderer.transform.DOScale(Vector3.zero, TweeningDuration);
                 break;
 
@@ -80,7 +79,7 @@ public class CombatTile : MonoBehaviour
         }
      }
 
-     private void OnDrawGizmos()
+     /*private void OnDrawGizmos()
      {
         Gizmos.color = new Color(1, .5f, 1, .3f);
         Gizmos.color = Color.blue;
@@ -89,5 +88,5 @@ public class CombatTile : MonoBehaviour
             if (n.isActive()) Gizmos.DrawLine(transform.position, n.transform.position);
         }
 
-     }
+     }*/
 }

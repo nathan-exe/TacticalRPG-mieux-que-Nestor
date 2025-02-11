@@ -13,21 +13,21 @@ public class HealthComponent : MonoBehaviour
     public float MaxHP = 100;
 
     //HP getters et setters
-    private float _HP;
+    public float _HP;
     public float HP
     {
         get { return _HP; }
-        private set
+        set
         {
             _HP = Mathf.Clamp(value, 0, MaxHP);
             OnHealthUpdated?.Invoke(_HP);
-            if(HP==0)OnDeath?.Invoke();
+            if(HP==0)OnDeath?.Invoke(this.gameObject);
         }
     }
 
     //notifiers
     public event Action<float> OnHealthUpdated;
-    public event Action OnDeath;
+    public event Action<GameObject> OnDeath;
     public event Action OnDamageTaken;
 
     /// <summary>
@@ -55,7 +55,7 @@ public class HealthComponent : MonoBehaviour
         if(_entity ==null) TryGetComponent(out _entity);
 
         //Destroy object on death
-        if (_destroyGameObjectOnDeath) OnDeath += () =>
+        if (_destroyGameObjectOnDeath) OnDeath += (GameObject EntityDeath) =>
         {
             if (TryGetComponent<PooledObject>(out PooledObject asPooledObject)) asPooledObject.GoBackIntoPool();
             else Destroy(gameObject);
@@ -63,7 +63,6 @@ public class HealthComponent : MonoBehaviour
 
         MaxHP = _entity.Data.MaxHP;
         HP = MaxHP;
-
     }
 
 }

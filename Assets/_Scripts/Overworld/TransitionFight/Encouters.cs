@@ -7,12 +7,12 @@ using UnityEngine.SceneManagement;
 public class Encouters : MonoBehaviour
 {
     [SerializeField] private Animation _anim;
-    [SerializeField] private int _nomberMonster;
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private List<string> _monsters = new();
+
     private void Start()
     {
-        PartyData.Instance.AddCharacter(new CharacterState("Nestor", 10, 100));
-        PartyData.Instance.AddCharacter(new CharacterState("Matéo", 5, 50));
+        GameStat.AddCharacter(new CharacterState(10, 100, "Matéo"));
+        GameStat.AddCharacter(new CharacterState(5, 50, "Nestor"));
     }
 
     private async void OnTriggerEnter(Collider other)
@@ -20,9 +20,13 @@ public class Encouters : MonoBehaviour
         if (other.GetComponent<PlayerOverworldController>() != null)
         {
             _anim.Play();
-            PartyData.Instance.DisplayTeam();
+            GameStat.DisplayTeam();
+            foreach (var monster in _monsters)
+            {
+                MonsterData.Instance.ListOfMonsterName.Add(monster);
+            }
             await Task.Delay(600);
-            SceneManager.LoadScene("Scene Matéo");
+            SceneManager.LoadScene("SceneMatéo");
         }
     }
 }
