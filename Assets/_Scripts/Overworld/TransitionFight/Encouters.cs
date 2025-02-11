@@ -11,12 +11,6 @@ public class Encouters : MonoBehaviour
     [SerializeField] private Animation _anim; //L'animation fight
     [SerializeField] private List<string> _monsters = new(); //Liste des montres à croisé
 
-    private void Start()
-    {
-        GameStat.AddCharacter(new CharacterState(10, 100, "Matéo"));
-        GameStat.AddCharacter(new CharacterState(5, 50, "Nestor"));
-    }
-
     private async void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerOverworldController>() != null)
@@ -32,6 +26,7 @@ public class Encouters : MonoBehaviour
             }
 
             GameStat.SetTeamPosition(other.transform.position); //Save la position du joueur
+            print(other.transform.position);
 
             if (!GameStat.EncountersDico.ContainsKey(ZoneName)) //On regarde si dans le dico qui réportorie toutes les zones de combats si notre zone existe déjà
             {
