@@ -114,7 +114,7 @@ public class AiCombatEntity : CombatEntity
 
         Debug.DrawRay(transform.position, VectorExtensions.All4Directions[bestIndex]*5, Color.red);
         Debug.Log("Direction choisie : " + VectorExtensions.All4Directions[bestIndex]);
-        EditorApplication.isPaused = true;
+        //EditorApplication.isPaused = true;
         return bestIndex;
     }
 

@@ -1,13 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Script qui gère les rencontres face aux monstres
+/// </summary>
 public class Encouters : MonoBehaviour
 {
-    [SerializeField] private Animation _anim;
-    [SerializeField] private List<string> _monsters = new();
+    [SerializeField] private Animation _anim; //L'animation fight
+    [SerializeField] private List<string> _monsters = new(); //Liste des montres à croisé
 
     private void Start()
     {
@@ -20,11 +22,23 @@ public class Encouters : MonoBehaviour
         if (other.GetComponent<PlayerOverworldController>() != null)
         {
             _anim.Play();
-            GameStat.DisplayTeam();
-            foreach (var monster in _monsters)
+            GameStat.DisplayTeam(); //Debug de qui est dans la team
+
+            string ZoneName = gameObject.name;
+
+            foreach (var monster in _monsters) //On se prépare à faire spawn les monstres dans la prochaine scene
             {
                 MonsterData.Instance.ListOfMonsterName.Add(monster);
             }
+
+            GameStat.SetTeamPosition(other.transform.position); //Save la position du joueur
+
+            if (!GameStat.EncountersDico.ContainsKey(ZoneName)) //On regarde si dans le dico qui réportorie toutes les zones de combats si notre zone existe déjà
+            {
+                GameStat.SetZoneName(ZoneName);
+                GameStat.EncountersDico.Add(ZoneName, false); // false = la zone n'a pas été réalisée
+            }
+
             await Task.Delay(600);
             SceneManager.LoadScene("SceneMatéo");
         }

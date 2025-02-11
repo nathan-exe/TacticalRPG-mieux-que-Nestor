@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
@@ -25,11 +26,13 @@ public class CombatManager : MonoBehaviour
         _isPlaying = false;
     }
 
-    void RemoveList(GameObject EntityDeath)
+    void RemoveList(GameObject EntityDeath) //Fonction qui supprime les morts du combats, PROBLEME DE TOURS LORS D UN REMOVE DE LA LISTE
     {
-        if (EntityDeath.GetComponent<PlayerCombatEntity>())
+        if (EntityDeath.GetComponent<PlayerCombatEntity>()) //Pour les joueurs
         {
             PlayerCombatEntity.Instances.Remove(EntityDeath.GetComponent<PlayerCombatEntity>());
+            Entities.Remove(EntityDeath.GetComponent<PlayerCombatEntity>());
+            EntityDeath.SetActive(false);
             print("Player mort");
 
             if (PlayerCombatEntity.Instances.Count == 0)
@@ -37,16 +40,25 @@ public class CombatManager : MonoBehaviour
                 print("GameOver");
             }
         }
-        if (EntityDeath.GetComponent<AiCombatEntity>())
+        if (EntityDeath.GetComponent<AiCombatEntity>()) // Pour les ennemis
         {
             AiCombatEntity.Instances.Remove(EntityDeath.GetComponent<AiCombatEntity>());
+            Entities.Remove(EntityDeath.GetComponent<AiCombatEntity>());
+            EntityDeath.SetActive(false);
             print("Méchant mort");
 
             if (AiCombatEntity.Instances.Count == 0)
             {
+                CompleteEncounter(GameStat.ZoneName);
                 print("Victoire");
+                SceneManager.LoadScene("SceneOverMatéo");
             }
         }
+    }
+
+    public void CompleteEncounter(string encounterID)
+    {
+        if (GameStat.EncountersDico.ContainsKey(encounterID)) { GameStat.EncountersDico[encounterID] = true; } // Marquer la zone comme faite
     }
 
     public async UniTask Play()
