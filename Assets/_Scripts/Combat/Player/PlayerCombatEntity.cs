@@ -23,7 +23,6 @@ public class PlayerCombatEntity : CombatEntity
     {
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
-
         await ChooseSpell();
         if(SpellCaster.SelectedSpellData!=null) await SpellCaster.CastSelectedSpell() ;
     }

@@ -10,34 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
-  m_Name: TuVeuxUneClaqueData
+  m_Name: JtePlante
   m_EditorClassIdentifier: 
-  Name: TuVeuxUneClaque
+  Name: JtePlante
   Sprite: {fileID: 0}
-  ManaCost: 2
+  ManaCost: 1
   Damage: 1
-  IsOccludedByWalls: 1
+  IsOccludedByWalls: 0
   Bounds:
     serializedVersion: 2
-    x: -5
-    y: -5
-    width: 11
-    height: 11
+    x: -1
+    y: -1
+    width: 5
+    height: 3
   AffectedTiles:
   - {x: 1, y: 0}
   - {x: 2, y: 0}
-  - {x: 5, y: -2}
-  - {x: 5, y: 2}
-  - {x: 4, y: 2}
-  - {x: 4, y: -2}
-  - {x: 2, y: -1}
-  - {x: 2, y: 1}
-  - {x: 3, y: 1}
-  - {x: 3, y: -1}
-  - {x: 3, y: 0}
-  - {x: 4, y: 0}
-  - {x: 4, y: -1}
-  - {x: 5, y: -1}
-  - {x: 5, y: 0}
-  - {x: 5, y: 1}
-  - {x: 4, y: 1}

@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks.Triggers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class AiCombatEntity : CombatEntity
@@ -39,18 +40,27 @@ public class AiCombatEntity : CombatEntity
 
         //choose SpellCast origin
         Vector2Int? TargetTile = null;
-        foreach(Vector2Int Offset in chosenSpell.AffectedTiles) //pour toutes les cases rouges
+        
+        foreach(Vector2Int o in chosenSpell.AffectedTiles) //pour toutes les cases rouges
         {
-            Offset.rotate90(Orientation);//@ToDo : fix orientation
+            Vector2Int Offset = o;
+
+            Offset = Offset.rotate90(Orientation);//@ToDo : fix orientation
+            //Offset *= -1;
+            //Offset *= -1;
 
             Vector2Int castOrigin = SpellTargetTile - Offset;
-            if (_floodFill.HighlightedTiles.Contains(Graph.Instance.Nodes[castOrigin]))
+            Debug.DrawRay(castOrigin.X0Y() + transform.position.y *Vector3.up, Vector3.up, Color.red, .1f);
+
+            if (Graph.Instance.Nodes.TryGetValue(castOrigin, out TileAstarNode node) && _floodFill.HighlightedTiles.Contains(node))
             {
                 if (chosenSpell.IsOccludedByWalls)
                 {
                     //raycast
                     Vector3 TileToCastOriginWS = (castOrigin - SpellTargetTile).X0Y();
-                    Debug.DrawRay(SpellTargetTile.X0Y() + Vector3.up * transform.position.y, TileToCastOriginWS, Color.red, .1f);
+                    Debug.DrawRay(SpellTargetTile.X0Y() + Vector3.up * transform.position.y, Vector3.up, Color.red, .1f);
+                    Debug.DrawRay(SpellTargetTile.X0Y() + Vector3.up * transform.position.y, TileToCastOriginWS, Color.grey, .1f);
+                    
                     if (!Physics.Raycast(SpellTargetTile.X0Y() + transform.position.y * Vector3.up, TileToCastOriginWS, TileToCastOriginWS.magnitude, LayerMask.GetMask("solid")))
                     {
                         TargetTile = castOrigin;
@@ -64,41 +74,49 @@ public class AiCombatEntity : CombatEntity
                 }
             }
         }
-        if(TargetTile ==null) TargetTile = _floodFill.HighlightedTiles.ToList().PickRandom().pose; //affreux
-
+        bool foundTile =TargetTile != null;
+        if (!foundTile) TargetTile = _floodFill.HighlightedTiles.ToList().PickRandom().pose; //affreux
+        
+        //EditorApplication.isPaused = true;
         await UniTask.Delay(1000);
 
         _floodFill.ResetTilesHighlighting();
 
         await _movement.GoTo(TargetTile.Value);
 
-        SpellCaster.Orientation = Orientation;
-        SpellCaster.SelectedSpellData = chosenSpell;
-        await UniTask.Delay(1000);
+        if (foundTile)
+        {
+            SpellCaster.Orientation = Orientation;
+            SpellCaster.SelectedSpellData = chosenSpell;
+            await UniTask.Delay(1000);
+            await SpellCaster.CastSelectedSpell();//@ToDo : cast spell only if tile wasnt picked at Random
+        }else await UniTask.Delay(1000);
 
-        await SpellCaster.CastSelectedSpell();//@ToDo : cast spell only if tile wasnt picked at Random
     }
 
     int ChooseClosestDirectionTowardPosition(Vector3 target)//@ToDo : fix orientation
     {
         float bestAngle = 181;
         byte bestIndex = 0;
-        for (byte i = 0; i < 3; i++)
+        Vector3 offset = target - transform.position;
+        Debug.DrawRay(transform.position, offset, Color.white);
+        for (byte i = 0; i < 4; i++)
         {
-            Vector3 offset = target - transform.position;
-            float angle = Vector3.Angle(offset, VectorExtensions.All4Directions[i]);
+            
+            float angle = Vector3.Angle(offset.normalized*5, VectorExtensions.All4Directions[i]);
+            Debug.DrawRay(transform.position, VectorExtensions.All4Directions[i]*5,Color.blue);
             if (angle < bestAngle)
             {
                 bestAngle = angle;
                 bestIndex = i;
             }
         }
+
+        Debug.DrawRay(transform.position, VectorExtensions.All4Directions[bestIndex]*5, Color.red);
+        Debug.Log("Direction choisie : " + VectorExtensions.All4Directions[bestIndex]);
+        //EditorApplication.isPaused = true;
         return bestIndex;
     }
-
-
-
-    
 
     async UniTask ChooseSpell()
     {
