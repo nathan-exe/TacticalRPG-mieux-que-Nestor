@@ -17,9 +17,9 @@ public class Interactible : MonoBehaviour, Iinteractable
 
     private void Start()
     {
-        interactibleName = interactibleData.name;
-        interactibleText = interactibleData.interactibleDialogueText;
-        canJoin = interactibleData.canJoinThePlayer;
+        //interactibleName = interactibleData.name;
+        //interactibleText = interactibleData.interactibleDialogueText;
+        //canJoin = interactibleData.canJoinThePlayer;
     }
     public async UniTask InteractWith()
     {
@@ -34,11 +34,11 @@ public class Interactible : MonoBehaviour, Iinteractable
             canJoin = false;
             gameObject.SetActive(false);
         }
-        if (interactibleData.canHealThePlayer)
-        {
-            Debug.Log("PlayerParty heal");
+        //if (interactibleData.canHealThePlayer)
+        //{
+        //    Debug.Log("PlayerParty heal");
 
-        }
+        //}
     }
 
     public void OnSelected()

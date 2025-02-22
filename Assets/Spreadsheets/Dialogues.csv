@@ -1,0 +1,4 @@
+"Id","Name","Dialogue","Type","Portrait","Sound","Next Line ID","Action Type","Choice 1","Choice 2"
+"Mateo1","Mateo","Salut moi c’est Mateo, yaaaa.",,,,,,,
+"Priest_Heal","Pretre","Ne bougez pas mon enfant, je vais vous soigner.",,,,,"Heal",,
+"Blacksmith1","Forgeron","Deso, pas d’arme à t’offrir.",,,,,,,
