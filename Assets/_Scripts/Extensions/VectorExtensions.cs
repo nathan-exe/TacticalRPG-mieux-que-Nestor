@@ -16,7 +16,7 @@ public static class VectorExtensions
     }
 
 
-    public static Vector2Int RoundToV2Int(this Vector3 v)
+    public static Vector2Int RoundToV2IntXZ(this Vector3 v)
     {
         return new Vector2Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.z));
     }
@@ -42,6 +42,10 @@ public static class VectorExtensions
         return (u - v).sqrMagnitude;
     }
 
+    public static float SqrDistanceTo(this Vector2Int u, Vector2Int v)
+    {
+        return (u - v).sqrMagnitude;
+    }
 
     //Swizzle
     public static Vector2 XZ(this Vector3 v)
