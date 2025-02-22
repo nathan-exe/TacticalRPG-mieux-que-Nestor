@@ -20,7 +20,7 @@ public class CombatEntityMovement : MonoBehaviour
 
     private void Start()
     {
-        _currentNode = Graph.Instance.Nodes[transform.position.RoundToV2IntXZ()];
+        _currentNode = Graph.Instance.Nodes[transform.position.RoundToV2Int()];
     }
 
 

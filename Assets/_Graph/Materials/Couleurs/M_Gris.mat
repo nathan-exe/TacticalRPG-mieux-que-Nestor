@@ -82,7 +82,6 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-<<<<<<< Updated upstream
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -118,12 +117,6 @@ Material:
     - _Color: {r: 0.4641509, g: 0.4641509, b: 0.4641509, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-=======
-    - _Metallic: 0
-    m_Colors:
-    - _BaseColor: {r: 0.8207547, g: 0.73945355, b: 0.73945355, a: 1}
-    - _Color: {r: 0.8207547, g: 0.7394536, b: 0.7394536, a: 1}
->>>>>>> Stashed changes
   m_BuildTextureStacks: []
 --- !u!114 &3645550796042335181
 MonoBehaviour:

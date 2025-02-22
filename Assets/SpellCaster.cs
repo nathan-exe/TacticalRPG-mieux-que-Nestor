@@ -44,7 +44,7 @@ public class SpellCaster : MonoBehaviour
             //rotation du sort
             Vector2Int offset = v;
             offset = offset.rotate90(Orientation);
-            Vector2Int TargetTile = transform.position.RoundToV2IntXZ() + offset;
+            Vector2Int TargetTile = transform.position.RoundToV2Int() + offset;
 
             //empty tile check
             if (Graph.Instance.Bounds.Contains(TargetTile))

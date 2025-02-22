@@ -34,7 +34,7 @@ public class PlayerCombatEntity : CombatEntity
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100, ~LayerMask.GetMask("solid"))) // @TODO faire un singleton de la camera plutot que Camera.main
             {
-                Vector2Int tilePos = hit.point.RoundToV2IntXZ();
+                Vector2Int tilePos = hit.point.RoundToV2Int();
                 Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode HitTile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
                 
                 //Si on clique sur une tile blanche :

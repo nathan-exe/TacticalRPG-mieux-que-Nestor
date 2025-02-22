@@ -14,7 +14,7 @@ public class CombatTile : MonoBehaviour
     public enum State { empty,clickable,dangerous};
 
     public TileAstarNode node = new();
-    public Vector2Int pose => transform.position.RoundToV2IntXZ();
+    public Vector2Int pose => transform.position.RoundToV2Int();
 
     public State CurrentState { get; private set; }
 
