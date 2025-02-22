@@ -61,7 +61,6 @@ public class Graph : MonoBehaviour
 
     public void ActivateNode(TileAstarNode node)
     {
-        
         node.MonoBehaviour.gameObject.SetActive(true);
         if(!FreeNodes.Contains(node))FreeNodes.Add(node);
     }
@@ -76,6 +75,7 @@ public class Graph : MonoBehaviour
     {
         if(Nodes.ContainsKey(position)) DisableNode (Nodes[position]);
     }
+
 
     public void OnDrawGizmos()
     {

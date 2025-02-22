@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System;
 using UnityEngine;
 
@@ -6,8 +8,10 @@ using UnityEngine;
 /// </summary>
 public class HealthComponent : MonoBehaviour
 {
-
+    [Header("Parameters")]
     [SerializeField] bool _destroyGameObjectOnDeath;
+
+    [Header("Scene References")]
     [SerializeField] CombatEntity _entity;
 
     public float MaxHP = 100;
@@ -34,10 +38,13 @@ public class HealthComponent : MonoBehaviour
     /// fait des dégats au joueur.
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    public async UniTask TakeDamage(float damage)
     {
         OnDamageTaken?.Invoke();
         HP = HP - Mathf.Abs(damage);
+
+        //feedbacks async
+        await _entity.Visuals.shake();
     }
 
     /// <summary>

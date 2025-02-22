@@ -11,6 +11,8 @@ public abstract class CombatEntity : MonoBehaviour
     [Header("References")]
     [SerializeField] public EntityData Data;
     [SerializeField] protected CombatEntityMovement _movement;
+    [SerializeField] public EntityVisuals Visuals;
+
     public CombatEntityUI UI;
     public HealthComponent Health;
     public SpellCaster SpellCaster;
@@ -32,7 +34,9 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        TryGetComponent<FloodFill>(out _floodFill);
+        if (_floodFill == null) TryGetComponent(out _floodFill);
+        if(Visuals==null) TryGetComponent(out Visuals);
+
         _floodFill.MovementRange = Data.MovementRangePerTurn;
         Mana = MaxManaPerEntity;
     }

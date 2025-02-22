@@ -69,6 +69,7 @@ public class FloodFill : MonoBehaviour
         //-----------------------------------------------------------------------------------------
 
         HighlightedTiles = newHighlight;
+
     }
 
     /// <summary>

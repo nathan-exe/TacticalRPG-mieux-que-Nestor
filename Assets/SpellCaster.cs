@@ -120,14 +120,16 @@ public class SpellCaster : MonoBehaviour
     {
         Assert.IsNotNull(SelectedSpellData,"y'a pas de spell à lancer là...");
 
+        //visuels
+        await Owner.Visuals.Jump();
+
+        //logique
         Owner.Mana -= SelectedSpellData.ManaCost;
-
         GetTargetableTiles(ref TargetableTiles);
-
         GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
         foreach (CombatEntity o in HittableObjects)
         {
-            o.Health.TakeDamage(SelectedSpellData.Damage);
+            await o.Health.TakeDamage(SelectedSpellData.Damage);
         }
 
         SelectedSpellData = null;

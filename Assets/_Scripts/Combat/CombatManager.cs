@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
-    public List<CombatEntity> Entities = new List<CombatEntity>();
+    public List<CombatEntity> Entities { get; private set; } = new List<CombatEntity>(); 
 
     int _currentEntityIndex = 0;
 
@@ -14,26 +14,26 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] CameraBehaviour _camera;
 
+
+    public static CombatManager Instance { get; private set; }
+
     private void Awake()
     {
-        if(_camera == null) _camera = FindObjectOfType<CameraBehaviour>();
+        Instance = this;
+        if (_camera == null) _camera = FindObjectOfType<CameraBehaviour>();
     }
 
     private void Start()
     {
         if (Entities.Count > 0) Play();
-        foreach (CombatEntity entity in Entities)
+        /*foreach (CombatEntity entity in Entities)
         {
-            entity.Health.OnDeath += RemoveList;
-        }
+            entity.Health.OnDeath += HandleEntityDeath;
+        }*/
     }
 
-    void EndFight()
-    {
-        _isPlaying = false;
-    }
 
-    void RemoveList(GameObject EntityDeath) //Fonction qui supprime les morts du combats, PROBLEME DE TOURS LORS D UN REMOVE DE LA LISTE
+    void HandleEntityDeath(GameObject EntityDeath) //Fonction qui supprime les morts du combats, PROBLEME DE TOURS LORS D UN REMOVE DE LA LISTE
     {
         if (EntityDeath.GetComponent<PlayerCombatEntity>()) //Pour les joueurs
         {
@@ -61,6 +61,7 @@ public class CombatManager : MonoBehaviour
                 SceneManager.LoadScene("SceneOverMatéo");
             }
         }
+
     }
 
     public void CompleteEncounter(string encounterID)
@@ -79,7 +80,9 @@ public class CombatManager : MonoBehaviour
         {
             _camera.StartFollowingTarget(Entities[_currentEntityIndex].transform);
             await Entities[_currentEntityIndex].PlayTurn();
-            
+
+            foreach (CombatEntity entity in Entities) if (entity.Health.HP <= 0) HandleEntityDeath(entity.gameObject);
+
             _currentEntityIndex++;
             _currentEntityIndex = _currentEntityIndex%Entities.Count;
         }
