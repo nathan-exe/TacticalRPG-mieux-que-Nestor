@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,17 +19,6 @@ public abstract class CombatEntity : MonoBehaviour
     [Header("Values")]
     private bool _isDead;
 
-    float _HP;
-
-    public float HP
-    {
-        get { return _HP; }
-        private set
-        {
-            _HP = value;
-            UI.HealthSlider.Value = _HP;
-        }
-    }
 
     float _mana;
     public float Mana { get { return _mana; }
@@ -40,12 +30,16 @@ public abstract class CombatEntity : MonoBehaviour
     }
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         TryGetComponent<FloodFill>(out _floodFill);
         _floodFill.MovementRange = Data.MovementRangePerTurn;
-        HP = Data.MaxHP;
         Mana = MaxManaPerEntity;
+    }
+
+    private void Start()
+    {
+        Health.HP = Data.MaxHP;
     }
 
     public abstract UniTask PlayTurn();

@@ -25,10 +25,10 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public Vector2Int GetOriginTile()
     {
-        if (!UseMouseOrigin) return _playerTransform.position.RoundToV2Int(); //Si c'est le joueur le centre alors sa tile est l'origine.
+        if (!UseMouseOrigin) return _playerTransform.position.RoundToV2IntXZ(); //Si c'est le joueur le centre alors sa tile est l'origine.
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2Int() : _lastOriginTile;
+        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2IntXZ() : _lastOriginTile;
     }
 
     /// <summary>
@@ -36,7 +36,23 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public void UpdateTileHighlighting(Vector2Int originTile)
     {
-        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode)) return;
+        if (Graph.Instance == null)
+        {
+            Debug.LogError("pitié");
+            return;
+        }
+
+        if (Graph.Instance.Nodes == null)
+        {
+            Debug.LogError("Graph.Instance.Nodes est NULL !");
+            return;
+        }
+
+        if (!Graph.Instance.Nodes.TryGetValue(originTile, out TileAstarNode startNode))
+        {
+            Debug.LogError($"Aucune tuile trouvée pour la position {originTile} !");
+            return;
+        }
 
         //Material activeMaterial = UseMouseOrigin ? _spellMaterial : _playerMaterial;
         HashSet<TileAstarNode> newHighlight = new(GetReachableTiles(startNode, _spellRange));
@@ -50,8 +66,8 @@ public class FloodFill : MonoBehaviour
         foreach (var tile in newHighlight)
             if (!_lockedTiles.Contains(tile))
                 tile.MonoBehaviour.SetState(CombatTile.State.clickable);
-
         //-----------------------------------------------------------------------------------------
+
         HighlightedTiles = newHighlight;
     }
 

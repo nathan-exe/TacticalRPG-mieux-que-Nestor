@@ -15,7 +15,7 @@ public class TileAstarNode : AstarNode
     public CombatTile MonoBehaviour;
     public GameObject gameObject => MonoBehaviour.gameObject;
     public Transform transform => MonoBehaviour.transform;
-    public Vector2Int pose => gameObject.transform.position.RoundToV2Int();
+    public Vector2Int pose => gameObject.transform.position.RoundToV2IntXZ();
 
     public const float gWheight = 2f;
 

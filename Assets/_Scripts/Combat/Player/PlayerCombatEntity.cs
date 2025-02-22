@@ -6,12 +6,23 @@ using System;
 
 public class PlayerCombatEntity : CombatEntity
 {
+    public static List<PlayerCombatEntity> Instances = new List<PlayerCombatEntity>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Instances.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        Instances.Remove(this);
+    }
 
     public override async UniTask PlayTurn()
     {
         Vector2Int t = await ChooseDestination();
         await _movement.GoTo(t);
-
         await ChooseSpell();
         if(SpellCaster.SelectedSpellData!=null) await SpellCaster.CastSelectedSpell() ;
     }
@@ -34,7 +45,7 @@ public class PlayerCombatEntity : CombatEntity
 
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, 100, ~LayerMask.GetMask("solid"))) // @TODO faire un singleton de la camera plutot que Camera.main
             {
-                Vector2Int tilePos = hit.point.RoundToV2Int();
+                Vector2Int tilePos = hit.point.RoundToV2IntXZ();
                 Graph.Instance.Nodes.TryGetValue(tilePos, out TileAstarNode HitTile); //Comme TileAstarNode n'est pas un mono impossible de GetComponnent
                 
                 //Si on clique sur une tile blanche :
@@ -44,7 +55,6 @@ public class PlayerCombatEntity : CombatEntity
                     //Tile Mouse events
                     if(HitTile!= SelectedTile)
                     {
-                        if(SelectedTile!=null) Debug.Log(SelectedTile.MonoBehaviour.gameObject.name);
                         if (SelectedTile != null) SelectedTile.MonoBehaviour.OnMouseLeave();
                         HitTile.MonoBehaviour.OnMouseHover();
                         SelectedTile = HitTile;
@@ -62,13 +72,13 @@ public class PlayerCombatEntity : CombatEntity
             
 
         }
-
+        _floodFill.ResetTilesHighlighting();
         return output;
 
     }
     async UniTask ChooseSpell()
     {
-        _floodFill.ResetTilesHighlighting();
+        
         await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 

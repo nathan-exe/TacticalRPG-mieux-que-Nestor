@@ -11,6 +11,8 @@ public class PlayerOverworldController : MonoBehaviour
     public NavMeshAgent agent;
     [SerializeField] PlayerInteraction _interaction;
 
+    public bool HasComeToDestination;
+
     void Update()
     {
         //clic souris
@@ -32,7 +34,11 @@ public class PlayerOverworldController : MonoBehaviour
                 else
                     _interaction.ClearSelection();
             }
-        }
 
+            if (gameObject.transform.position == hit.point)
+            {
+                HasComeToDestination = true;
+            }
+        }
     }
 }
