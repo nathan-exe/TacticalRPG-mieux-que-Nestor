@@ -25,10 +25,10 @@ public class FloodFill : MonoBehaviour
     /// </summary>
     public Vector2Int GetOriginTile()
     {
-        if (!UseMouseOrigin) return _playerTransform.position.RoundToV2Int(); //Si c'est le joueur le centre alors sa tile est l'origine.
+        if (!UseMouseOrigin) return _playerTransform.position.RoundToV2IntXZ(); //Si c'est le joueur le centre alors sa tile est l'origine.
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2Int() : _lastOriginTile;
+        return Physics.Raycast(ray, out RaycastHit hit) ? hit.point.RoundToV2IntXZ() : _lastOriginTile;
     }
 
     /// <summary>

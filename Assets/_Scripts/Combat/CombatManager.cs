@@ -12,6 +12,8 @@ public class CombatManager : MonoBehaviour
 
     bool _isPlaying = false;
 
+    [SerializeField] CameraBehaviour _camera;
+
     private void Start()
     {
         if (Entities.Count > 0) Play();
@@ -61,12 +63,18 @@ public class CombatManager : MonoBehaviour
         if (GameStat.EncountersDico.ContainsKey(encounterID)) { GameStat.EncountersDico[encounterID] = true; } // Marquer la zone comme faite
     }
 
+    /// <summary>
+    /// boucle de jeu principale
+    /// </summary>
+    /// <returns></returns>
     public async UniTask Play()
     {
         _isPlaying = true;
         while(_isPlaying)
         {
+            _camera.StartFollowingTarget(Entities[_currentEntityIndex].transform);
             await Entities[_currentEntityIndex].PlayTurn();
+            
             _currentEntityIndex++;
             _currentEntityIndex = _currentEntityIndex%Entities.Count;
         }

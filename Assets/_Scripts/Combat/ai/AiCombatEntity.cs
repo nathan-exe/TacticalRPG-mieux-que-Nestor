@@ -31,11 +31,11 @@ public class AiCombatEntity : CombatEntity
         //pick random spell
         SpellData chosenSpell = Data.Spells.PickRandom(); //@ToDo : take mana intoAccount
 
-        //pick random target unit
-        Vector2Int SpellTargetTile = PlayerCombatEntity.Instances.PickRandom().transform.position.RoundToV2Int();
+        //pick closest target unit
+        Vector2Int TargetedUnitPosition = FindClosestEnemyEntity().transform.position.RoundToV2IntXZ();//PlayerCombatEntity.Instances.PickRandom().transform.position.RoundToV2Int();
 
         //choose best orientation
-        int Orientation = ChooseClosestDirectionTowardPosition(new Vector3(SpellTargetTile.x, 0, SpellTargetTile.y));
+        int Orientation = ChooseClosestDirectionTowardPosition(new Vector3(TargetedUnitPosition.x, 0, TargetedUnitPosition.y));
 
 
         //choose SpellCast origin
@@ -49,7 +49,7 @@ public class AiCombatEntity : CombatEntity
             //Offset *= -1;
             //Offset *= -1;
 
-            Vector2Int castOrigin = SpellTargetTile - Offset;
+            Vector2Int castOrigin = TargetedUnitPosition - Offset;
             Debug.DrawRay(castOrigin.X0Y() + transform.position.y *Vector3.up, Vector3.up, Color.red, .1f);
 
             if (Graph.Instance.Nodes.TryGetValue(castOrigin, out TileAstarNode node) && _floodFill.HighlightedTiles.Contains(node))
@@ -57,11 +57,11 @@ public class AiCombatEntity : CombatEntity
                 if (chosenSpell.IsOccludedByWalls)
                 {
                     //raycast
-                    Vector3 TileToCastOriginWS = (castOrigin - SpellTargetTile).X0Y();
-                    Debug.DrawRay(SpellTargetTile.X0Y() + Vector3.up * transform.position.y, Vector3.up, Color.red, .1f);
-                    Debug.DrawRay(SpellTargetTile.X0Y() + Vector3.up * transform.position.y, TileToCastOriginWS, Color.grey, .1f);
+                    Vector3 TileToCastOriginWS = (castOrigin - TargetedUnitPosition).X0Y();
+                    Debug.DrawRay(TargetedUnitPosition.X0Y() + Vector3.up * transform.position.y, Vector3.up, Color.red, .1f);
+                    Debug.DrawRay(TargetedUnitPosition.X0Y() + Vector3.up * transform.position.y, TileToCastOriginWS, Color.grey, .1f);
                     
-                    if (!Physics.Raycast(SpellTargetTile.X0Y() + transform.position.y * Vector3.up, TileToCastOriginWS, TileToCastOriginWS.magnitude, LayerMask.GetMask("solid")))
+                    if (!Physics.Raycast(TargetedUnitPosition.X0Y() + transform.position.y * Vector3.up, TileToCastOriginWS, TileToCastOriginWS.magnitude, LayerMask.GetMask("solid")))
                     {
                         TargetTile = castOrigin;
                         break;
@@ -75,7 +75,7 @@ public class AiCombatEntity : CombatEntity
             }
         }
         bool foundTile =TargetTile != null;
-        if (!foundTile) TargetTile = _floodFill.HighlightedTiles.ToList().PickRandom().pose; //affreux
+        if (!foundTile) TargetTile = FindClosestTileToPositionInList(_floodFill.HighlightedTiles, TargetedUnitPosition).pose;//_floodFill.HighlightedTiles.ToList().PickRandom().pose; //affreux
         
         //EditorApplication.isPaused = true;
         await UniTask.Delay(1000);
@@ -122,5 +122,54 @@ public class AiCombatEntity : CombatEntity
     {
         _floodFill.ResetTilesHighlighting();
         await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
+    }
+
+    /// <summary>
+    /// retourne le noeud le plus proche de la position donnée parmi la liste de noeuds.
+    /// </summary>
+    /// <param name="nodes"></param>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    private TileAstarNode FindClosestTileToPositionInList(HashSet<TileAstarNode> tiles, Vector2Int targetPosition)
+    {
+        float minDistanceSqrd = Mathf.Infinity;
+        TileAstarNode clostestTile = null;
+
+        foreach (TileAstarNode tile in tiles)
+        {
+            float distanceSqrd = tile.pose.SqrDistanceTo(targetPosition);
+            if (clostestTile == null || distanceSqrd < minDistanceSqrd)
+            {
+                minDistanceSqrd = distanceSqrd;
+                clostestTile = tile;
+            }
+        }
+
+        return clostestTile;
+    }
+
+
+    /// <summary>
+    /// retourne l'entité ennemie la plus proche
+    /// </summary>
+    /// <param name="nodes"></param>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    private PlayerCombatEntity FindClosestEnemyEntity()
+    {
+        float minDistanceSqrd = Mathf.Infinity;
+        PlayerCombatEntity clostestEntity = null;
+
+        foreach (PlayerCombatEntity entity in PlayerCombatEntity.Instances)
+        {
+            float distanceSqrd = entity.transform.position.SqrDistanceTo(transform.position);
+            if (clostestEntity == null || distanceSqrd < minDistanceSqrd)
+            {
+                minDistanceSqrd = distanceSqrd;
+                clostestEntity = entity;
+            }
+        }
+
+        return clostestEntity;
     }
 }
