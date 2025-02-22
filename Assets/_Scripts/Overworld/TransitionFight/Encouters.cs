@@ -35,7 +35,7 @@ public class Encouters : MonoBehaviour
             }
 
             await Task.Delay(600);
-            SceneManager.LoadScene("SceneMatéo");
+            SceneManager.LoadScene(1);
         }
     }
 }

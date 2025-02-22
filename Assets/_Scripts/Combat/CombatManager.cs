@@ -14,6 +14,11 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] CameraBehaviour _camera;
 
+    private void Awake()
+    {
+        if(_camera == null) _camera = FindObjectOfType<CameraBehaviour>();
+    }
+
     private void Start()
     {
         if (Entities.Count > 0) Play();
