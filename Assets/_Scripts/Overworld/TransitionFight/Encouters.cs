@@ -1,5 +1,5 @@
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,8 +34,9 @@ public class Encouters : MonoBehaviour
                 GameStat.EncountersDico.Add(ZoneName, false); // false = la zone n'a pas été réalisée
             }
 
-            await Task.Delay(600);
-            SceneManager.LoadScene(1);
+            PostProcessController.instance.FadeOut.play();
+            await UniTask.Delay(600);
+            SceneManager.LoadScene(2);
         }
     }
 }

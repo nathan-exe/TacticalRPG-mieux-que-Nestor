@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/TheoScene.unity
+    guid: 343c8b91e0aef694a9812df38608e305
+  - enabled: 1
     path: "Assets/Scenes/SceneOverMat\xE9o.unity"
     guid: 5162c3f320bee40469ca5118a61a1564
   - enabled: 1
