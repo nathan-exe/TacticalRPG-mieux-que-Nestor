@@ -78,6 +78,7 @@ public class SpellCaster : MonoBehaviour
         GetTargetableTiles(ref TargetableTiles);
         foreach (Vector2Int targetTile in TargetableTiles)
         {
+            Debug.DrawRay(targetTile.X0Y(), Vector3.up * 10, Color.white,10);
             Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.dangerous);
         }
 
@@ -146,11 +147,13 @@ public class SpellCaster : MonoBehaviour
         healthComponentsList.Clear();
         foreach (Vector2Int targetTile in TargetableTiles)
         {
+            Debug.DrawRay(targetTile.X0Y(), Vector3.up * 9, Color.blue, 10);
             Vector3 worldPos = new Vector3(targetTile.x, .5f, targetTile.y);
             if (Physics.SphereCast(new Vector3(worldPos.x, 50, worldPos.z), .4f, Vector3.down, out RaycastHit hit, 100))
             {
                 if (hit.collider.TryGetComponent(out CombatEntity hitEntity))
                 {
+                    Debug.DrawRay(targetTile.X0Y(), Vector3.up * 8, Color.red, 10);
                     healthComponentsList.Add(hitEntity);
                 }
             }

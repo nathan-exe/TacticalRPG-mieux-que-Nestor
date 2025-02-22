@@ -15,6 +15,14 @@ public class AiCombatEntity : CombatEntity
         Instances.Add(this);
         //Health.HP = Data.MaxHP;
     }
+
+    protected override void Start()
+    {
+        base.Start();
+        Health.OnDamageTaken += () => PostProcessController.instance.E_ExposureFlash.play();
+        Health.OnDamageTaken += () => PostProcessController.instance.E_ScreenDistortion.play();
+    }
+
     private void OnDestroy()
     {
         Instances.Remove(this);

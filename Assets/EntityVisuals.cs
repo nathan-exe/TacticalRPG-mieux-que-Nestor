@@ -17,7 +17,7 @@ public class EntityVisuals : MonoBehaviour
     {
         //pas terrible
         float duration = .4f;
-        _mesh.DOShakePosition(duration, 1.2f,20);
+        _mesh.DOShakePosition(duration, .3f,17);
         await UniTask.Delay(Mathf.RoundToInt(duration * 1000)); 
     }
 

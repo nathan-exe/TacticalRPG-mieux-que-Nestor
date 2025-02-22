@@ -41,7 +41,7 @@ public abstract class CombatEntity : MonoBehaviour
         Mana = MaxManaPerEntity;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         Health.HP = Data.MaxHP;
     }
