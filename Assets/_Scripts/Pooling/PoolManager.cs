@@ -30,14 +30,10 @@ public class PoolManager : MonoBehaviour
         instance = this;
     }
 
-    [Header("Gameplay")]
-    public Pool bombPool;
-    public Pool pickUpPool;
 
 
     [Header("VFXs")]
-    public Pool VfxExplosionPool;
-    public Pool VfxHitPool, VFXDeathPool, VFXBricksPool;
+    public Pool VfxHitPool, VFXDeathPool;
 
 
 }

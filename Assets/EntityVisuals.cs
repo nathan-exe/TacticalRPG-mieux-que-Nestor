@@ -28,4 +28,6 @@ public class EntityVisuals : MonoBehaviour
         _mesh.DOJump(_mesh.position,1,1, duration);
         await UniTask.Delay(Mathf.RoundToInt(duration * 1000));
     }
+
+    
 }

@@ -72,4 +72,9 @@ public class HealthComponent : MonoBehaviour
         HP = MaxHP;
     }
 
+    private void Start()
+    {
+        OnDamageTaken+= ()=> PoolManager.Instance.VfxHitPool.PullObjectFromPool(transform.position);
+        OnDeath+= (GameObject o) => PoolManager.Instance.VFXDeathPool.PullObjectFromPool(transform.position);
+    }
 }

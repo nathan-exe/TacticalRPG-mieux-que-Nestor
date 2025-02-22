@@ -8,6 +8,8 @@ public class CombatEntityUI : MonoBehaviour
     [Header("References")]
     public CoolSlider HealthSlider;
     public CoolSlider ManaSlider;
+
+
     public void PreviewManaLoss(float loss) => ManaSlider.PreviewValue(ManaSlider.Value - loss);
     public void CancelManaLossPreview() => ManaSlider.CancelPreview();
 
@@ -25,7 +27,9 @@ public class CombatEntityUI : MonoBehaviour
     {
         ManaSlider.MaxValue = CombatEntity.MaxManaPerEntity;
         ManaSlider.Value = CombatEntity.MaxManaPerEntity;
+        //ManaSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(20 * ManaSlider.MaxValue, 20);
 
         HealthSlider.MaxValue = transform.parent.GetComponent<CombatEntity>().Data.MaxHP;
+        HealthSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(20*HealthSlider.MaxValue,20);
     }
 }
