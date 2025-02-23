@@ -5,30 +5,39 @@ using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CSVReader : MonoBehaviour
+public class CSVReader : EditorWindow
 {
-    public TextAsset csvFile;
-    public string folderPath = "Assets/_Scripts/Overworld/NPC/Interactible_Data";
+    private static string folderPath = "Assets/_Scripts/Overworld/NPC/Interactible_Data";
+    private static string csvFilePath = "Assets/Spreadsheets/Dialogues.csv";
 
-    void Start() => LoadCSV();
-
-    public void LoadCSV()
+    [MenuItem("Dialogues/1-Charger CSV")]
+    public static void LoadCSV()
     {
-        var lines = csvFile.text.Split('\n')
-            .Where(line => !string.IsNullOrWhiteSpace(line))
-            .Skip(1);
+        // Vérifie si le fichier CSV existe
+        if (!File.Exists(csvFilePath))
+        {
+            Debug.LogError($"Fichier CSV introuvable : {csvFilePath}");
+            return;
+        }
+
+        // Lit le fichier CSV en texte
+        string csvText = File.ReadAllText(csvFilePath);
+
+        var lines = csvText.Split('\n') // Sépare en lignes
+            .Where(line => !string.IsNullOrWhiteSpace(line)) // Supprime les lignes vides
+            .Skip(1); // Ignore la première ligne (en-tête)
 
         foreach (var line in lines)
         {
             var data = ParseCSVLine(line);
-            if (data.Count > 0)
-            {
-                UpdateOrCreateDialogueData(data.ToArray());
-            }
+            UpdateOrCreateDialogueData(data.ToArray());
         }
+
+        Debug.Log("CSV chargé avec succès");
     }
 
-    private List<string> ParseCSVLine(string line)
+    // Analyse une ligne CSV tout en gérant les champs entre guillemets
+    private static List<string> ParseCSVLine(string line)
     {
         List<string> fields = new List<string>();
         StringBuilder currentField = new StringBuilder();
@@ -38,17 +47,17 @@ public class CSVReader : MonoBehaviour
         {
             if (line[i] == '"')
             {
-                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"') 
+                if (inQuotes && i + 1 < line.Length && line[i + 1] == '"') // Gère les guillemets doubles ""
                 {
                     currentField.Append('"');
-                    i++; 
+                    i++;
                 }
                 else
                 {
                     inQuotes = !inQuotes;
                 }
             }
-            else if (line[i] == ',' && !inQuotes)
+            else if (line[i] == ',' && !inQuotes) // Séparateur de champ
             {
                 fields.Add(currentField.ToString().Trim());
                 currentField.Clear();
@@ -59,8 +68,9 @@ public class CSVReader : MonoBehaviour
             }
         }
 
-        fields.Add(currentField.ToString().Trim());
+        fields.Add(currentField.ToString().Trim()); // Ajoute le dernier champ
 
+        // Retire les guillemets des champs
         for (int i = 0; i < fields.Count; i++)
         {
             string field = fields[i];
@@ -73,38 +83,41 @@ public class CSVReader : MonoBehaviour
         return fields;
     }
 
-    private void UpdateOrCreateDialogueData(string[] data)
+    // Crée ou met à jour un ScriptableObject à partir des données CSV
+    private static void UpdateOrCreateDialogueData(string[] data)
     {
-        var path = Path.Combine(folderPath, $"{data[0]}.asset");
+        var path = Path.Combine(folderPath, $"{data[0]}.asset"); // Chemin de sauvegarde du ScriptableObject
         var newData = CreateDialogueData(data);
 
-        Directory.CreateDirectory(folderPath);
-
+        // Vérifie si un fichier de données existe déjà
         var existingData = AssetDatabase.LoadAssetAtPath<InteractibleData>(path);
         if (existingData != null)
         {
-            if (UpdateExistingData(existingData, newData))
+            if (UpdateExistingData(existingData, newData)) // Met à jour uniquement si des changements sont détectés
             {
                 EditorUtility.SetDirty(existingData);
                 AssetDatabase.SaveAssets();
-                Debug.Log($"Updated existing ScriptableObject with id: {data[0]}");
+                Debug.Log($"Mis à jour : {data[0]}");
             }
             else
             {
-                Debug.Log($"No changes for id: {data[0]}");
+                Debug.Log($"Aucune modification : {data[0]}");
             }
         }
-        else
+        else // Crée un nouveau fichier de données
         {
             AssetDatabase.CreateAsset(newData, path);
             AssetDatabase.SaveAssets();
-            Debug.Log($"Created new ScriptableObject for id: {data[0]}");
+            Debug.Log($"Nouveau fichier créé : {data[0]}");
         }
     }
 
-    private InteractibleData CreateDialogueData(string[] data)
+    // Crée une nouvelle instance de données de dialogue
+    private static InteractibleData CreateDialogueData(string[] data)
     {
         var dialogueData = ScriptableObject.CreateInstance<InteractibleData>();
+
+        // Remplit les champs avec les données du CSV
         dialogueData.id = data[0];
         dialogueData.name = data[1];
         dialogueData.dialogue = data[2];
@@ -115,13 +128,16 @@ public class CSVReader : MonoBehaviour
         dialogueData.choice1 = data[7];
         dialogueData.choice2 = data[8];
         dialogueData.actionType = data[9];
+
         return dialogueData;
     }
 
-    private bool UpdateExistingData(InteractibleData existing, InteractibleData newData)
+    // Met à jour les données si des changements sont détectés
+    private static bool UpdateExistingData(InteractibleData existing, InteractibleData newData)
     {
         bool hasChanges = false;
 
+        // Fonction locale pour mettre à jour un champ si nécessaire
         void UpdateField<T>(ref T field, T newValue)
         {
             if (!Equals(field, newValue))
@@ -131,6 +147,7 @@ public class CSVReader : MonoBehaviour
             }
         }
 
+        // Vérifie et met à jour chaque champ
         UpdateField(ref existing.name, newData.name);
         UpdateField(ref existing.dialogue, newData.dialogue);
         UpdateField(ref existing.mood, newData.mood);

@@ -10,16 +10,14 @@ public class Interactible : MonoBehaviour, Iinteractable
     public string interactibleName;
     [TextArea] 
     public string interactibleText;
-    private bool canJoin;
+    bool canJoin = true;
 
     public InteractibleData interactibleData;
 
-
-    private void Start()
+    public void dialogueLoad()
     {
-        //interactibleName = interactibleData.name;
-        //interactibleText = interactibleData.interactibleDialogueText;
-        //canJoin = interactibleData.canJoinThePlayer;
+        interactibleName = interactibleData.name;
+        interactibleText = interactibleData.dialogue;
     }
     public async UniTask InteractWith()
     {
@@ -27,18 +25,18 @@ public class Interactible : MonoBehaviour, Iinteractable
         await DialogueBoxDisplay.Instance.OpenDialogueBox(interactibleName, interactibleText);
         await DialogueBoxDisplay.Instance.IsSkipping();
 
-        if (canJoin)
+        if (interactibleData.actionType == "Join" && canJoin)
         {
             GameStat.AddCharacter(new CharacterState(10, 100, "Matéo"));
             GameStat.DisplayTeam();
             canJoin = false;
             gameObject.SetActive(false);
         }
-        //if (interactibleData.canHealThePlayer)
-        //{
-        //    Debug.Log("PlayerParty heal");
+        else if (interactibleData.actionType == "Heal")
+        {
+            Debug.Log("PlayerParty heal");
 
-        //}
+        }
     }
 
     public void OnSelected()
