@@ -21,7 +21,6 @@ public class PauseManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("ohhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh-");
             UiManager.Instance.HideCurrentPanel();
         }
         

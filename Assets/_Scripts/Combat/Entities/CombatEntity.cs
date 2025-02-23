@@ -26,7 +26,7 @@ public abstract class CombatEntity : MonoBehaviour
     public float Mana { get { return _mana; }
         set
         {
-            _mana = value;
+            _mana = Mathf.Clamp(value, 0, MaxManaPerEntity);
             UI.ManaSlider.Value = _mana;
         }
     }
