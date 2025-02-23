@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80ebf651ba43a4646a0ae8824ba390ac, type: 3}
-  m_Name: Pretre
+  m_Name: Blacksmith1
   m_EditorClassIdentifier: 
-  interactibleName: Pretre
-  interactibleDialogueText: Hello mon pote, je vais te soigner, rahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh!
-  canJoinThePlayer: 0
-  canHealThePlayer: 1
+  id: Blacksmith1
+  name: Forgeron
+  dialogue: "Deso, pas d\u2019arme \xE0 t\u2019offrir."
+  mood: 
+  portrait: 
+  sound: 
+  nextLineID: 
+  choice1: 
+  choice2: 
+  actionType: 

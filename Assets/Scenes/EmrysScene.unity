@@ -716,8 +716,8 @@ GameObject:
   - component: {fileID: 165867628}
   - component: {fileID: 165867627}
   m_Layer: 0
-  m_Name: New sign
-  m_TagString: Untagged
+  m_Name: Sign1
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -749,9 +749,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: 
-  interactibleText: 
-  interactibleData: {fileID: 11400000, guid: 1eb56fff1e528a341bfa0930013f19fb, type: 2}
+  interactibleName: Panneau
+  interactibleText: "N\u2019oublie pas de te rendre dans une auberge si tu es fatigu\xE9"
+  interactibleData: {fileID: 11400000, guid: 255ea986b5331f347b15725fe36f0a4b, type: 2}
 --- !u!114 &165867628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,8 +1087,8 @@ GameObject:
   - component: {fileID: 271258156}
   - component: {fileID: 271258155}
   m_Layer: 0
-  m_Name: Pretre
-  m_TagString: Untagged
+  m_Name: priest1
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1120,9 +1120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: 
-  interactibleText: 
-  interactibleData: {fileID: 11400000, guid: 88529a12904d7964f8ccb2ecae45fd36, type: 2}
+  interactibleName: Pretre
+  interactibleText: Ne bougez pas mon enfant, je vais vous soigner.
+  interactibleData: {fileID: 11400000, guid: 6588dfdb1c714a54698061e8d1e86f0f, type: 2}
 --- !u!114 &271258156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,8 +1734,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -207.1, y: 67}
-  m_SizeDelta: {x: 91.0057, y: 24.9244}
+  m_AnchoredPosition: {x: -181.15051, y: 67}
+  m_SizeDelta: {x: 142.9047, y: 24.9244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &406452689
 MonoBehaviour:
@@ -1834,6 +1834,147 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406452687}
   m_CullTransparentMesh: 1
+--- !u!1 &452092011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452092012}
+  - component: {fileID: 452092017}
+  - component: {fileID: 452092016}
+  - component: {fileID: 452092015}
+  - component: {fileID: 452092014}
+  - component: {fileID: 452092013}
+  m_Layer: 0
+  m_Name: blacksmith1
+  m_TagString: NPC
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452092012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.42, y: 0.76710844, z: 2.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1845745196}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &452092013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactibleName: Forgeron
+  interactibleText: "Deso, pas d\u2019arme \xE0 t\u2019offrir."
+  interactibleData: {fileID: 11400000, guid: 4abf011ad90494f49b33c3112d9aa5c1, type: 2}
+--- !u!114 &452092014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
+--- !u!65 &452092015
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &452092016
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 061efd8ca6d9b494896e20f99cd3ee32, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &452092017
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452092011}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &473798498
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,8 +2127,8 @@ GameObject:
   - component: {fileID: 496301933}
   - component: {fileID: 496301932}
   m_Layer: 0
-  m_Name: Old sign
-  m_TagString: Untagged
+  m_Name: Oldsign1
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2019,9 +2160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: 
-  interactibleText: 
-  interactibleData: {fileID: 11400000, guid: 36338a9283ff5b748a755a098fd38b90, type: 2}
+  interactibleName: Vieux panneau
+  interactibleText: Les inscriptions sont illisibles
+  interactibleData: {fileID: 11400000, guid: 87031982b9fb46342b0b9781e8d54cd9, type: 2}
 --- !u!114 &496301933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3873,8 +4014,8 @@ GameObject:
   - component: {fileID: 1094096760}
   - component: {fileID: 1094096759}
   m_Layer: 0
-  m_Name: Mateo
-  m_TagString: Untagged
+  m_Name: Mateo1
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3906,9 +4047,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: 
-  interactibleText: 
-  interactibleData: {fileID: 11400000, guid: e0add3b645b49e54c933093acc2a6a36, type: 2}
+  interactibleName: Mateo
+  interactibleText: "Salut moi c\u2019est Mateo, yaaaa."
+  interactibleData: {fileID: 11400000, guid: a5df2e883cf56804eb367cf0df464603, type: 2}
 --- !u!114 &1094096760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5167,8 +5308,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -202.6964, y: 66.542076}
-  m_SizeDelta: {x: 117.24078, y: 33.8842}
+  m_AnchoredPosition: {x: -181.67247, y: 66.542076}
+  m_SizeDelta: {x: 159.2886, y: 33.8842}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1528349439
 MonoBehaviour:
@@ -6531,6 +6672,7 @@ Transform:
   m_Children:
   - {fileID: 271258154}
   - {fileID: 1094096758}
+  - {fileID: 452092012}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1867656710

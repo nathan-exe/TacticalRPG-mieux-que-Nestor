@@ -1,0 +1,6 @@
+"Id","Name","Dialogue","Type","Portrait","Sound","Next Line ID","Choice 1","Choice 2","Action Type"
+"mateo1","Mateo","Salut moi c’est Mateo, yaaaa.",,,,,,,"Join"
+"priest1","Pretre","Ne bougez pas mon enfant, je vais vous soigner.",,,,,,,"Heal"
+"blacksmith1","Forgeron","Deso, pas d’arme à t’offrir.",,,,,,,
+"oldsign1","Vieux panneau","Les inscriptions sont illisibles",,,,,,,
+"sign1","Panneau","N’oublie pas de te rendre dans une auberge si tu es fatigué",,,,,,,
