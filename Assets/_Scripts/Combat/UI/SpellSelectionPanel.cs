@@ -23,7 +23,12 @@ public class SpellSelectionPanel : MonoBehaviour
     public event Action<int> OnSpellRotated;
     private int _orientation;
     public int SpellOrientation { get => _orientation; set { _orientation = value % 4; OnSpellRotated?.Invoke(SpellOrientation); } }
-    
+
+    bool shouldSkip = false;
+    public void skip()
+    {
+        shouldSkip = true;
+    }
 
     private void Start()
     {
@@ -47,7 +52,7 @@ public class SpellSelectionPanel : MonoBehaviour
             await UniTask.Yield();
             
             if (Input.GetMouseButtonDown(1)) SpellOrientation++; //rotation du spell
-            if (Input.GetKeyDown(KeyCode.Escape)) Waiting = false;
+            if (shouldSkip) { shouldSkip = false; Waiting = false; }
         }
 
         DisableButtons();

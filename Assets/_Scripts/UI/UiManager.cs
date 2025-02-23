@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,6 +11,7 @@ public class UiManager : MonoBehaviour
 
     [Header("References")]
     [SerializeField] CanvasGroup _currentPanel;
+    [field : SerializeField]public CanvasGroup FormerPanel { get; private set; } = null;
     public CanvasGroup GameOverPanel, WinPanel, PausePanel;
 
     [Header("Parameters")]
@@ -37,12 +39,11 @@ public class UiManager : MonoBehaviour
 
     public void ShowPanel(CanvasGroup canvasGroup)
     {
-        
         HideCurrentPanel();
         _currentPanel = canvasGroup;
         _currentPanel.blocksRaycasts = true;
         _currentPanel.interactable = true;
-        _currentPanel.DOFade(1, _transitionTime);
+        _currentPanel.DOFade(1, _transitionTime).SetUpdate(true);
     }
 
     public void HideCurrentPanel()
@@ -50,7 +51,10 @@ public class UiManager : MonoBehaviour
         if (_currentPanel == null) return;
         _currentPanel.interactable = false;
         _currentPanel.blocksRaycasts = false;
-        _currentPanel.DOFade(0, _transitionTime);
+        _currentPanel.DOFade(0, _transitionTime).SetUpdate(true);
+
+        FormerPanel = _currentPanel;
+        _currentPanel = null;
     }
 
 
@@ -60,5 +64,11 @@ public class UiManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    
+
+    public void setTimeScale(float timeScale)
+    {
+
+    }
 
 }
