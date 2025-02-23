@@ -18,8 +18,7 @@ public class ScreenDistortionAnimation : PostProcessEffectAnimation<LensDistorti
 
     protected override void ApplyEffect(LensDistortion component, float alpha)
     {
-        alpha = AlphaCurve01.Evaluate(alpha);
-        component.intensity.value = Mathf.Lerp(Mathf.Lerp(AnimStartValue, startValue, alpha), startValue + offset, alpha);
+        component.intensity.value = Mathf.Lerp(Mathf.Lerp(AnimStartValue, startValue, alpha), startValue + offset, AlphaCurve01.Evaluate(alpha));
     }
 
     protected override void OnBeforePlay()

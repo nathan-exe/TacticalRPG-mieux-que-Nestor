@@ -26,6 +26,8 @@ public class CombatEntityMovement : MonoBehaviour
 
     public async UniTask MoveToPoint(Vector3 from,Vector3 to, float duration, bool smoothstep) 
     {
+        
+
         from.y = to.y = transform.position.y;
 
         float StartTime = Time.time;
@@ -39,11 +41,13 @@ public class CombatEntityMovement : MonoBehaviour
             Debug.Log("moving");
         }
         transform.position = to;
+        
     }
 
 
     public async UniTask GoTo(Vector2Int p)
     {
+        Graph.Instance.ActivateNode(_currentNode);
         Stack<AstarNode> path = _pathfinder.ComputePath(_currentNode, Graph.Instance.Nodes[p]);
         while(path.Count>0)
         {
@@ -51,6 +55,7 @@ public class CombatEntityMovement : MonoBehaviour
             await MoveToPoint((_currentNode).MonoBehaviour.transform.position,((TileAstarNode)targetNode).MonoBehaviour.transform.position, 1f/ _speed,false);
             _currentNode = targetNode;
         }
+        Graph.Instance.DisableNode(_currentNode);
     }
 
 

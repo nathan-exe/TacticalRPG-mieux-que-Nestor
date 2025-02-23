@@ -14,6 +14,13 @@ public class PlayerCombatEntity : CombatEntity
         Instances.Add(this);
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        Health.OnDamageTaken += () => PostProcessController.instance.ChromaticAberrationFlash.play();
+        Health.OnDamageTaken += () => PostProcessController.instance.E_ScreenDistortion.play();
+    }
+
     private void OnDestroy()
     {
         Instances.Remove(this);
