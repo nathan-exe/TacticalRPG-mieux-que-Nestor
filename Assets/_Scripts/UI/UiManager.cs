@@ -40,7 +40,10 @@ public class UiManager : MonoBehaviour
     public void ShowPanel(CanvasGroup canvasGroup)
     {
         HideCurrentPanel();
+
         _currentPanel = canvasGroup;
+        if (FormerPanel == canvasGroup) FormerPanel = null;
+
         _currentPanel.blocksRaycasts = true;
         _currentPanel.interactable = true;
         _currentPanel.DOFade(1, _transitionTime).SetUpdate(true);
