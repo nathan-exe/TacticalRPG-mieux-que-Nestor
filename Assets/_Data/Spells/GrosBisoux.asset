@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
-  m_Name: Gros bisou
+  m_Name: GrosBisoux
   m_EditorClassIdentifier: 
-  Name: Tu veux une claque
+  Name: Gros bisoux
   Sprite: {fileID: 0}
-  ManaCost: 2
-  Damage: 2
+  ManaCost: 3
+  Damage: -5
   IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2
@@ -24,20 +24,11 @@ MonoBehaviour:
     width: 11
     height: 11
   AffectedTiles:
+  - {x: -1, y: 1}
+  - {x: 0, y: 1}
+  - {x: 1, y: 1}
   - {x: 1, y: 0}
-  - {x: 2, y: 0}
-  - {x: 5, y: -2}
-  - {x: 5, y: 2}
-  - {x: 4, y: 2}
-  - {x: 4, y: -2}
-  - {x: 2, y: -1}
-  - {x: 2, y: 1}
-  - {x: 3, y: 1}
-  - {x: 3, y: -1}
-  - {x: 3, y: 0}
-  - {x: 4, y: 0}
-  - {x: 4, y: -1}
-  - {x: 5, y: -1}
-  - {x: 5, y: 0}
-  - {x: 5, y: 1}
-  - {x: 4, y: 1}
+  - {x: 1, y: -1}
+  - {x: 0, y: -1}
+  - {x: -1, y: -1}
+  - {x: -1, y: 0}

@@ -2865,16 +2865,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vfx_Healing_Instant
       objectReference: {fileID: 0}
-    - target: {fileID: 5347364033978596410, guid: 28511e094a50a2d448ef5773282bff48,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167983850145261242, guid: 28511e094a50a2d448ef5773282bff48,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44690,7 +44680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c95b865e9b31b2459018503c37202b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 6740965509898487199, guid: 29ee4b7f4f984494ebb628f09907b6c7, type: 3}
+  _prefab: {fileID: 5347364033978596410, guid: 28511e094a50a2d448ef5773282bff48, type: 3}
   _poolSize: 10
 --- !u!4 &1725609429 stripped
 Transform:
@@ -47583,7 +47573,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VfxHitPool: {fileID: 1105870435}
   VFXDeathPool: {fileID: 1989710687}
-  VfxHealPool: {fileID: 0}
+  VfxHealPool: {fileID: 1723686117}
 --- !u!4 &1872912990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2469274828200830063, guid: 4b9f7417066e373448741f75c947fc83,
