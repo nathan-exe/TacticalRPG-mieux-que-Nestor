@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ebf651ba43a4646a0ae8824ba390ac, type: 3}
+  m_Name: policeman1
+  m_EditorClassIdentifier: 
+  id: policeman1
+  name: Policier
+  dialogue: "La for\xEAt est dangereuse \xE0 cette p\xE9riode de l\u2019ann\xE9e.
+    Attention \xE0 toi"
+  mood: 
+  portrait: 
+  sound: 
+  nextLineID: 
+  choice1: 
+  choice2: 
+  actionType: 
