@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tristan
   m_EditorClassIdentifier: 
   Name: Tristan
-  MaxHP: 10
+  MaxHP: 8
   MovementRangePerTurn: 5
   Spells:
   - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}

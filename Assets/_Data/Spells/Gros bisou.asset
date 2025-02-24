@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
-  m_Name: TuVeuxUneClaqueData
+  m_Name: Gros bisou
   m_EditorClassIdentifier: 
   Name: Tu veux une claque
   Sprite: {fileID: 0}

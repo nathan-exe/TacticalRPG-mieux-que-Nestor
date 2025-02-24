@@ -130,7 +130,15 @@ public class SpellCaster : MonoBehaviour
         GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
         foreach (CombatEntity o in HittableObjects)
         {
-            await o.Health.TakeDamage(SelectedSpellData.Damage);
+            if (SelectedSpellData.Damage > 0)
+            {
+                await o.Health.TakeDamage(SelectedSpellData.Damage);
+            }
+            else
+            {
+                await o.Health.Heal(-SelectedSpellData.Damage);
+            }
+            
         }
 
         SelectedSpellData = null;

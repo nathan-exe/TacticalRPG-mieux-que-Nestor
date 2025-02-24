@@ -23,8 +23,9 @@ public class CombatManager : MonoBehaviour
         if (_camera == null) _camera = FindObjectOfType<CameraBehaviour>();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return 1;
         if (Entities.Count > 0) Play();
     }
 

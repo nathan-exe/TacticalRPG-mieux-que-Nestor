@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: "Mat\xE9o"
   m_EditorClassIdentifier: 
   Name: "Mat\xE9o"
-  MaxHP: 12
-  MovementRangePerTurn: 3
+  MaxHP: 5
+  MovementRangePerTurn: 9
   Spells:
   - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}
-  - {fileID: 11400000, guid: 647ffe4d144ed584b86752fe4b6b86ba, type: 2}
+  - {fileID: 11400000, guid: 2664057663e2d09489383130d65ba62d, type: 2}
   - {fileID: 11400000, guid: 1c51b49e377ef1e40acd54ae5dc93e83, type: 2}
