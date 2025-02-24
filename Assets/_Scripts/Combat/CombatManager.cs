@@ -72,13 +72,14 @@ public class CombatManager : MonoBehaviour
             {
                 foreach (CharacterState Teammate in GameStat.TeamState)
                 {
-                    CharacterState test = Teammate;
                     foreach (PlayerCombatEntity Entity in PlayerCombatEntity.Instances)
                     {
                         if (Entity.GetComponentInChildren<CombatEntityUI>().Name.text == Teammate.Name)
                         {
+                            print(Teammate.Name);
+                            print(Entity.GetComponent<HealthComponent>().HP);
+                            Teammate.HP = Entity.GetComponent<HealthComponent>().HP;
                             GameStat.DisplayTeam();
-                            test.HP = Entity.GetComponent<HealthComponent>().HP;
                         }
                     }
                 }
