@@ -1,16 +1,23 @@
+using System.Reflection;
+using UnityEngine;
 /// <summary>
 /// Struct de player pour save plus facilement
 /// </summary>
 public struct CharacterState
 {
-    public int HP;
-    public int Mana;
+    public float HP;
+    public float Mana;
     public string Name;
 
-    public CharacterState(int health, int mana, string nom)
+    public EntityData EntityData;
+
+    public CharacterState(string DataFileName)
     {
-        HP = health;
-        Mana = mana;
-        Name = nom;
+        this.EntityData = (EntityData)Resources.Load(DataFileName);
+        
+        HP = EntityData.MaxHP;
+        Mana = CombatEntity.MaxManaPerEntity;
+        Name = EntityData.Name;
+        
     }
 }

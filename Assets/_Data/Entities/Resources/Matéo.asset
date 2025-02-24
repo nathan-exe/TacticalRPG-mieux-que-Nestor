@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "Mat\xE9o"
   m_EditorClassIdentifier: 
   Name: "Mat\xE9o"
-  MaxHP: 10
+  MaxHP: 12
   MovementRangePerTurn: 3
   Spells:
   - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}

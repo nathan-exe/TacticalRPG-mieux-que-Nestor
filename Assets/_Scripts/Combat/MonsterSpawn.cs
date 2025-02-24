@@ -15,7 +15,6 @@ public class MonsterSpawn : MonoBehaviour
             EntityData foundMonster = MonsterData.Instance.ScriptableMonsters.Find(entity => entity.Name == name);
 
             GameObject newMonstre = Instantiate(_monsterPrefab); //nouveau monstre
-
             newMonstre.GetComponent<AiCombatEntity>().Data = foundMonster;//attribution de son type
 
             newMonstre.GetComponentInChildren<CombatEntityUI>().Name.text = foundMonster.Name; //nom

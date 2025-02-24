@@ -23,13 +23,17 @@ public class CombatEntityUI : MonoBehaviour
     }
 
     //set up
-    private void Start()
+    private IEnumerator Start()
     {
+        Debug.Log("OAOAOAOAOAOAOAOHHHHHHHH");
         ManaSlider.MaxValue = CombatEntity.MaxManaPerEntity;
         ManaSlider.Value = CombatEntity.MaxManaPerEntity;
         //ManaSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(20 * ManaSlider.MaxValue, 20);
 
+        yield return null;
         HealthSlider.MaxValue = transform.parent.GetComponent<CombatEntity>().Data.MaxHP;
         HealthSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(20*HealthSlider.MaxValue,20);
+        Debug.Log("OAOAOAOAOAOAOAOHHHHHHHH__");
+
     }
 }

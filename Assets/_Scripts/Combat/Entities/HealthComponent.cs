@@ -68,13 +68,14 @@ public class HealthComponent : MonoBehaviour
             else Destroy(gameObject);
         };
 
-        MaxHP = _entity.Data.MaxHP;
-        HP = MaxHP;
+        
     }
 
     private void Start()
     {
-        OnDamageTaken+= ()=> PoolManager.Instance.VfxHitPool.PullObjectFromPool(transform.position);
+        MaxHP = _entity.Data.MaxHP;
+        HP = MaxHP;
+        OnDamageTaken += ()=> PoolManager.Instance.VfxHitPool.PullObjectFromPool(transform.position);
         OnDeath+= (GameObject o) => PoolManager.Instance.VFXDeathPool.PullObjectFromPool(transform.position);
     }
 }

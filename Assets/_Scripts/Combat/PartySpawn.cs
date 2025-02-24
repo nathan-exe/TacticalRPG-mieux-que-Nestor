@@ -12,7 +12,7 @@ public class PartySpawn : MonoBehaviour
         foreach(CharacterState Teammate in GameStat.TeamState)
         {
             GameObject newTeammate = Instantiate(_partyPrefab); //nouveau pote
-
+            newTeammate.GetComponent<PlayerCombatEntity>().Data = Teammate.EntityData;
             //@todo : setup entity data
 
             newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
