@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1214ceb04aa1e9b4893ac136a77b1d99, type: 3}
-  m_Name: Nestor
+  m_Name: "Mat\xE9o"
   m_EditorClassIdentifier: 
-  Name: Nestor
-  MaxHP: 8
-  MovementRangePerTurn: 5
+  Name: "Mat\xE9o"
+  MaxHP: 5
+  MovementRangePerTurn: 9
   Spells:
   - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}
+  - {fileID: 11400000, guid: 2664057663e2d09489383130d65ba62d, type: 2}
   - {fileID: 11400000, guid: 1c51b49e377ef1e40acd54ae5dc93e83, type: 2}
-  - {fileID: 11400000, guid: 647ffe4d144ed584b86752fe4b6b86ba, type: 2}

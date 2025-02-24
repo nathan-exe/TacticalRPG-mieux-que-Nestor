@@ -34,6 +34,14 @@ public class CombatTile : MonoBehaviour
         node.MonoBehaviour = this;
         node.resetNode();
         _rendererBaseScale = _renderer.transform.localScale;
+
+    }
+
+    private void Start()
+    {
+        _renderer.transform.localScale = Vector3.zero;
+        SetState(State.empty);
+
     }
 
     public void SetState(State newState)

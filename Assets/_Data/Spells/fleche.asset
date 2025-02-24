@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
   m_Name: fleche
   m_EditorClassIdentifier: 
-  Name: fleche
+  Name: Fleche
   Sprite: {fileID: 0}
-  ManaCost: 0
-  Damage: 0
+  ManaCost: 1
+  Damage: 2
   IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2

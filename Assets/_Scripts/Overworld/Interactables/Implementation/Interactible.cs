@@ -27,7 +27,7 @@ public class Interactible : MonoBehaviour, Iinteractable
 
         if (interactibleData.actionType == "Join" && canJoin)
         {
-            GameStat.AddCharacter(new CharacterState(10, 100, "Matéo"));
+            GameStat.AddCharacter(new CharacterState("Matéo"));
             GameStat.DisplayTeam();
             canJoin = false;
             gameObject.SetActive(false);

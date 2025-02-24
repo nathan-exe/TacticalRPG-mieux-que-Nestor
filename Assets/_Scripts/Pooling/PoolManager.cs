@@ -33,7 +33,7 @@ public class PoolManager : MonoBehaviour
 
 
     [Header("VFXs")]
-    public Pool VfxHitPool, VFXDeathPool;
+    public Pool VfxHitPool, VFXDeathPool,VfxHealPool;
 
 
 }

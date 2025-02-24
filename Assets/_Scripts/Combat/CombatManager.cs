@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,6 @@ public class CombatManager : MonoBehaviour
 
     [SerializeField] CameraBehaviour _camera;
 
-
     public static CombatManager Instance { get; private set; }
 
     private void Awake()
@@ -23,8 +23,9 @@ public class CombatManager : MonoBehaviour
         if (_camera == null) _camera = FindObjectOfType<CameraBehaviour>();
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return 1;
         if (Entities.Count > 0) Play();
     }
 
@@ -67,10 +68,21 @@ public class CombatManager : MonoBehaviour
             Entities.Remove(EntityDeath.GetComponent<AiCombatEntity>());
             EntityDeath.SetActive(false);
             print("Méchant mort");
-
-            //win
-            if (AiCombatEntity.Instances.Count == 0)
+            if (AiCombatEntity.Instances.Count == 0) //win
             {
+                foreach (CharacterState Teammate in GameStat.TeamState)
+                {
+                    foreach (PlayerCombatEntity Entity in PlayerCombatEntity.Instances)
+                    {
+                        if (Entity.GetComponentInChildren<CombatEntityUI>().Name.text == Teammate.Name)
+                        {
+                            print(Teammate.Name);
+                            print(Entity.GetComponent<HealthComponent>().HP);
+                            Teammate.HP = Entity.GetComponent<HealthComponent>().HP;
+                            GameStat.DisplayTeam();
+                        }
+                    }
+                }
                 _isPlaying = false;
                 CompleteEncounter(GameStat.ZoneName);
                 TimeManager.instance.StopTime(.5f);

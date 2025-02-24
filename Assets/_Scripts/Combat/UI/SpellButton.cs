@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,9 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
 
     public Button Button;
     [field: SerializeField] public SpellInfoBubble _infoBubble;
+    
+    TMP_Text _text;
+    TMP_Text Text { get { if (_text == null) _text = GetComponentInChildren<TMP_Text>(); return _text; } set => _text = value; }
 
     SpellCaster _spellCaster;
     CombatEntity _currentEntity;
@@ -20,9 +24,10 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
     bool _interactable;
 
     bool _isOverlappedByMouse;
-
+ 
     public event Action OnMouseHover;
     public event Action OnMouseHoverExit;
+
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -65,6 +70,7 @@ public class SpellButton : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
         Image i = (Image)Button.targetGraphic;
         i.sprite = entity.Data.Spells[spellID].Sprite;
         i.color = _interactable ? Color.white : Color.grey;
+        Text.text = entity.Data.Spells[spellID].Name;
     }
 
     public void Disable()

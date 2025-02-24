@@ -85,7 +85,6 @@ public class PlayerCombatEntity : CombatEntity
     }
     async UniTask ChooseSpell()
     {
-        
         await CombatUI.Instance.SpellSelectionPanel.SelectEntitySpell(this);
     }
 
