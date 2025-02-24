@@ -43,7 +43,6 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Start()
     {
-        Health.HP = Data.MaxHP;
         _floodFill.MovementRange = Data.MovementRangePerTurn;
     }
 
