@@ -11,7 +11,6 @@ public static class GameStat
     public static Dictionary<string, bool> EncountersDico { get; private set; } = new(); //Dictionnaire des noms de zones ainsi que d'un bool pour savoir si elles sont clear ou non.
     public static Vector3 TeamPosition { get; private set; } = Vector3.zero; //Position de l'équipe dans l'overworld
 
-
     public static void SetTeamPosition(Vector3 position) => TeamPosition = position;
 
     public static void SetZoneName(string zoneName) => ZoneName = zoneName;
