@@ -25,7 +25,7 @@ public class HealthComponent : MonoBehaviour
         {
             _HP = Mathf.Clamp(value, 0, MaxHP);
             OnHealthUpdated?.Invoke(_HP);
-            if(HP==0)OnDeath?.Invoke(this.gameObject);
+            if (HP==0)OnDeath?.Invoke(this.gameObject);
         }
     }
 
@@ -74,6 +74,7 @@ public class HealthComponent : MonoBehaviour
         
     }
 
+    
     private void Start()
     {
         MaxHP = _entity.Data.MaxHP;
