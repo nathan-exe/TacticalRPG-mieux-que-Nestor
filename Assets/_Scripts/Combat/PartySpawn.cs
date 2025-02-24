@@ -17,6 +17,7 @@ public class PartySpawn : MonoBehaviour
 
             newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
             Debug.Log($"Les pv sont de: {Teammate.HP}");
+            newTeammate.GetComponent<HealthComponent>().MaxHP = Teammate.EntityData.MaxHP; //pv
             newTeammate.GetComponent<HealthComponent>().HP = Teammate.HP; //pv
 
             int pos = Random.Range(0, _potentialSpawn.Count); //positionne
