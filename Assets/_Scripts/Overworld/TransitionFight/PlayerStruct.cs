@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Struct de player pour save plus facilement
 /// </summary>
-public struct CharacterState
+public class CharacterState
 {
     public float HP;
     public float Mana;
@@ -14,8 +14,8 @@ public struct CharacterState
     public CharacterState(string DataFileName)
     {
         this.EntityData = (EntityData)Resources.Load(DataFileName);
-        
         HP = EntityData.MaxHP;
+        Debug.Log(HP + "cvbsdiof");
         Mana = CombatEntity.MaxManaPerEntity;
         Name = EntityData.Name;
         

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 public class PartySpawn : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class PartySpawn : MonoBehaviour
         {
             GameObject newTeammate = Instantiate(_partyPrefab); //nouveau pote
             newTeammate.GetComponent<PlayerCombatEntity>().Data = Teammate.EntityData;
-            //@todo : setup entity data
 
             newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
+            Debug.Log($"Les pv sont de: {Teammate.HP}");
             newTeammate.GetComponent<HealthComponent>().HP = Teammate.HP; //pv
 
             int pos = Random.Range(0, _potentialSpawn.Count); //positionne
