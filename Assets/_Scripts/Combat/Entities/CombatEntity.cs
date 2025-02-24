@@ -43,7 +43,7 @@ public abstract class CombatEntity : MonoBehaviour
 
     protected virtual void Start()
     {
-        Health.HP = Data.MaxHP;
+        //Health.HP = Data.MaxHP;
     }
 
     public abstract UniTask PlayTurn();

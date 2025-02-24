@@ -3,11 +3,11 @@
 /// </summary>
 public struct CharacterState
 {
-    public int HP;
+    public float HP;
     public int Mana;
     public string Name;
 
-    public CharacterState(int health, int mana, string nom)
+    public CharacterState(float health, int mana, string nom)
     {
         HP = health;
         Mana = mana;
