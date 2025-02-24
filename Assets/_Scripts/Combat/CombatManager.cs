@@ -79,7 +79,6 @@ public class CombatManager : MonoBehaviour
                             print(Teammate.Name);
                             print(Entity.GetComponent<HealthComponent>().HP);
                             Teammate.HP = Entity.GetComponent<HealthComponent>().HP;
-                            GameStat.DisplayTeam();
                         }
                     }
                 }
