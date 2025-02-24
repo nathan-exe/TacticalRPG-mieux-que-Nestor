@@ -6,6 +6,7 @@ using UnityEngine;
 public class CombatTileData : ScriptableObject
 {
     public Material Material_Danger;
+    public Material Material_Heal;
     public Material Material_Clickable;
     public Material Material_Default;
 }

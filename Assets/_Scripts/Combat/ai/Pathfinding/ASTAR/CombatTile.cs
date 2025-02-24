@@ -11,7 +11,7 @@ using UnityEngine;
 public class CombatTile : MonoBehaviour
 {
 
-    public enum State { empty,clickable,dangerous};
+    public enum State { empty,clickable,dangerous, Heal };
 
     public TileAstarNode node = new();
     public Vector2Int pose => transform.position.RoundToV2IntXZ();
@@ -59,6 +59,11 @@ public class CombatTile : MonoBehaviour
 
             case State.dangerous:
                 _renderer.material = _data.Material_Danger;
+                _renderer.transform.DOScale(_rendererBaseScale, TweeningDuration);
+                break;
+
+            case State.Heal:
+                _renderer.material = _data.Material_Heal;
                 _renderer.transform.DOScale(_rendererBaseScale, TweeningDuration);
                 break;
 
