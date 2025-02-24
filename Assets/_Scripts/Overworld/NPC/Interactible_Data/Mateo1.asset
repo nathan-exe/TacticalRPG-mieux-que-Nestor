@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Mateo1
   name: Mateo
-  dialogue: "Salut moi c\u2019est Mateo, yaaaa."
+  dialogue: "J\u2019adore les carte graphique."
   mood: 
   portrait: 
   sound: 
