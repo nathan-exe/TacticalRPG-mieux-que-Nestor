@@ -37,13 +37,13 @@ public abstract class CombatEntity : MonoBehaviour
         if (_floodFill == null) TryGetComponent(out _floodFill);
         if(Visuals==null) TryGetComponent(out Visuals);
 
-        _floodFill.MovementRange = Data.MovementRangePerTurn;
+        
         Mana = MaxManaPerEntity;
     }
 
     protected virtual void Start()
     {
-        Health.HP = Data.MaxHP;
+        _floodFill.MovementRange = Data.MovementRangePerTurn;
     }
 
     public abstract UniTask PlayTurn();

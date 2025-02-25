@@ -25,7 +25,7 @@ public class HealthComponent : MonoBehaviour
         {
             _HP = Mathf.Clamp(value, 0, MaxHP);
             OnHealthUpdated?.Invoke(_HP);
-            if(HP==0)OnDeath?.Invoke(this.gameObject);
+            if (HP==0)OnDeath?.Invoke(this.gameObject);
         }
     }
 
@@ -33,6 +33,7 @@ public class HealthComponent : MonoBehaviour
     public event Action<float> OnHealthUpdated;
     public event Action<GameObject> OnDeath;
     public event Action OnDamageTaken;
+    public event Action OnHealed;
 
     /// <summary>
     /// fait des dégats au joueur.
@@ -51,9 +52,11 @@ public class HealthComponent : MonoBehaviour
     /// soigne le joueur.
     /// </summary>
     /// <param name="heal"></param>
-    public void Heal(int heal)
+    public async UniTask Heal(float heal)
     {
         HP = HP + Mathf.Abs(heal);
+        OnHealed?.Invoke();
+        await _entity.Visuals.Jump();
     }
 
 
@@ -68,13 +71,16 @@ public class HealthComponent : MonoBehaviour
             else Destroy(gameObject);
         };
 
-        MaxHP = _entity.Data.MaxHP;
-        HP = MaxHP;
+        
     }
 
+    
     private void Start()
     {
-        OnDamageTaken+= ()=> PoolManager.Instance.VfxHitPool.PullObjectFromPool(transform.position);
-        OnDeath+= (GameObject o) => PoolManager.Instance.VFXDeathPool.PullObjectFromPool(transform.position);
+        MaxHP = _entity.Data.MaxHP;
+        //HP = MaxHP;
+        OnDamageTaken += ()=> PoolManager.Instance.VfxHitPool.PullObjectFromPool(transform.position);
+        OnHealed += () => PoolManager.Instance.VfxHealPool.PullObjectFromPool(transform.position);
+        OnDeath += (GameObject o) => PoolManager.Instance.VFXDeathPool.PullObjectFromPool(transform.position);
     }
 }

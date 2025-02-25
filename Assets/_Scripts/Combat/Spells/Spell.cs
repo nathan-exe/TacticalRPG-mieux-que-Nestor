@@ -6,7 +6,7 @@ using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
 [Serializable]
-public /*abstract*/ class Spell
+public class Spell
 {
     
 

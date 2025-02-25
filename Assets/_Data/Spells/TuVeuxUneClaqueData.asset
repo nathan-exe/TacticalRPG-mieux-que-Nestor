@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Tu veux une claque
   Sprite: {fileID: 0}
   ManaCost: 2
-  Damage: 1
+  Damage: 2
   IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2

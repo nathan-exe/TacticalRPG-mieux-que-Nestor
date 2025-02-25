@@ -79,7 +79,16 @@ public class SpellCaster : MonoBehaviour
         foreach (Vector2Int targetTile in TargetableTiles)
         {
             Debug.DrawRay(targetTile.X0Y(), Vector3.up * 10, Color.white,10);
-            Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.dangerous);
+
+            if (SelectedSpellData.Damage >= 0)
+            {
+                Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.dangerous);
+            }
+            else
+            {
+                Graph.Instance.Nodes[targetTile].MonoBehaviour.SetState(CombatTile.State.Heal);
+            }
+            
         }
 
         //preview mana loss
@@ -130,7 +139,15 @@ public class SpellCaster : MonoBehaviour
         GetAllHittableEntitiesOnTiles_NoAlloc(TargetableTiles, ref HittableObjects);
         foreach (CombatEntity o in HittableObjects)
         {
-            await o.Health.TakeDamage(SelectedSpellData.Damage);
+            if (SelectedSpellData.Damage > 0)
+            {
+                await o.Health.TakeDamage(SelectedSpellData.Damage);
+            }
+            else
+            {
+                await o.Health.Heal(-SelectedSpellData.Damage);
+            }
+            
         }
 
         SelectedSpellData = null;

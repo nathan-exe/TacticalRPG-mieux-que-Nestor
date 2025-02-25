@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: CombatTileData
   m_EditorClassIdentifier: 
   Material_Danger: {fileID: 2100000, guid: f401708d0fdc5654f896b2b28ca2894f, type: 2}
+  Material_Heal: {fileID: 2100000, guid: f20088b7d75e986448bd0ca70ca6f061, type: 2}
   Material_Clickable: {fileID: 2100000, guid: 076bb69d879001042bd1e2e3b54e86b8, type: 2}
   Material_Default: {fileID: 2100000, guid: ce4594ab7d5f75d439ad0843f0e2147d, type: 2}
