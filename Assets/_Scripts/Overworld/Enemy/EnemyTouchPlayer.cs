@@ -32,6 +32,6 @@ public class EnemyTouchPlayer : MonoBehaviour
     public async void GoToCombat()
     {
         await Task.Delay(3000);
-        SceneManager.LoadScene("SceneMatéo");
+        
     }
 }

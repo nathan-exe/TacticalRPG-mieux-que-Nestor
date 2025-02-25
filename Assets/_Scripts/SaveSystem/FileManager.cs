@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class FileManager 
+public abstract class FileManager : MonoBehaviour
 {
     protected FileManager()
     {

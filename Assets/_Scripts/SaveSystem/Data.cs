@@ -6,7 +6,8 @@ using UnityEngine;
 [Serializable]
 public struct GameData
 {
-    public float playTime;
-    public int clickCount;
-    public string playerName;
+    public List<CharacterState> teamState;
+    public string ZoneName;
+    public Dictionary<string, bool> encountersDico;
+    public Vector3 teamPosition;
 }
