@@ -54,12 +54,10 @@ public class XMLmanager : FileManager
                     data.teamState = new List<CharacterState>();
                     foreach (XmlNode charNode in node.ChildNodes)
                     {
-                        CharacterState character = new()
-                        {
-                            Name = charNode["Name"].InnerText,
-                            HP = int.Parse(charNode["HP"].InnerText),
-                            Mana = int.Parse(charNode["Mana"].InnerText)
-                        };
+                        CharacterState character = new(charNode["Name"].InnerText);
+                        character.Name = charNode["Name"].InnerText;
+                        character.HP = int.Parse(charNode["HP"].InnerText);
+                        character.Mana = int.Parse(charNode["Mana"].InnerText);
                         data.teamState.Add(character);
                     }
                     break;
