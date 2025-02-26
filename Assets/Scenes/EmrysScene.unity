@@ -1284,7 +1284,7 @@ Transform:
   m_GameObject: {fileID: 110404680}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8, y: 0.54, z: 7.5}
+  m_LocalPosition: {x: -0.8, y: 0.54, z: -0.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1322,10 +1322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: Policier
-  interactibleText: "La for\xEAt est dangereuse \xE0 cette p\xE9riode de l\u2019ann\xE9e.
-    Attention \xE0 toi"
-  interactibleData: {fileID: 11400000, guid: 3b1e764944b42ea4a80449241a753fe4, type: 2}
+  interactibleName: Pretre
+  interactibleText: Ne bougez pas mon enfant, je vais vous soigner.
+  interactibleData: {fileID: 11400000, guid: 6588dfdb1c714a54698061e8d1e86f0f, type: 2}
 --- !u!65 &110404684
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3218,7 +3217,7 @@ Transform:
   m_GameObject: {fileID: 271258153}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.11, y: 0.76710844, z: 3.76}
+  m_LocalPosition: {x: -12.11, y: 0.76710844, z: -4.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3236,9 +3235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a201ec70b8c839b408814ffb1a7a01a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactibleName: Pretre
-  interactibleText: Ne bougez pas mon enfant, je vais vous soigner.
-  interactibleData: {fileID: 11400000, guid: 6588dfdb1c714a54698061e8d1e86f0f, type: 2}
+  interactibleName: Policier
+  interactibleText: "La for\xEAt est dangereuse \xE0 cette p\xE9riode de l\u2019ann\xE9e.
+    Attention \xE0 toi"
+  interactibleData: {fileID: 11400000, guid: 3b1e764944b42ea4a80449241a753fe4, type: 2}
 --- !u!114 &271258156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21336,7 +21336,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 056de418ab0c0b346af936118fa5074d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.19999999
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 056de418ab0c0b346af936118fa5074d,
         type: 3}
@@ -21346,7 +21346,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 056de418ab0c0b346af936118fa5074d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 056de418ab0c0b346af936118fa5074d,
         type: 3}

@@ -19,7 +19,6 @@ public class Interactible : MonoBehaviour, Iinteractable
         await DialogueBoxDisplay.Instance.OpenDialogueBox(interactibleData.name, interactibleData.dialogue);
         await DialogueBoxDisplay.Instance.IsSkipping();
 
-        //Non fonctionnel, ajoute des actions suites au dialogue
         if (interactibleData.actionType == "Join" && canJoin)
         {
             GameState.AddCharacter(new CharacterState("Matéo"));
@@ -29,8 +28,12 @@ public class Interactible : MonoBehaviour, Iinteractable
         }
         else if (interactibleData.actionType == "Heal")
         {
-            Debug.Log("PlayerParty heal");
-
+            GameState.DisplayTeam();
+            foreach(var character in GameState.TeamState)
+            {
+                character.HP = character.EntityData.MaxHP;
+            }
+            GameState.DisplayTeam();
         }
     }
     public void OnSelected()
