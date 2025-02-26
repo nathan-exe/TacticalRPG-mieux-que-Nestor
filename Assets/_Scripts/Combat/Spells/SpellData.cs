@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -13,6 +14,7 @@ public class SpellData : ScriptableObject
     /// </summary>
     public string Name;
 
+    [XmlIgnore]
     public Sprite Sprite;
     
     /// <summary>
