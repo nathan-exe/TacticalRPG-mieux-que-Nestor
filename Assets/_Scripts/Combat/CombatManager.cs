@@ -79,6 +79,7 @@ public class CombatManager : MonoBehaviour
                             print(Teammate.EntityData.name);
                             print(Entity.GetComponent<HealthComponent>().HP);
                             Teammate.HP = Entity.GetComponent<HealthComponent>().HP;
+                            //@SAVEMAN SaveManager.Instance.SaveCurrentGameState(SaveManager.Instance.CurrentFileName);
                         }
                     }
                 }
