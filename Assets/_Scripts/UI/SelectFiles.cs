@@ -18,4 +18,16 @@ public class SelectFiles : MonoBehaviour
         _button = button;
         _button.GetComponent<Image>().color = Color.gray;
     }
+
+    public void StartGame()
+    {
+        if (_button == null) { return; }
+        string Files = _button.GetComponent<Files>().filesNames;
+        //SaveManager.Instance.LoadGame();
+    }
+
+    public void EraseFiles()
+    {
+
+    }
 }
