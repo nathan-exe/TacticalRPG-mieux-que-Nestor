@@ -28,12 +28,12 @@ public class Interactible : MonoBehaviour, Iinteractable
         }
         else if (interactibleData.actionType == "Heal")
         {
-            GameState.DisplayTeam();
             foreach(var character in GameState.TeamState)
             {
                 character.HP = character.EntityData.MaxHP;
             }
-            GameState.DisplayTeam();
+            //@SAVEMAN SaveManager.Instance.SaveCurrentGameState(SaveManager.Instance.CurrentFileName);
+
         }
     }
     public void OnSelected()
