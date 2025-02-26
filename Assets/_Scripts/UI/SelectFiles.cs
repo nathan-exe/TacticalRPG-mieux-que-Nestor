@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,11 +24,35 @@ public class SelectFiles : MonoBehaviour
     {
         if (_button == null) { return; }
         string Files = _button.GetComponent<Files>().filesNames;
-        //SaveManager.Instance.LoadGame();
+        if(SaveFileExists(Files))
+        {
+            Debug.Log("On Load");
+            //SaveManager.Instance.LoadGame(Files);
+        }
+        else
+        {
+            LoadScene.Instance.ChangeScene("EmrysScene");
+            //Il faudrait permettre au SaveManager de se rappelr de la variable Files après le changement de scene
+        }
     }
 
     public void EraseFiles()
     {
+        if (_button == null) { return; }
+        string Files = _button.GetComponent<Files>().filesNames;
+        string filePath = Path.Combine(Application.persistentDataPath, Files + ".xml");
 
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+        _button.GetComponent<Image>().color = Color.white;
+        _button = null;
+    }
+
+    public bool SaveFileExists(string fileName)
+    {
+        string filePath = Path.Combine(Application.persistentDataPath, fileName + ".xml");
+        return File.Exists(filePath);
     }
 }
