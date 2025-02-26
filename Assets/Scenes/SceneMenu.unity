@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 92974773}
   - component: {fileID: 92974772}
   - component: {fileID: 92974771}
+  - component: {fileID: 92974774}
   m_Layer: 5
   m_Name: File #1
   m_TagString: Untagged
@@ -526,6 +527,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 92974769}
   m_CullTransparentMesh: 1
+--- !u!114 &92974774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92974769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e285994b55b303f4dba4efb66650dd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filesNames: File1
 --- !u!1 &124293342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1683,16 +1697,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1443632525}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: ChangeScene
-        m_Mode: 5
+      - m_Target: {fileID: 949429890}
+        m_TargetAssemblyTypeName: SelectFiles, Assembly-CSharp
+        m_MethodName: StartGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: EmrysScene
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &882330736
@@ -2625,7 +2639,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1413812812}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 949429890}
+        m_TargetAssemblyTypeName: SelectFiles, Assembly-CSharp
+        m_MethodName: EraseFiles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1413812812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2860,6 +2886,7 @@ GameObject:
   - component: {fileID: 1490980559}
   - component: {fileID: 1490980558}
   - component: {fileID: 1490980557}
+  - component: {fileID: 1490980560}
   m_Layer: 5
   m_Name: File #2
   m_TagString: Untagged
@@ -2981,6 +3008,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1490980555}
   m_CullTransparentMesh: 1
+--- !u!114 &1490980560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1490980555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e285994b55b303f4dba4efb66650dd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filesNames: File2
 --- !u!1 &1604896908
 GameObject:
   m_ObjectHideFlags: 0
@@ -3128,6 +3168,7 @@ GameObject:
   - component: {fileID: 1919797684}
   - component: {fileID: 1919797683}
   - component: {fileID: 1919797682}
+  - component: {fileID: 1919797685}
   m_Layer: 5
   m_Name: File #3
   m_TagString: Untagged
@@ -3249,6 +3290,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919797680}
   m_CullTransparentMesh: 1
+--- !u!114 &1919797685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1919797680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e285994b55b303f4dba4efb66650dd99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filesNames: File3
 --- !u!1 &1920502608
 GameObject:
   m_ObjectHideFlags: 0
