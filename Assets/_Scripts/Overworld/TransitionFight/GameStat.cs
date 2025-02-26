@@ -23,9 +23,19 @@ public static class GameState
 
     public static void DisplayTeam()
     {
+        Debug.Log("Team :");
         foreach (var character in TeamState)
         {
             Debug.Log($"- Nom: {character.EntityData.name}, PV: {character.HP}, Mana: {character.Mana}");
+        }
+    }
+
+    public static void DisplayEncounters()
+    {
+        Debug.Log("Dico :");
+        foreach (var v in EncountersDico)
+        {
+            Debug.Log($"- key: {v.Key}, Value: {v.Value}");
         }
     }
 
