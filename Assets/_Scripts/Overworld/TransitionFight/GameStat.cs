@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public static class GameStat
 {
-    public static List<CharacterState> TeamState { get; private set; } = new(); //Liste des personnages de l'équipe
+    public static List<CharacterState> TeamState = new(); //Liste des personnages de l'équipe
     public static string ZoneName { get; private set; } //Nom de la zone actuel (pour le systeme de combat)
     public static Dictionary<string, bool> EncountersDico { get; private set; } = new(); //Dictionnaire des noms de zones ainsi que d'un bool pour savoir si elles sont clear ou non.
     public static Vector3 TeamPosition { get; private set; } = Vector3.zero; //Position de l'équipe dans l'overworld
