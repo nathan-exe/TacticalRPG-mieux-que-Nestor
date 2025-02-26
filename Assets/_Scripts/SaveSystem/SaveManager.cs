@@ -36,7 +36,13 @@ public class SaveManager : MonoBehaviour
             SaveCurrentGameState();
         }*/
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("Save");
+            SaveCurrentGameState();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
         {
             Debug.Log("Load");
             LoadGame();
@@ -46,125 +52,85 @@ public class SaveManager : MonoBehaviour
     public void SaveCurrentGameState(string SaveName = "Save1")
     {
 
-        XmlWriterSettings settings = new XmlWriterSettings();
-        settings.Indent = true;
-        settings.NewLineOnAttributes = false;
-
         string directoryPath = Path.Combine(Application.persistentDataPath, "Saves");
         if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
-        string filePath = Path.Combine(directoryPath, SaveName + ".xml");
+        string filePath = Path.Combine(directoryPath, SaveName);
 
-        using (XmlWriter writer = XmlWriter.Create(filePath, settings))
+        using (var filestream = File.Open(filePath, FileMode.Create))
         {
-            writer.WriteStartDocument();
-            writer.WriteComment(SaveName);
-            writer.WriteStartElement("Data");
-
-            //time
-            WriteValue(writer, "SaveDate", System.DateTime.Now.ToShortDateString());
-
-            //player overworld position
-            WriteValue(writer, "PlayerPosition", GameState.TeamPosition);
-
-            //encounters
-            writer.WriteStartElement("EncountersDico");
-            foreach (KeyValuePair<string, bool> keyValuePair in GameState.EncountersDico)
+            using (BinaryWriter w = new(filestream))
             {
-                WriteValue(writer, "KeyValuePair", keyValuePair);
+                //teamstate
+                w.Write((Int32)GameState.TeamState.Count);
+                foreach (CharacterState state in GameState.TeamState)
+                {
+                    w.Write(state.HP);
+                    w.Write(state.DataFileName);
+                }
+
+                //dico
+                w.Write((Int32)GameState.EncountersDico.Count);
+                foreach (var kv in GameState.EncountersDico)
+                {
+                    w.Write(kv.Key);
+                    w.Write(kv.Value);
+                }
+
+                //playerPosition
+                w.Write(GameState.TeamPosition.x);
+                w.Write(GameState.TeamPosition.y);
+                w.Write(GameState.TeamPosition.z);
+
             }
-            writer.WriteEndElement();
 
-            //team state
-            writer.WriteStartElement("TeamState");
-            foreach (CharacterState character in GameState.TeamState)
-            {
-                writer.WriteStartElement("Character");
-
-                WriteValue(writer, "DataFileName", character.DataFileName);
-                WriteValue(writer, "HP", character.HP);
-
-                writer.WriteEndElement();
-            }
-            writer.WriteEndElement();
-
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
+            filestream.Close();
         }
 
-        Debug.Log("Saved xml data to file : \n" + filePath);
+        Debug.Log("Saved data to file : \n" + filePath);
     }
 
 
     public void LoadGame(string SaveName = "Save1")
     {
         string directoryPath = Path.Combine(Application.persistentDataPath, "Saves");
-        string filePath = Path.Combine(directoryPath, SaveName + ".xml");
+        string filePath = Path.Combine(directoryPath, SaveName);
 
         Assert.IsTrue(Directory.Exists(directoryPath), "No save found");
         Assert.IsTrue(File.Exists(filePath), "No save found");
 
         Debug.Log("Reading save file :\n" + filePath);
 
-        using (XmlReader reader = XmlReader.Create(filePath))
+        using (var filestream = File.Open(filePath, FileMode.Open))
         {
-            reader.ReadStartElement("Data");
-
-            //date
-            reader.ReadToFollowing("SaveDate");
-            Debug.Log("Save date : " + reader.ReadElementContentAsString());
-
-            //position
-            reader.ReadToFollowing("PlayerPosition");
-            GameState.SetTeamPosition(reader.ReadElementContentAsVector3());
-
-            //dico
-            reader.ReadToFollowing("EncountersDico");
-            Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
-            
-
-            GameState.EncountersDico.Clear();
-            if (!reader.IsEmptyElement)
+            using (BinaryReader r = new(filestream))
             {
-                while (reader.Read() && (reader.Name == "KeyValuePair"))
+
+                //teamstate
+                GameState.TeamState.Clear();
+                int n = r.ReadInt32();
+                for(int i = 0; i < n;i++)
                 {
-                    KeyValuePair<string, bool> p = reader.ReadElementContentAsStringBoolPair();
-                    GameState.EncountersDico.Add(p.Key, p.Value);
+                    float hp = r.ReadSingle();
+                    string filename = r.ReadString();
+                    GameState.TeamState.Add(new(filename,hp));
                 }
-                
-            }
-            
 
-            //teamstate
-            reader.ReadToFollowing("TeamState");
-            reader.ReadStartElement();
-
-            GameState.TeamState.Clear();
-            if (!reader.IsEmptyElement)
-            {
-                Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
-                while (reader.Read() && (reader.Name == "Character" ) && reader.NodeType==XmlNodeType.Element)
+                //dico
+                GameState.EncountersDico.Clear();
+                n = r.ReadInt32();
+                for (int i = 0; i < n;i++)
                 {
-                    reader.ReadToFollowing("HP");
-                    float hp = reader.ReadElementContentAsFloat();
-
-                    reader.ReadToFollowing("DataFileName");
-                    string fileName = reader.ReadElementContentAsString();
-
-                    reader.ReadEndElement();
-                    GameState.TeamState.Add(new(fileName, hp));
+                    GameState.EncountersDico.Add(r.ReadString(), r.ReadBoolean());
                 }
-                reader.ReadEndElement();
+
+                //player position
+                GameState.SetTeamPosition(new Vector3(r.ReadSingle(), r.ReadSingle(), r.ReadSingle()));
+
+                GameState.DisplayTeam();
+                GameState.DisplayEncounters();
+                Debug.Log("Overworld position : " + GameState.TeamPosition);
             }
-                
-            
-
-
-            reader.ReadEndElement();
-
-            GameState.DisplayTeam();
-            GameState.DisplayEncounters();
-            Debug.Log("Overworld position : " + GameState.TeamPosition);
         }
     }
 
