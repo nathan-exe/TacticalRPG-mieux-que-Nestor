@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Toutes les datas
 [Serializable]
-public struct GameData
+public struct Dico
 {
-    public List<CharacterState> teamState;
-    public string ZoneName;
-    public Dictionary<string, bool> encountersDico;
-    public Vector3 teamPosition;
+    ////GameStat.EncountersDico
+}
+
+[Serializable]
+public class SaveData
+{
+    public Vector3 TeamPosition;  // Position de l'équipe
+    public List<CharacterState> TeamState;  // Liste des personnages
 }

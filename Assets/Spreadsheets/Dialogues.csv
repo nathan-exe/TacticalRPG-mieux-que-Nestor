@@ -1,10 +1,10 @@
-Id,Name,Dialogue,Type,Portrait,Sound,Next Line ID,Choice 1,Choice 2,Action Type
-mateo1,Mateo,J’adore les carte graphique.,,,,,,,Join
-priest1,Pretre,"Ne bougez pas mon enfant, je vais vous soigner.",,,,,,,Heal
-blacksmith1,Forgeron,"Deso, pas d’arme à t’offrir.",,,,,,,
-oldsign1,Vieux panneau,Les inscriptions sont illisibles,,,,,,,
-sign1,Panneau,N’oublie pas de te rendre dans une auberge si tu es fatigué,,,,,,,
-cart1,Charrette,Il n’y a pas grand-chose dans cette charrette,,,,,,,
-cart2,Charrette remplie,Plein de chose intéressantes dans cette charrette,,,,,,,
-door1,Porte,Vous n’avez pas la clé de votre propre maison,,,,,,,
-policeman1,Policier,La forêt est dangereuse à cette période de l’année. Attention à toi,,,,,,,
+﻿Id;Name;Dialogue;Type;Portrait;Sound;Next Line ID;Choice 1;Choice 2;Action Type
+mateo1;Mateo;Bonjour Nestor, j’ai entendu dire que vous aviez besoin de main-d’œuvre, pour 10 pièces d’or, je rejoins votre équipe, deal ?;;;;;;;Join
+priest1;Pretre;Ne bougez pas mon enfant, je vais vous soigner.;;;;;;;Heal
+blacksmith1;Forgeron;Deso, pas d’arme à t’offrir.;;;;;;;
+oldsign1;Vieux panneau;Les inscriptions sont illisibles;;;;;;;
+sign1;Panneau;N’oublie pas de te rendre dans une auberge si tu es fatigué;;;;;;;
+cart1;Charrette;Il n’y a pas grand-chose dans cette charrette;;;;;;;
+cart2;Charrette remplie;Plein de chose intéressantes dans cette charrette;;;;;;;
+door1;Porte;Vous n’avez pas la clé de votre propre maison;;;;;;;
+policeman1;Policier;La forêt est dangereuse à cette période de l’année. Attention à toi;;;;;;;

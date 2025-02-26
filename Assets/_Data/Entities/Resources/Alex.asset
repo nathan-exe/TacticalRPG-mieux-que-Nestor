@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1214ceb04aa1e9b4893ac136a77b1d99, type: 3}
-  m_Name: "Mat\xE9o"
+  m_Name: Alex
   m_EditorClassIdentifier: 
-  Name: "Mat\xE9o"
-  MaxHP: 5
-  MovementRangePerTurn: 9
+  Name: Alex
+  MaxHP: 8
+  MovementRangePerTurn: 6
   Spells:
-  - {fileID: 11400000, guid: f05a7530e2572b4459563910bfa0893d, type: 2}
-  - {fileID: 11400000, guid: 2664057663e2d09489383130d65ba62d, type: 2}
-  - {fileID: 11400000, guid: 72c1bb25c7cd9cc4096da0cbd5612bab, type: 2}
+  - {fileID: 11400000, guid: 5fc0c8f532b55de45b8a46c2a87b7f26, type: 2}
+  - {fileID: 11400000, guid: e7b6a66fc0bb5e1448d9c605fbcd9c8d, type: 2}
+  - {fileID: 11400000, guid: 79990ed0ba4afee4480a36e041e08156, type: 2}
