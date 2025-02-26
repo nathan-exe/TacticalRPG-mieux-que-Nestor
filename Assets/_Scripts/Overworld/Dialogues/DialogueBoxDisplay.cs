@@ -34,7 +34,7 @@ public class DialogueBoxDisplay : MonoBehaviour
     }
 
 
-    public async UniTask OpenDialogueBox(string name, string dialogue)
+    public async UniTask OpenDialogueBox(string name, string dialogue) //ouvre la boite de dialogue et désactive les controles du joueur
     {
         playerOverworldController.enabled = false;
         isSkipping = false;
@@ -47,24 +47,24 @@ public class DialogueBoxDisplay : MonoBehaviour
 
         foreach (char c in dialogue)
         {
-            if (isSkipping)
+            if (isSkipping) // Si action du joueur, tout le texte défile rapidement
             {
                 boxDialogueText.text = dialogue;
                 break;
             }
-            boxDialogueText.text += c;
-            if (IsPunctuation(c)){
+            boxDialogueText.text += c; //effet d'écriture
+            if (IsPunctuation(c)){ // Si ponctuation, alors on attends un peu plus
                 await UniTask.Delay(punctuationDelay);
             }
-            await UniTask.Delay(letterDelay); 
+            await UniTask.Delay(letterDelay); //on attend légérement entre chaque caractère
         }
 
-        await PlayerInput();
+        await PlayerInput(); //on attend que le joueur ai finit de lire
 
-        CloseDialogueBox();
+        CloseDialogueBox(); //on ferme la boite
     }
 
-    public void CloseDialogueBox()
+    public void CloseDialogueBox() //ferme la boite puis réactive le controller du joueur
     {
         UiManager.Instance.HideCurrentPanel();
         isDialogueOpen = false;
@@ -79,13 +79,13 @@ public class DialogueBoxDisplay : MonoBehaviour
         }
     }
 
-    public async UniTask IsSkipping()
+    public async UniTask IsSkipping() 
     {
         while (isDialogueOpen)
         {
             if (Input.anyKeyDown)
             {
-                isSkipping = true;
+                isSkipping = true; 
                 return;
             }
             await UniTask.Yield();

@@ -16,17 +16,15 @@ public class AssignDialogue : EditorWindow
 
         foreach (var npc in npcs)
         {
-            var path = Path.Combine(folderPath, npc.name + ".asset");
-            InteractibleData interactibleData = AssetDatabase.LoadAssetAtPath<InteractibleData>(path);
+            var path = Path.Combine(folderPath, npc.name + ".asset"); //va chercher le scriptable au bon endroit
+            InteractibleData interactibleData = AssetDatabase.LoadAssetAtPath<InteractibleData>(path); //charge le scriptable
 
             if (interactibleData != null)
             {
                 Interactible interactible = npc.GetComponent<Interactible>();
                 if (interactible != null)
                 {
-                    // Assigne le scriptable à l'objet trouvé
-                    interactible.interactibleData = interactibleData;
-                    interactible.dialogueLoad();
+                    interactible.interactibleData = interactibleData; // Assigne le scriptable à l'objet trouvé
                     Debug.Log($"{npc.name} à maintenant le dialogue de {interactibleData.name}");
                 }
                 else
@@ -39,8 +37,6 @@ public class AssignDialogue : EditorWindow
                 Debug.LogWarning($"Pas de dialogue trouvé pour NPC: {npc.name}");
             }
         }
-
-        //Save les changements
         EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         AssetDatabase.SaveAssets();
     }

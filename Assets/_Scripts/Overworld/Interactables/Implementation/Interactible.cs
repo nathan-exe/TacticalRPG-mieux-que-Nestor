@@ -14,17 +14,12 @@ public class Interactible : MonoBehaviour, Iinteractable
 
     public InteractibleData interactibleData;
 
-    public void dialogueLoad()
-    {
-        interactibleName = interactibleData.name;
-        interactibleText = interactibleData.dialogue;
-    }
     public async UniTask InteractWith()
     {
-        Debug.Log("coucou C moi");
-        await DialogueBoxDisplay.Instance.OpenDialogueBox(interactibleName, interactibleText);
+        await DialogueBoxDisplay.Instance.OpenDialogueBox(interactibleData.name, interactibleData.dialogue);
         await DialogueBoxDisplay.Instance.IsSkipping();
 
+        //Non fonctionnel, ajoute des actions suites au dialogue
         if (interactibleData.actionType == "Join" && canJoin)
         {
             GameStat.AddCharacter(new CharacterState("Matéo"));
@@ -38,7 +33,6 @@ public class Interactible : MonoBehaviour, Iinteractable
 
         }
     }
-
     public void OnSelected()
     {
         transform.localScale = Vector3.one*1.2f;
