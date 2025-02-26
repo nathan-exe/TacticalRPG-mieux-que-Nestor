@@ -112,7 +112,7 @@ public class CSVReader : EditorWindow
         }
     }
 
-    // Crée une nouvelle instance de données de dialogue
+    // Crée un nouveau scriptable
     private static InteractibleData CreateDialogueData(string[] data)
     {
         var dialogueData = ScriptableObject.CreateInstance<InteractibleData>();
@@ -137,7 +137,6 @@ public class CSVReader : EditorWindow
     {
         bool hasChanges = false;
 
-        // Fonction locale pour mettre à jour un champ si nécessaire
         void UpdateField<T>(ref T field, T newValue)
         {
             if (!Equals(field, newValue))
