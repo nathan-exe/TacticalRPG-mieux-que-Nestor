@@ -15,18 +15,13 @@ MonoBehaviour:
   Name: Magouille
   Sprite: {fileID: 0}
   ManaCost: 1
-  Damage: 1
+  Damage: 10
   IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2
-    x: -5
-    y: -5
-    width: 11
-    height: 11
+    x: -1
+    y: -1
+    width: 3
+    height: 3
   AffectedTiles:
-  - {x: 0, y: -1}
-  - {x: 0, y: -2}
-  - {x: 0, y: -3}
-  - {x: 1, y: -1}
-  - {x: 2, y: -1}
-  - {x: 1, y: -2}
+  - {x: 1, y: 0}
