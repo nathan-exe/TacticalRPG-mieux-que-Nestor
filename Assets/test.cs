@@ -8,5 +8,6 @@ public class test : MonoBehaviour
     {
         GameStat.AddCharacter(new CharacterState("Matéo"));
         GameStat.AddCharacter(new CharacterState("Nestor"));
+        GameStat.AddCharacter(new CharacterState("Alex"));
     }
 }
