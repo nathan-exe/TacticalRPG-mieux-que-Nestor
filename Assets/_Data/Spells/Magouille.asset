@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Magouille
   Sprite: {fileID: 0}
-  ManaCost: 1
+  ManaCost: 4
   Damage: 10
   IsOccludedByWalls: 1
   Bounds:
     serializedVersion: 2
-    x: -1
-    y: -1
-    width: 3
-    height: 3
+    x: -2
+    y: -2
+    width: 5
+    height: 5
   AffectedTiles:
   - {x: 1, y: 0}
