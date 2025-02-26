@@ -10,12 +10,12 @@ public class PartySpawn : MonoBehaviour
 
     private void Awake()
     {
-        foreach (CharacterState Teammate in GameStat.TeamState)
+        foreach (CharacterState Teammate in GameState.TeamState)
         {
             GameObject newTeammate = Instantiate(_partyPrefab); //nouveau pote
             newTeammate.GetComponent<PlayerCombatEntity>().Data = Teammate.EntityData;
 
-            newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.Name; //nom
+            newTeammate.GetComponentInChildren<CombatEntityUI>().Name.text = Teammate.EntityData.name; //nom
             Debug.Log($"Les pv sont de: {Teammate.HP}");
             newTeammate.GetComponent<HealthComponent>().MaxHP = Teammate.EntityData.MaxHP; //pv
             newTeammate.GetComponent<HealthComponent>().HP = Teammate.HP; //pv

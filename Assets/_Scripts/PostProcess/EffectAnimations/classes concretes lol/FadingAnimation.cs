@@ -18,7 +18,6 @@ public class FadingEffect : PostProcessEffectAnimation<ColorAdjustments>
     protected override void ApplyEffect(ColorAdjustments component, float alpha)
     {
         alpha = AlphaCurve01.Evaluate(alpha);
-        Debug.Log("putain");
         //Color v = Color.Lerp(AnimStartValue, startValue, alpha);
         component.colorFilter.value = Color.Lerp(AnimStartValue, Color.black, alpha);
     }

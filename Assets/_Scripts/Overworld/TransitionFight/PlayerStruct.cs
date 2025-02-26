@@ -8,7 +8,8 @@ public class CharacterState
 {
     public float HP;
     public float Mana;
-    public string Name;
+
+    public string DataFileName;
 
     public EntityData EntityData;
 
@@ -16,10 +17,9 @@ public class CharacterState
 
     public CharacterState(string DataFileName)
     {
+        this.DataFileName = DataFileName;
         this.EntityData = (EntityData)Resources.Load(DataFileName);
         HP = EntityData.MaxHP;
-        Mana = CombatEntity.MaxManaPerEntity;
-        Name = EntityData.Name;
-        
+        Mana = CombatEntity.MaxManaPerEntity;        
     }
 }

@@ -6,8 +6,8 @@ public class test : MonoBehaviour
 {
     void Start()
     {
-        GameStat.AddCharacter(new CharacterState("Matéo"));
-        GameStat.AddCharacter(new CharacterState("Nestor"));
-        GameStat.AddCharacter(new CharacterState("Alex"));
+        GameState.AddCharacter(new CharacterState("Matéo"));
+        GameState.AddCharacter(new CharacterState("Nestor"));
+        GameState.AddCharacter(new CharacterState("Alex"));
     }
 }

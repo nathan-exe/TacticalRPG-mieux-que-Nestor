@@ -17,7 +17,7 @@ public class XMLmanager
         foreach (var character in teamState)
         {
             writer.WriteStartElement("Character");
-            writer.WriteElementString("Name", character.Name);
+            writer.WriteElementString("Name", character.EntityData.name);
             writer.WriteElementString("HP", character.HP.ToString());
             writer.WriteElementString("Mana", character.Mana.ToString());
             writer.WriteEndElement();  // </Character>

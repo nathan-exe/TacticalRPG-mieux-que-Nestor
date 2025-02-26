@@ -20,7 +20,7 @@ public class Encouters : MonoBehaviour
         if (other.GetComponent<PlayerOverworldController>() != null)
         {
             _anim.Play();
-            GameStat.DisplayTeam(); //Debug de qui est dans la team
+            GameState.DisplayTeam(); //Debug de qui est dans la team
 
             string ZoneName = gameObject.name;
 
@@ -29,13 +29,13 @@ public class Encouters : MonoBehaviour
                 MonsterData.Instance.ListOfMonsterName.Add(monster);
             }
 
-            GameStat.SetTeamPosition(other.transform.position); //Save la position du joueur
+            GameState.SetTeamPosition(other.transform.position); //Save la position du joueur
             print(other.transform.position);
 
-            if (!GameStat.EncountersDico.ContainsKey(ZoneName)) //On regarde si dans le dico qui réportorie toutes les zones de combats si notre zone existe déjà
+            if (!GameState.EncountersDico.ContainsKey(ZoneName)) //On regarde si dans le dico qui réportorie toutes les zones de combats si notre zone existe déjà
             {
-                GameStat.SetZoneName(ZoneName);
-                GameStat.EncountersDico.Add(ZoneName, false); // false = la zone n'a pas été réalisée
+                GameState.SetZoneName(ZoneName);
+                GameState.EncountersDico.Add(ZoneName, false); // false = la zone n'a pas été réalisée
             }
 
             PostProcessController.instance.FadeOut.play();

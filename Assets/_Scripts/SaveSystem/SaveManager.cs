@@ -2,6 +2,9 @@ using System.IO;
 using UnityEngine;
 using System.Xml;
 using System.Xml.Serialization;
+using System.Collections.Generic;
+using UnityEngine.TextCore.Text;
+using Unity.VisualScripting;
 
 public class SaveManager : MonoBehaviour
 {
@@ -25,31 +28,73 @@ public class SaveManager : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             Debug.Log("Save");
-            SaveGame();
+            SaveCurrentGameState();
         }
     }
 
-    public void SaveGame()
+    public void SaveCurrentGameState(string SaveName = "Save1")
     {
-        string path = Path.Combine(Application.dataPath, "saveRomainQuest.xml");
 
-        SaveData saveData = new SaveData
+        XmlWriterSettings settings = new XmlWriterSettings();
+        settings.Indent = true;
+        settings.NewLineOnAttributes = false;
+
+        string directoryPath = Path.Combine(Application.persistentDataPath, "Saves");
+        if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
+
+        string filePath = Path.Combine(directoryPath, SaveName+".xml");
+
+        using (XmlWriter writer = XmlWriter.Create(filePath,settings))
         {
-            TeamPosition = GameStat.TeamPosition,
-            TeamState = GameStat.TeamState
-        };
+            writer.WriteStartDocument();
+            writer.WriteComment(SaveName);
+            writer.WriteStartElement("Data");
 
-        SerializeToXML(saveData, path);
-    }
+            //time
+            WriteValue(writer, "SaveDate", System.DateTime.Now.ToShortTimeString());
 
-    private void SerializeToXML(SaveData saveData, string path)
-    {
-        XmlSerializer serializer = new XmlSerializer(typeof(SaveData));
-        using (FileStream fileStream = new FileStream(path, FileMode.Create)) 
-        {
-            serializer.Serialize(fileStream, saveData);
+            //player overworld position
+            WriteValue(writer,"PlayerPosition", GameState.TeamPosition);
+
+            //encounters
+            writer.WriteStartElement("EncountersDico");
+            foreach(KeyValuePair<string,bool> keyValuePair in GameState.EncountersDico)
+            {
+                writer.WriteStartElement("Key");
+                writer.WriteString(keyValuePair.Key);
+                writer.WriteEndElement();
+                
+                writer.WriteStartElement("Value");
+                writer.WriteValue(keyValuePair.Value);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+
+            //team state
+            writer.WriteStartElement("TeamState");
+            foreach(CharacterState character in GameState.TeamState)
+            {
+                writer.WriteStartElement("Character");
+                
+                writer.WriteStartElement("HP");
+                writer.WriteValue(character.HP);
+                writer.WriteEndElement();
+
+                writer.WriteStartElement("DataFileName");
+                writer.WriteString(character.DataFileName);
+                writer.WriteEndElement();
+
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
         }
+
+        Debug.Log("Saved xml data to file : \n" + filePath);
     }
+
 
     public void LoadGame()
     {
@@ -63,6 +108,14 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError("FDP");
         }
+    }
+
+    void WriteValue<T>(XmlWriter writer,string name,T value) 
+    {
+        writer.WriteStartElement(name);
+        writer.WriteAttributeString("Type", typeof(T).ToString());
+        writer.WriteString(value.ToString());
+        writer.WriteEndElement();
     }
 
 }

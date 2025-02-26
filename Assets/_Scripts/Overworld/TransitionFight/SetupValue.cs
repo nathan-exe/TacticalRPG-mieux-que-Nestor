@@ -21,7 +21,7 @@ public class SetupValue : MonoBehaviour
             _collidersDico.Add(zoneName, boxCollider);
         }
 
-        foreach (KeyValuePair<string, bool> encounter in GameStat.EncountersDico) // Désactiver les zones qui ont été complétées
+        foreach (KeyValuePair<string, bool> encounter in GameState.EncountersDico) // Désactiver les zones qui ont été complétées
         {
             string zoneName = encounter.Key;
             bool isCompleted = encounter.Value;
@@ -40,6 +40,6 @@ public class SetupValue : MonoBehaviour
                 }
             }
         }
-        _player.transform.position = GameStat.TeamPosition; //Setup la pos du joueur
+        _player.transform.position = GameState.TeamPosition; //Setup la pos du joueur
     }
 }

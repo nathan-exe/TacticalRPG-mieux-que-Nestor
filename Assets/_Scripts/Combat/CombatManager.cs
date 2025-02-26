@@ -70,20 +70,20 @@ public class CombatManager : MonoBehaviour
             print("Méchant mort");
             if (AiCombatEntity.Instances.Count == 0) //win
             {
-                foreach (CharacterState Teammate in GameStat.TeamState)
+                foreach (CharacterState Teammate in GameState.TeamState)
                 {
                     foreach (PlayerCombatEntity Entity in PlayerCombatEntity.Instances)
                     {
-                        if (Entity.GetComponentInChildren<CombatEntityUI>().Name.text == Teammate.Name)
+                        if (Entity.GetComponentInChildren<CombatEntityUI>().Name.text == Teammate.EntityData.name)
                         {
-                            print(Teammate.Name);
+                            print(Teammate.EntityData.name);
                             print(Entity.GetComponent<HealthComponent>().HP);
                             Teammate.HP = Entity.GetComponent<HealthComponent>().HP;
                         }
                     }
                 }
                 _isPlaying = false;
-                CompleteEncounter(GameStat.ZoneName);
+                CompleteEncounter(GameState.ZoneName);
                 TimeManager.instance.StopTime(.5f);
                 UiManager.Instance.ShowPanel(UiManager.Instance.WinPanel);
             }
@@ -93,7 +93,7 @@ public class CombatManager : MonoBehaviour
 
     public void CompleteEncounter(string encounterID)
     {
-        if (GameStat.EncountersDico.ContainsKey(encounterID)) { GameStat.EncountersDico[encounterID] = true; } // Marquer la zone comme faite
+        if (GameState.EncountersDico.ContainsKey(encounterID)) { GameState.EncountersDico[encounterID] = true; } // Marquer la zone comme faite
     }
 
     /// <summary>
