@@ -120,7 +120,9 @@ public class SaveManager : MonoBehaviour
 
             //dico
             reader.ReadToFollowing("EncountersDico");
-            reader.ReadStartElement();
+            Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
+            
+
             GameState.EncountersDico.Clear();
             if (!reader.IsEmptyElement)
             {
@@ -129,8 +131,9 @@ public class SaveManager : MonoBehaviour
                     KeyValuePair<string, bool> p = reader.ReadElementContentAsStringBoolPair();
                     GameState.EncountersDico.Add(p.Key, p.Value);
                 }
+                
             }
-            reader.ReadEndElement();
+            
 
             //teamstate
             reader.ReadToFollowing("TeamState");
@@ -150,10 +153,11 @@ public class SaveManager : MonoBehaviour
 
                     reader.ReadEndElement();
                     GameState.TeamState.Add(new(fileName, hp));
-                } 
+                }
+                reader.ReadEndElement();
             }
                 
-            reader.ReadEndElement();
+            
 
 
             reader.ReadEndElement();
@@ -184,7 +188,6 @@ public static class xmlReaderExtension
     {
         string v = reader.ReadElementContentAsString();
         string[] s = v.Substring(1,v.Length - 2).Split(',');
-        foreach(string s2 in s) {Debug.Log(s2);}
         return new Vector3(float.Parse(s[0], CultureInfo.InvariantCulture), float.Parse(s[1], CultureInfo.InvariantCulture), float.Parse(s[2], CultureInfo.InvariantCulture));
 
 
