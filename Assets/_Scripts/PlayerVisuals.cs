@@ -31,8 +31,7 @@ public class PlayerVisuals : MonoBehaviour
         Vector3 vel = ( transform.position- oldPose)/Time.deltaTime;
 
         //rotation
-        if (vel != Vector3.zero) _targetRotation = Quaternion.LookRotation(vel.normalized + Vector3.down * vel.magnitude * _tiltIntensity, Vector3.up);
-
+        _targetRotation = vel == Vector3.zero ? Quaternion.identity : Quaternion.LookRotation(vel.normalized + Vector3.down * vel.magnitude * _tiltIntensity, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, Mathf.Pow(_smoothFactor, Time.deltaTime));
 
 

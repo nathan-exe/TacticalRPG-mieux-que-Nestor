@@ -13,7 +13,7 @@ using System.Globalization;
 
 public class SaveManager : MonoBehaviour
 {
-    private static SaveManager Instance;
+    public static SaveManager Instance;
 
     void Awake()
     {
@@ -122,40 +122,33 @@ public class SaveManager : MonoBehaviour
             reader.ReadToFollowing("EncountersDico");
             reader.ReadStartElement();
             GameState.EncountersDico.Clear();
-            while (reader.Read() && (reader.Name == "KeyValuePair"))
+            if (!reader.IsEmptyElement)
             {
-                KeyValuePair<string, bool> p = reader.ReadElementContentAsStringBoolPair();
-                GameState.EncountersDico.Add(p.Key, p.Value);
+                while (reader.Read() && (reader.Name == "KeyValuePair"))
+                {
+                    KeyValuePair<string, bool> p = reader.ReadElementContentAsStringBoolPair();
+                    GameState.EncountersDico.Add(p.Key, p.Value);
+                }
             }
             reader.ReadEndElement();
 
             //teamstate
             reader.ReadToFollowing("TeamState");
-            Debug.Log("-");
-            Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
+            reader.ReadStartElement();
 
             GameState.TeamState.Clear();
             if (!reader.IsEmptyElement)
             {
-                reader.ReadToFollowing("Character");
                 Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
-                while (reader.Name == "Character") 
+                while (reader.Read() && (reader.Name == "Character" ) && reader.NodeType==XmlNodeType.Element)
                 {
-
-                    //reader.ReadToFollowing("Character");
-                    //reader.ReadStartElement();
-
                     reader.ReadToFollowing("HP");
-                    Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
-                    //Debug.Log(reader.ReadContentAsString());
                     float hp = reader.ReadElementContentAsFloat();
 
                     reader.ReadToFollowing("DataFileName");
-                    Debug.Log(reader.NodeType.ToString() + " " + reader.Name.ToString());
                     string fileName = reader.ReadElementContentAsString();
 
-                    reader.Read();
-                    //reader.ReadToFollowing("Character");
+                    reader.ReadEndElement();
                     GameState.TeamState.Add(new(fileName, hp));
                 } 
             }
@@ -165,10 +158,9 @@ public class SaveManager : MonoBehaviour
 
             reader.ReadEndElement();
 
-
             GameState.DisplayTeam();
             GameState.DisplayEncounters();
-            Debug.Log(GameState.TeamPosition);
+            Debug.Log("Overworld position : " + GameState.TeamPosition);
         }
     }
 
