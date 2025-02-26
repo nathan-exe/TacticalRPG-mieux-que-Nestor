@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using UnityEngine;
 /// <summary>
@@ -11,11 +12,12 @@ public class CharacterState
 
     public EntityData EntityData;
 
+    public CharacterState() { }
+
     public CharacterState(string DataFileName)
     {
         this.EntityData = (EntityData)Resources.Load(DataFileName);
         HP = EntityData.MaxHP;
-        Debug.Log(HP + "cvbsdiof");
         Mana = CombatEntity.MaxManaPerEntity;
         Name = EntityData.Name;
         
