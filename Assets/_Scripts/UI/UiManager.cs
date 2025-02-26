@@ -12,7 +12,7 @@ public class UiManager : MonoBehaviour
     [Header("References")]
     [SerializeField] CanvasGroup _currentPanel;
     [field : SerializeField]public CanvasGroup FormerPanel { get; private set; } = null;
-    public CanvasGroup GameOverPanel, WinPanel, PausePanel;
+    public CanvasGroup GameOverPanel, WinPanel, PausePanel,DialoguePanel;
 
     [Header("Parameters")]
     [SerializeField] float _transitionTime = .2f;

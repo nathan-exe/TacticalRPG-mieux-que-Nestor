@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-    bool isPaused = false;
-    
+    public static PauseManager Instance;
+    public bool isPaused {  get; private set; } = false;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void PauseGame()
     {
         UiManager.Instance.ShowPanel(UiManager.Instance.PausePanel);

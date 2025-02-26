@@ -11,6 +11,10 @@ public class Encouters : MonoBehaviour
     [SerializeField] private Animation _anim; //L'animation fight
     [SerializeField] private List<string> _monsters = new(); //Liste des montres à croisé
 
+
+    BoxCollider _collider;
+    private BoxCollider Collider { get { if (_collider == null) TryGetComponent(out _collider); return _collider; } set => _collider = value; }
+
     private async void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerOverworldController>() != null)
@@ -38,5 +42,11 @@ public class Encouters : MonoBehaviour
             await UniTask.Delay(600);
             SceneManager.LoadScene(2);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = new Color(.95f,.7f,.7f,.75f);
+        Gizmos.DrawCube((transform.TransformPoint(Collider.center)), transform.localToWorldMatrix * Collider.size);
     }
 }

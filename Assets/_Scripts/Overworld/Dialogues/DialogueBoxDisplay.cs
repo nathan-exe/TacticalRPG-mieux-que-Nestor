@@ -9,7 +9,6 @@ using UnityEngine.TextCore.Text;
 public class DialogueBoxDisplay : MonoBehaviour
 {
     public static DialogueBoxDisplay Instance { get; private set; }
-    [SerializeField] GameObject dialogueBox;
     [SerializeField] TextMeshProUGUI boxName;
     [SerializeField] TextMeshProUGUI boxDialogueText;
     [SerializeField] PlayerOverworldController playerOverworldController;
@@ -34,17 +33,13 @@ public class DialogueBoxDisplay : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        dialogueBox.SetActive(false);
-    }
 
     public async UniTask OpenDialogueBox(string name, string dialogue)
     {
         playerOverworldController.enabled = false;
         isSkipping = false;
         isDialogueOpen = true;
-        dialogueBox.SetActive(true);
+        UiManager.Instance.ShowPanel(UiManager.Instance.DialoguePanel);
         boxName.text = name;
         boxDialogueText.text = "";
 
@@ -71,14 +66,14 @@ public class DialogueBoxDisplay : MonoBehaviour
 
     public void CloseDialogueBox()
     {
-        dialogueBox.SetActive(false);
+        UiManager.Instance.HideCurrentPanel();
         isDialogueOpen = false;
         playerOverworldController.enabled = true;
     }
 
     private async UniTask PlayerInput()
     {
-        while (!Input.anyKeyDown)
+        while (!Input.anyKeyDown || PauseManager.Instance.isPaused)
         {
             await UniTask.Yield();
         }

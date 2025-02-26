@@ -3,11 +3,16 @@ guid: e88389bf4b2675e4e859e33682ca99ce
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: roofRed
+    second: {fileID: 2100000, guid: 13c67475d01a96d42a4defacc87f5d7d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 2
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
