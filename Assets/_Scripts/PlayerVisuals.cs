@@ -16,6 +16,8 @@ public class PlayerVisuals : MonoBehaviour
 
     Vector3 _forward = Vector3.zero;
 
+    Quaternion _targetRotation;
+
     private void Awake()
     {
         _walkVFX.Stop();
@@ -29,11 +31,9 @@ public class PlayerVisuals : MonoBehaviour
         Vector3 vel = ( transform.position- oldPose)/Time.deltaTime;
 
         //rotation
-        if (vel != Vector3.zero)
-        {
-            Quaternion q = Quaternion.LookRotation(vel.normalized + Vector3.down * vel.magnitude * _tiltIntensity, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, q, Mathf.Pow(_smoothFactor, Time.deltaTime));
-        }
+        if (vel != Vector3.zero) _targetRotation = Quaternion.LookRotation(vel.normalized + Vector3.down * vel.magnitude * _tiltIntensity, Vector3.up);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, _targetRotation, Mathf.Pow(_smoothFactor, Time.deltaTime));
 
 
         if (vel.sqrMagnitude > 0.2f)

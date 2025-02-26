@@ -15,11 +15,13 @@ public class CharacterState
 
     public CharacterState() { }
 
-    public CharacterState(string DataFileName)
+    public CharacterState(string DataFileName ,float HP = -1 )
     {
         this.DataFileName = DataFileName;
         this.EntityData = (EntityData)Resources.Load(DataFileName);
-        HP = EntityData.MaxHP;
+        if (HP == -1) this.HP = EntityData.MaxHP; else this.HP = HP;
         Mana = CombatEntity.MaxManaPerEntity;        
     }
+
+
 }
