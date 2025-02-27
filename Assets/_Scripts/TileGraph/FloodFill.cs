@@ -130,9 +130,4 @@ public class FloodFill : MonoBehaviour
         }
         return result;
     }
-
-    public void CheckElement()
-    {
-
-    }
 }

@@ -1,12 +1,10 @@
 using Cysharp.Threading.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Interactible : MonoBehaviour, Iinteractable
 {
-
+    [SerializeField]
+    private GameObject _capsuleMateo;
     public string interactibleName;
     [TextArea] 
     public string interactibleText;
@@ -24,7 +22,9 @@ public class Interactible : MonoBehaviour, Iinteractable
             GameState.AddCharacter(new CharacterState("Matéo"));
             GameState.DisplayTeam();
             canJoin = false;
+            _capsuleMateo.SetActive(true);
             gameObject.SetActive(false);
+            //ajout capsule
         }
         else if (interactibleData.actionType == "Heal")
         {

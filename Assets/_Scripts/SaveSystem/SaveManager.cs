@@ -1,15 +1,7 @@
 using System.IO;
 using UnityEngine;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Collections.Generic;
-using UnityEngine.TextCore.Text;
-using Unity.VisualScripting;
 using UnityEngine.Assertions;
-using System.Collections;
-using Unity.Mathematics;
 using System;
-using System.Globalization;
 
 public class SaveManager : MonoBehaviour
 {
@@ -28,23 +20,6 @@ public class SaveManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void Update()
-    {
-        return;
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Debug.Log("Save");
-            SaveCurrentGameState();
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("Load");
-            LoadGame();
         }
     }
 

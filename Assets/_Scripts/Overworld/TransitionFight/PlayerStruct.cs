@@ -1,5 +1,3 @@
-using System;
-using System.Reflection;
 using UnityEngine;
 /// <summary>
 /// Struct de player pour save plus facilement

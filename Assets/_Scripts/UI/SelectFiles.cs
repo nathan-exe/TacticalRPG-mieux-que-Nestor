@@ -1,8 +1,6 @@
 using System.IO;
-using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class SelectFiles : MonoBehaviour
