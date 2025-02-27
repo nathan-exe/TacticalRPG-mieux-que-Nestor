@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: heal1
   name: Trousse de soin
-  dialogue: "Votre \xE9quipe est compl\xE8tement soign\xE9e."
+  dialogue: Votre equipe est completement soignee.
   mood: 
   portrait: 
   sound: 

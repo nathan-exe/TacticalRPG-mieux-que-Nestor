@@ -8,7 +8,7 @@ using System.Linq;
 public class CSVReader : EditorWindow
 {
     private static string folderPath = "Assets/_Scripts/Overworld/NPC/Interactible_Data";
-    private static string csvFilePath = "Assets/Spreadsheets/Dialogues.csv";
+    private static string csvFilePath = "Assets/_Data/Spreadsheets/Dialogues.csv";
 
     [MenuItem("Dialogues/1-Charger CSV")]
     public static void LoadCSV()

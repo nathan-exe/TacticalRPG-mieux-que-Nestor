@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: policeman1
   name: Policier
-  dialogue: "La for\xEAt est dangereuse \xE0 cette p\xE9riode de l\u2019ann\xE9e.
-    Attention \xE0 toi."
+  dialogue: "La foret est dangereuse a cette periode de l\u2019ann\xE9e. Attention
+    a toi."
   mood: 
   portrait: 
   sound: 

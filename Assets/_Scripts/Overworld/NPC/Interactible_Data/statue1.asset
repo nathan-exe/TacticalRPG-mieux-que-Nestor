@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: statue1
   name: Ancienne Statue
-  dialogue: "Vous prenez le temps de vous reposer devant la statue. Partie sauvegard\xE9e\_!"
+  dialogue: "Vous prenez le temps de vous reposer devant la statue. Partie sauvegardee\_!"
   mood: 
   portrait: 
   sound: 

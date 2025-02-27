@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: sign1
   name: Panneau
-  dialogue: "N\u2019oublie pas de te rendre dans une auberge si tu es fatigu\xE9"
+  dialogue: "N\u2019oublie pas de te rendre dans une auberge si tu es fatigue"
   mood: 
   portrait: 
   sound: 

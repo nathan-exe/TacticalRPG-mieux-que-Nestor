@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: door1
   name: Porte
-  dialogue: "Vous n\u2019avez pas la cl\xE9 de votre propre maison"
+  dialogue: "Vous n\u2019avez pas la cle de votre propre maison"
   mood: 
   portrait: 
   sound: 

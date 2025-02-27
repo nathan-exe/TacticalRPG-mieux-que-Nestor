@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: cart2
   name: Charrette remplie
-  dialogue: "Plein de chose int\xE9ressantes dans cette charrette."
+  dialogue: Plein de chose interessantes dans cette charrette.
   mood: 
   portrait: 
   sound: 
