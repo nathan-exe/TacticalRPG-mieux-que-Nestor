@@ -5,6 +5,8 @@
 "oldsign1","Vieux panneau","Les inscriptions sont illisibles",,,,,,,
 "sign1","Panneau","N’oublie pas de te rendre dans une auberge si tu es fatigué",,,,,,,
 "cart1","Charrette","Il n’y a pas grand-chose dans cette charrette",,,,,,,
-"cart2","Charrette remplie","Plein de chose intéressantes dans cette charrette",,,,,,,
+"cart2","Charrette remplie","Plein de chose intéressantes dans cette charrette.",,,,,,,
 "door1","Porte","Vous n’avez pas la clé de votre propre maison",,,,,,,
-"policeman1","Policier","La forêt est dangereuse à cette période de l’année. Attention à toi",,,,,,,
+"policeman1","Policier","La forêt est dangereuse à cette période de l’année. Attention à toi.",,,,,,,
+"statue1","Ancienne Statue","Vous prenez le temps de vous reposer devant la statue. Partie sauvegardée !",,,,,,,"Save"
+"heal1","Trousse de soin","Votre équipe est complètement soignée.",,,,,,,"Heal"

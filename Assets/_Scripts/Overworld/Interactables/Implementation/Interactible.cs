@@ -31,9 +31,12 @@ public class Interactible : MonoBehaviour, Iinteractable
             foreach(var character in GameState.TeamState)
             {
                 character.HP = character.EntityData.MaxHP;
+                gameObject.SetActive(false);
             }
-            //@SAVEMAN SaveManager.Instance.SaveCurrentGameState(SaveManager.Instance.CurrentFileName);
-
+        }
+        else if(interactibleData.actionType == "Save")
+        {
+            SaveManager.Instance.SaveCurrentGameState();
         }
     }
     public void OnSelected()

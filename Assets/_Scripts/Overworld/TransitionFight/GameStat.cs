@@ -11,6 +11,7 @@ public static class GameState
     public static Vector3 TeamPosition { get; private set; } = Vector3.zero; //Position de l'équipe dans l'overworld
 
 
+
     public static string ZoneName { get; private set; } //Nom de la zone actuel (pour le systeme de combat)
 
     public static void SetTeamPosition(Vector3 position) => TeamPosition = position;
@@ -19,6 +20,11 @@ public static class GameState
     {
         TeamState.Add(character);
         Debug.Log($"{character.EntityData.name} rejoint votre équipe. {character.HP} HP & {character.Mana} PM");
+    }
+    public static GameObject GetPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        return player;
     }
 
     public static void DisplayTeam()
@@ -38,6 +44,5 @@ public static class GameState
             Debug.Log($"- key: {v.Key}, Value: {v.Value}");
         }
     }
-
 
 }

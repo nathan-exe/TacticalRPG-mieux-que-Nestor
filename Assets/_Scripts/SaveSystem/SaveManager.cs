@@ -49,10 +49,14 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+
     public void SaveCurrentGameState(string SaveName = "Save1")
     {
 
         string directoryPath = Path.Combine(Application.persistentDataPath, "Saves");
+
+        GameState.SetTeamPosition(GameState.GetPlayer().transform.position);
+
         if (!Directory.Exists(directoryPath)) Directory.CreateDirectory(directoryPath);
 
         string filePath = Path.Combine(directoryPath, SaveName);
@@ -130,6 +134,7 @@ public class SaveManager : MonoBehaviour
                 GameState.DisplayTeam();
                 GameState.DisplayEncounters();
                 Debug.Log("Overworld position : " + GameState.TeamPosition);
+                
             }
         }
     }

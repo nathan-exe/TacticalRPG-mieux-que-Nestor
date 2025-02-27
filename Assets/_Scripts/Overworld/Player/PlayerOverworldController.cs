@@ -13,6 +13,10 @@ public class PlayerOverworldController : MonoBehaviour
 
     public bool HasComeToDestination;
 
+    private void Start()
+    {
+        GameState.GetPlayer().transform.position = GameState.TeamPosition;
+    }
     void Update()
     {
         //clic souris
