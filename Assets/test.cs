@@ -6,8 +6,10 @@ public class test : MonoBehaviour
 {
     void Start()
     {
-        //GameState.AddCharacter(new CharacterState("Matéo"));
-        GameState.AddCharacter(new CharacterState("Nestor"));
-        GameState.AddCharacter(new CharacterState("Alex"));
+        if ((GameState.TeamState.Count == 0))
+        {
+            GameState.AddCharacter(new CharacterState("Nestor"));
+            GameState.AddCharacter(new CharacterState("Alex"));
+        }
     }
 }
