@@ -15,6 +15,8 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance;
 
+    public string CurrentFileUse = "Save1";
+
     void Awake()
     {
         if (Instance == null)

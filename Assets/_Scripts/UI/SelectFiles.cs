@@ -47,8 +47,8 @@ public class SelectFiles : MonoBehaviour
             //_button.transform.GetChild(1).gameObject.SetActive(true); //InputField active
             //await WaitForEnterKey();
             //_button.GetComponent<Files>().filesNames = _button.transform.GetChild(1).GetComponent<TMP_InputField>().text;
+            SaveManager.Instance.CurrentFileUse = Files;
             LoadScene.Instance.ChangeScene("EmrysScene");
-            //Il faudrait permettre au SaveManager de se rappeler de la variable Files après le changement de scene comme ça je peux regarder dans quel nom de fichier je peux save
         }
     }
 
@@ -90,10 +90,9 @@ public class SelectFiles : MonoBehaviour
         {
             string[] saveFiles = Directory.GetFiles(savesPath);
             Files[] buttons = FindObjectsOfType<Files>();
-
             string fileName = Path.GetFileName(saveFiles[0]);
             buttons[0].filesNames = fileName;
-            buttons[0].transform.GetChild(0).GetComponent<TMP_Text>().text = fileName;
+            buttons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = fileName;
         }
     }
 }

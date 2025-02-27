@@ -36,7 +36,7 @@ public class Interactible : MonoBehaviour, Iinteractable
         }
         else if(interactibleData.actionType == "Save")
         {
-            SaveManager.Instance.SaveCurrentGameState();
+            SaveManager.Instance.SaveCurrentGameState(SaveManager.Instance.CurrentFileUse);
         }
     }
     public void OnSelected()
