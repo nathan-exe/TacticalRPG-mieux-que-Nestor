@@ -6,18 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/OldScene/TheoScene.unity
+    path: Assets/_Scenes/tests/OldScene/TheoScene.unity
     guid: 343c8b91e0aef694a9812df38608e305
   - enabled: 1
-    path: Assets/Scenes/SceneMenu.unity
+    path: Assets/_Scenes/SceneMenu.unity
     guid: 37cc5c6f1e563ae41a4cad68ed45de18
   - enabled: 1
-    path: Assets/Scenes/EmrysScene.unity
+    path: Assets/_Scenes/EmrysScene.unity
     guid: 3f30b5b834714394f8c6e986d804ac83
   - enabled: 1
-    path: Assets/Scenes/SceneNathanCombat.unity
+    path: Assets/_Scenes/SceneNathanCombat.unity
     guid: 8bc7de99224e7da4aa8425773ff6fff5
   - enabled: 0
-    path: "Assets/Scenes/OldScene/SceneMat\xE9o.unity"
+    path: "Assets/_Scenes/tests/OldScene/SceneMat\xE9o.unity"
     guid: 9f8ba7eb2a6399646a0250cab641bc34
   m_configObjects: {}
