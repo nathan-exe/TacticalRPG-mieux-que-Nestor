@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.VFX;
 
-public class PlayerVisuals : MonoBehaviour
+public class CapsuleVisuals : MonoBehaviour
 {
     NavMeshAgent _navMeshAgent;
 

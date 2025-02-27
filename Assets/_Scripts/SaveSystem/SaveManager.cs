@@ -13,10 +13,11 @@ using System.Globalization;
 
 public class SaveManager : MonoBehaviour
 {
-    public static SaveManager Instance;
 
     public string CurrentFileUse = "Save1";
 
+    //singleton wish
+    public static SaveManager Instance;
     void Awake()
     {
         if (Instance == null)
@@ -32,11 +33,7 @@ public class SaveManager : MonoBehaviour
 
     private void Update()
     {
-        /*if (Input.GetKey(KeyCode.S))
-        {
-            Debug.Log("Save");
-            SaveCurrentGameState();
-        }*/
+        return;
 
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -51,7 +48,9 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Saves the current gamestate values to a save file.
+    /// </summary>
     public void SaveCurrentGameState(string SaveName = "Save1")
     {
 
@@ -96,7 +95,10 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Saved data to file : \n" + filePath);
     }
 
-
+    /// <summary>
+    /// reads a save file and applies its values to the GameState static class
+    /// </summary>
+    /// <param name="SaveName"></param>
     public void LoadGame(string SaveName = "Save1")
     {
         string directoryPath = Path.Combine(Application.persistentDataPath, "Saves");
@@ -141,35 +143,4 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-
-
-    void WriteValue<T>(XmlWriter writer, string name, T value)
-    {
-        writer.WriteStartElement(name);
-        //writer.WriteAttributeString("Type", typeof(T).ToString());
-        writer.WriteValue(value);
-        writer.WriteEndElement();
-    }
-
-
-
-
-}
-public static class xmlReaderExtension
-{
-    public static Vector3 ReadElementContentAsVector3(this XmlReader reader) //nul mais pas le temps d'apprendre une lib
-    {
-        string v = reader.ReadElementContentAsString();
-        string[] s = v.Substring(1,v.Length - 2).Split(',');
-        return new Vector3(float.Parse(s[0], CultureInfo.InvariantCulture), float.Parse(s[1], CultureInfo.InvariantCulture), float.Parse(s[2], CultureInfo.InvariantCulture));
-
-
-    }
-
-    public static KeyValuePair<string, bool> ReadElementContentAsStringBoolPair(this XmlReader reader) //nul mais pas le temps d'apprendre une lib
-    {
-        string v = reader.ReadElementContentAsString();
-        string[] s = v.Substring(1,v.Length - 2).Split(',');
-        return new KeyValuePair<string, bool>(s[0], bool.Parse(s[1]));
-    }
 }
