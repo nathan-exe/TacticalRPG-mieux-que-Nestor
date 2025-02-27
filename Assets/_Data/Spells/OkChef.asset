@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf176a4bf3238f449c194f0144909d6, type: 3}
   m_Name: OkChef
   m_EditorClassIdentifier: 
-  Name: PkChef
+  Name: OkChef
   Sprite: {fileID: 0}
-  ManaCost: 2
+  ManaCost: 3
   Damage: -8
   IsOccludedByWalls: 1
   Bounds:
