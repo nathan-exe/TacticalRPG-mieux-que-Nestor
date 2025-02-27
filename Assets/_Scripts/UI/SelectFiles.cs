@@ -38,15 +38,12 @@ public class SelectFiles : MonoBehaviour
         if (SaveFileExists(Files))
         {
             Debug.Log("On Load");
+            SaveManager.Instance.CurrentFileUse = Files;
             SaveManager.Instance.LoadGame(Files);
             LoadScene.Instance.ChangeScene("EmrysScene");
         }
         else
         {
-            //_button.transform.GetChild(0).gameObject.SetActive(false); //text false
-            //_button.transform.GetChild(1).gameObject.SetActive(true); //InputField active
-            //await WaitForEnterKey();
-            //_button.GetComponent<Files>().filesNames = _button.transform.GetChild(1).GetComponent<TMP_InputField>().text;
             SaveManager.Instance.CurrentFileUse = Files;
             LoadScene.Instance.ChangeScene("EmrysScene");
         }
@@ -67,14 +64,6 @@ public class SelectFiles : MonoBehaviour
         _button = null;
     }
 
-    private async Task WaitForEnterKey()
-    {
-        while (!Input.GetKeyDown(KeyCode.Return)) //Enter
-        {
-            await Task.Yield();
-        }
-    }
-
     public bool SaveFileExists(string fileName)
     {
         string filePath = Path.Combine(Application.persistentDataPath, "Saves", fileName);
@@ -90,9 +79,14 @@ public class SelectFiles : MonoBehaviour
         {
             string[] saveFiles = Directory.GetFiles(savesPath);
             Files[] buttons = FindObjectsOfType<Files>();
-            string fileName = Path.GetFileName(saveFiles[0]);
-            buttons[0].filesNames = fileName;
-            buttons[0].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = fileName;
+            Debug.Log("Test");
+            for (int i = 0; i < saveFiles.Length; i++)
+            {
+                Debug.Log("boucle");
+                string fileName = Path.GetFileName(saveFiles[i]);
+                buttons[i].filesNames = fileName;
+                buttons[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = fileName;
+            }
         }
     }
 }
